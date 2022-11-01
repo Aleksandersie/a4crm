@@ -15,6 +15,7 @@ import {
 } from "../axios/ToDoApi";
 import { Context } from "../../index";
 import { getEmployees } from "../axios/UserApi";
+import { adminConst } from "../../Const";
 
 const ToDoModal = ({ show, hide }) => {
     const [message, setMessage] = useState("");
@@ -38,7 +39,7 @@ const ToDoModal = ({ show, hide }) => {
     }
 
     async function sendTask() {
-        if (user.user.role === "admin") {
+        if (user.user.role === adminConst) {
             setLoading(true);
             const randomNumber = (Math.random() * 10000).toFixed();
             const createdDate = new Date().toLocaleString();
@@ -112,7 +113,7 @@ const ToDoModal = ({ show, hide }) => {
                     >
                         Срочная задача
                     </ToggleButton>
-                    {user.user.role === "admin" ? (
+                    {user.user.role === adminConst ? (
                         <Dropdown style={{ color: "black" }}>
                             <Dropdown.Toggle
                                 variant="outline-warning"
