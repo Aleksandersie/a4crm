@@ -9,9 +9,11 @@ import { removeToDo } from "../axios/ToDoApi";
 import ToDoModal from "./ToDoModal";
 import ToDoComplete from "./ToDoComplete";
 import ToDoEdit from "./ToDoEdit";
+import { adminConst } from "../../Const";
 
 const ToDoString = observer(({ task, index }) => {
     const { toDoStore } = useContext(Context);
+    const { user } = useContext(Context);
 
     const [showComplete, setShowComplete] = useState(false);
     const [editComplete, setEditComplete] = useState(false);
@@ -31,11 +33,20 @@ const ToDoString = observer(({ task, index }) => {
     return (
         <Card
             className={
-                "mt-3 mb-3 pt-3 pb-3 m-auto shadow-sm d-flex justify-content-around flex-row"
+                "mt-3 mb-3 pt-3 pb-3 ps-3 pe-3 m-auto shadow-sm d-flex justify-content-around flex-row"
             }
-            style={{ width: 750, backgroundColor: "whitesmoke" }}
+            style={{ width: 800, backgroundColor: "whitesmoke" }}
             bg={task.highPriority ? "danger" : ""}
         >
+            {user.user.role === adminConst ? (
+                <div style={{ textAlign: "center" }} className={"col-2"}>
+                    <h6>{"Исполнитель"}</h6>
+                    <p>{task.owner}</p>
+                </div>
+            ) : (
+                ""
+            )}
+
             <div style={{ textAlign: "center" }} className={"col-2"}>
                 <h6>{"Дата создания"}</h6>
                 <p>{task.createdDate}</p>
