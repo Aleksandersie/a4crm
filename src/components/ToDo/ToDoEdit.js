@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
     Button,
+    Dropdown,
     FormControl,
     Modal,
     Spinner,
@@ -13,6 +14,8 @@ import {
     updateToDo,
 } from "../axios/ToDoApi";
 import { Context } from "../../index";
+import { adminConst } from "../../Const";
+import { getEmployees } from "../axios/UserApi";
 
 const ToDoEdit = ({ show, hide, task }) => {
     useEffect(() => {
@@ -23,11 +26,25 @@ const ToDoEdit = ({ show, hide, task }) => {
     const { toDoStore } = useContext(Context);
     const { user } = useContext(Context);
 
+    useEffect(() => {
+        getEmployees().then((data) => user.setEmployees(data));
+        console.log(user);
+    }, []);
+
+    function selectEmp(i) {
+        user.setSelectedEmployees(i);
+        console.log(user.selectedEmployees.alias);
+    }
+
     async function editTask(number) {
         setEdit(true);
-        await updateToDo(message, number, priority);
-
-        if (user.user.role === "admin") {
+        await updateToDo(
+            message,
+            number,
+            priority,
+            user.selectedEmployees.alias
+        );
+        if (user.user.role === adminConst) {
             const res = getToDo()
                 .then((data) => toDoStore.setToDoList(data))
                 .finally(() => setEdit(false));
@@ -69,6 +86,31 @@ const ToDoEdit = ({ show, hide, task }) => {
                     >
                         Срочная задача
                     </ToggleButton>
+                    {user.user.role === adminConst ? (
+                        <Dropdown style={{ color: "black" }}>
+                            <div className={"mb-2"}>Выберите исполнителя </div>
+                            <Dropdown.Toggle
+                                variant="outline-warning"
+                                id="dropdown-basic"
+                                style={{ color: "black" }}
+                            >
+                                {user.selectedEmployees.alias ||
+                                    "Выберите сотрудника"}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {user.employees.map((i) => (
+                                    <Dropdown.Item
+                                        key={i.alias}
+                                        onClick={() => selectEmp(i)}
+                                    >
+                                        {i.alias}
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    ) : (
+                        ""
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     {edit ? (

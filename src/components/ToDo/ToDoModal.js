@@ -115,6 +115,7 @@ const ToDoModal = ({ show, hide }) => {
                     </ToggleButton>
                     {user.user.role === adminConst ? (
                         <Dropdown style={{ color: "black" }}>
+                            <div className={"mb-2"}>Выберите исполнителя </div>
                             <Dropdown.Toggle
                                 variant="outline-warning"
                                 id="dropdown-basic"
