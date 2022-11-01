@@ -7,7 +7,12 @@ import {
     Spinner,
     ToggleButton,
 } from "react-bootstrap";
-import { getToDo, getTodoByOwner, postToDo } from "../axios/ToDoApi";
+import {
+    getToDo,
+    getTodoByOwner,
+    postToDo,
+    postTodoByCustomOwner,
+} from "../axios/ToDoApi";
 import { Context } from "../../index";
 import { getEmployees } from "../axios/UserApi";
 
@@ -37,11 +42,12 @@ const ToDoModal = ({ show, hide }) => {
             setLoading(true);
             const randomNumber = (Math.random() * 10000).toFixed();
             const createdDate = new Date().toLocaleString();
-            await postToDo(
+            await postTodoByCustomOwner(
                 message,
                 randomNumber,
                 priority,
-                createdDate
+                createdDate,
+                user.selectedEmployees.alias
             ).finally(() => setLoading(false));
             setLoadingRed(true);
             await getToDo()
@@ -106,27 +112,31 @@ const ToDoModal = ({ show, hide }) => {
                     >
                         Срочная задача
                     </ToggleButton>
-                    <Dropdown style={{ color: "black" }}>
-                        <Dropdown.Toggle
-                            variant="outline-warning"
-                            id="dropdown-basic"
-                            style={{ color: "black" }}
-                        >
-                            {user.selectedEmployees.alias ||
-                                "Выберите сотрудника"}
-                        </Dropdown.Toggle>
+                    {user.user.role === "admin" ? (
+                        <Dropdown style={{ color: "black" }}>
+                            <Dropdown.Toggle
+                                variant="outline-warning"
+                                id="dropdown-basic"
+                                style={{ color: "black" }}
+                            >
+                                {user.selectedEmployees.alias ||
+                                    "Выберите сотрудника"}
+                            </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            {user.employees.map((i) => (
-                                <Dropdown.Item
-                                    key={i.alias}
-                                    onClick={() => selectEmp(i)}
-                                >
-                                    {i.alias}
-                                </Dropdown.Item>
-                            ))}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                            <Dropdown.Menu>
+                                {user.employees.map((i) => (
+                                    <Dropdown.Item
+                                        key={i.alias}
+                                        onClick={() => selectEmp(i)}
+                                    >
+                                        {i.alias}
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    ) : (
+                        ""
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     {loading ? (

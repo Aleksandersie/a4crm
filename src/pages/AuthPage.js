@@ -4,6 +4,7 @@ import { Button, Card, Container, Form } from "react-bootstrap";
 import { MAIN_ROUTE } from "../routeConst/routeConst";
 import { login } from "../components/axios/UserApi";
 import { Context } from "../index";
+import axios, { AxiosError } from "axios";
 
 const AuthPage = () => {
     const navigate = useNavigate();
@@ -11,11 +12,16 @@ const AuthPage = () => {
     const [loginData, setLoginData] = useState({ email: "", password: "" });
 
     async function logIn() {
-        const userData = await login(loginData.email, loginData.password);
-        user.setUser(userData);
-        user.setIsAuth(true);
-        console.log(userData);
-        navigate(MAIN_ROUTE);
+        try{
+            const userData = await login(loginData.email, loginData.password);
+            user.setUser(userData);
+            user.setIsAuth(true);
+            console.log(userData);
+            navigate(MAIN_ROUTE);
+        }catch (e){
+            console.log(e.message);
+        }
+
     }
 
     return (

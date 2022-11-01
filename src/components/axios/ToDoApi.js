@@ -30,6 +30,22 @@ export const postToDo = async function (
     });
 };
 
+export const postTodoByCustomOwner = async function (
+    message,
+    randomNumber,
+    highPriority,
+    createdDate,
+    role
+) {
+    const res = await host.post("api/todo/customOwner", {
+        message,
+        randomNumber,
+        highPriority,
+        createdDate,
+        role,
+    });
+};
+
 export const removeToDo = async function (randomNumber) {
     console.log(randomNumber);
     const res = await host.delete(`api/todo/`, { data: { randomNumber } });

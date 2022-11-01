@@ -43,7 +43,7 @@ const TopBar = observer(() => {
                             className="me-2 mb-1"
                             style={{}}
                         />
-                        TEST CALC TYPE SCRIPT
+                        A4 CRM
                     </div>
                 </NavLink>
                 <div style={{ color: "white", fontSize: 22 }}>
