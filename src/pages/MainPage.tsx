@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CalcBlock from "../components/CalcBlock/CaclBlock";
 import OrderListBlock from "../components/OrderListBlock/OrderListBlock";
@@ -8,10 +8,18 @@ import TopBreadCrumbs from "../components/TopBreadCrumbs/TopBreadCrumbs";
 import CategoryBlock from "../components/CategoryCard/CategoryBlock";
 
 import OrderTotal from "../components/OrderTotal/OrderTotal";
+import { getRetailPrice } from "../components/axios/PriceApi";
+import { Context } from "../index";
 
 const MainPage = () => {
-    const { order } = useState();
-    console.log(order);
+    // const { order } = useState();
+    const { price } = useContext(Context);
+
+    useEffect(() => {
+        getRetailPrice().then((data) => price.setRetailPrice(data));
+        console.log({ price });
+    }, []);
+
     return (
         <Container>
             <Row>

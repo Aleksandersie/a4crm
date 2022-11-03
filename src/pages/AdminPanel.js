@@ -8,7 +8,7 @@ const AdminPanel = observer(() => {
     return (
         <Container>
             <UserPanel />
-            {/*<PriceList />*/}
+            <PriceList />
         </Container>
     );
 });

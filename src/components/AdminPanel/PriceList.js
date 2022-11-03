@@ -7,48 +7,45 @@ import { Context } from "../../index";
 import RetailPrice from "./RetailPrice";
 
 const PriceList = observer(() => {
-  const { price } = useContext(Context);
+    const { price } = useContext(Context);
 
-  const [edit, setEdit] = useState({
-    banner: null || price.retailPrice.banner,
-    vinyl: null || price.retailPrice.vinyl,
-  });
+    const [edit, setEdit] = useState({
+        banner: null || price.retailPrice.banner,
+        vinyl: null || price.retailPrice.vinyl,
+    });
 
-  useEffect(() => {
-    getRetailPrice().then((data) => price.setRetailPrice(data));
-    console.log({ price });
-  }, []);
-
-  function test() {
-    console.log(edit);
-  }
-  return (
-    <div>
-      <Card className={"mt-5"} style={{ textAlign: "center" }}>
-        <Card.Header>
-          <h4>Настройка цен</h4>
-        </Card.Header>
+    function test() {
+        console.log(edit);
+    }
+    return (
         <div>
-          {price.retailPrice.banner}
-          <FormControl
-            placeholder={price.retailPrice.banner}
-            value={edit.banner}
-            onChange={(e) => setEdit({ ...edit, banner: e.target.value })}
-          />
+            <Card className={"mt-5"} style={{ textAlign: "center" }}>
+                <Card.Header>
+                    <h4>Настройка цен</h4>
+                </Card.Header>
+                <div>
+                    {price.retailPrice.banner}
+                    <FormControl
+                        placeholder={price.retailPrice.banner}
+                        value={edit.banner}
+                        onChange={(e) =>
+                            setEdit({ ...edit, banner: e.target.value })
+                        }
+                    />
+                </div>
+                <div>
+                    <FormControl
+                        placeholder={price.retailPrice.vinyl}
+                        value={edit.vinyl}
+                        onChange={(e) =>
+                            setEdit({ ...edit, vinyl: Number(e.target.value) })
+                        }
+                    />
+                </div>
+                <Button onClick={test}>123</Button>
+            </Card>
         </div>
-        <div>
-          <FormControl
-            placeholder={price.retailPrice.vinyl}
-            value={edit.vinyl}
-            onChange={(e) =>
-              setEdit({ ...edit, vinyl: Number(e.target.value) })
-            }
-          />
-        </div>
-        <Button onClick={test}>123</Button>
-      </Card>
-    </div>
-  );
+    );
 });
 
 export default PriceList;

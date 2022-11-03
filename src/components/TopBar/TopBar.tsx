@@ -12,14 +12,12 @@ import {
 } from "../../routeConst/routeConst";
 import { observer } from "mobx-react-lite";
 
-// @ts-ignore
 import { Context } from "../../index";
 // const nav = useNavigate();
 
 import { AiOutlineUnorderedList, AiOutlineSetting } from "react-icons/ai";
 
 const TopBar = observer(() => {
-    // @ts-ignore
     const { user } = useContext(Context);
 
     function logOut() {
