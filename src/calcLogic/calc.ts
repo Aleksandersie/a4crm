@@ -3,6 +3,7 @@ import {
     firstDiscountValue,
     secondDiscountStep,
     secondDiscountValue,
+    thirdDiscountStep,
 } from "../Const";
 
 export let orderList: any[] = [];
@@ -49,8 +50,6 @@ let startCalc: IStartCalc = function (
         onePcsArea: number;
         onePcsCost: number;
         totalCost: number;
-        totalCostTest: any;
-
         constructor(
             width,
             height,
@@ -72,26 +71,60 @@ let startCalc: IStartCalc = function (
             this.random = parseInt((Math.random() * 10000).toFixed());
             this.orderCategory = orderCategory;
             this.price = price;
-            this.totalArea = parseFloat(
-                (this.width * this.height * this.count).toFixed(3)
-            );
-            this.onePcsArea = parseFloat((this.width * this.height).toFixed(3));
-            this.onePcsCost = this.onePcsArea * this.price;
-            this.totalCost = this.totalArea * this.price;
-            this.totalCostTest = this.discountCalc();
+            this.totalArea = parseFloat((this.width * this.height * this.count).toFixed(4));
+            this.onePcsArea = parseFloat((this.width * this.height).toFixed(4));
+            //this.onePcsCost = this.onePcsArea * this.price;
+            this.onePcsCost = this.onePcsDiscountCalc();
+            //this.totalCost = this.totalArea * this.price;
+            //this.totalCost = this.totalDiscountCalc();
+            this.totalCost = this.onePcsCost * count;
         }
-        discountCalc(): number {
-            if (this.totalArea > firstDiscountStep) {
-                let currentDiscountValue: number =
-                    (this.price * firstDiscountValue) / 100;
+        totalDiscountCalc(): number {
+            if (this.totalArea <= firstDiscountStep) {
+                let discountPrice: number = this.price;
+                return this.totalArea * discountPrice;
+            }
+            if (this.totalArea > firstDiscountStep && this.totalArea < secondDiscountStep) {
+                let currentDiscountValue: number = (this.price * firstDiscountValue) / 100;
                 let discountPrice: number = this.price - currentDiscountValue;
                 return this.totalArea * discountPrice;
             }
-            if (this.totalArea > secondDiscountStep) {
-                let currentDiscountValue: number =
-                    (this.price * secondDiscountValue) / 100;
+            if (this.totalArea >= secondDiscountStep && this.totalArea < thirdDiscountStep) {
+                let currentDiscountValue: number = (this.price * secondDiscountValue) / 100;
                 let discountPrice: number = this.price - currentDiscountValue;
                 return this.totalArea * discountPrice;
+            }
+            if (this.totalArea >= thirdDiscountStep && this.totalArea < 1000) {
+                // Заглушка
+                let currentDiscountValue: number = (this.price * secondDiscountValue) / 100;
+                let discountPrice: number = this.price - currentDiscountValue;
+                return this.totalArea * discountPrice;
+            }
+        }
+        onePcsDiscountCalc(): number {
+            if (this.totalArea <= firstDiscountStep) {
+                let discountPrice: number = this.price;
+                let oneCount = this.onePcsArea * discountPrice;
+                if (oneCount < 1) {
+                    oneCount = 1;
+                }
+                return oneCount;
+            }
+            if (this.totalArea > firstDiscountStep && this.totalArea < secondDiscountStep) {
+                let currentDiscountValue: number = (this.price * firstDiscountValue) / 100;
+                let discountPrice: number = this.price - currentDiscountValue;
+                return this.onePcsArea * discountPrice;
+            }
+            if (this.totalArea >= secondDiscountStep && this.totalArea < thirdDiscountStep) {
+                let currentDiscountValue: number = (this.price * secondDiscountValue) / 100;
+                let discountPrice: number = this.price - currentDiscountValue;
+                return this.onePcsArea * discountPrice;
+            }
+            if (this.totalArea >= thirdDiscountStep && this.totalArea < 1000) {
+                // Заглушка
+                let currentDiscountValue: number = (this.price * secondDiscountValue) / 100;
+                let discountPrice: number = this.price - currentDiscountValue;
+                return this.onePcsArea * discountPrice;
             }
         }
     }

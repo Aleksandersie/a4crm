@@ -1,13 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-    Button,
-    Card,
-    Col,
-    Form,
-    FormControl,
-    Row,
-    Table,
-} from "react-bootstrap";
+import { Button, Card, Col, Form, FormControl, Row, Table } from "react-bootstrap";
 import startCalc from "../../calcLogic/calc";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
@@ -81,34 +73,27 @@ const CalcInputBlock = observer(() => {
         let preFlightPrice: number = price.currentPrice; /////Подтягивает стоимость выбранного маетриала
         if (areaT > firstDiscountStep && areaT < secondDiscountStep) {
             /////Считаем процент скидки в зависимости от общей площади
-            let currentDiscountValue =
-                (preFlightPrice * firstDiscountValue) / 100;
+            let currentDiscountValue = (preFlightPrice * firstDiscountValue) / 100;
             preFlightPrice = preFlightPrice - currentDiscountValue;
         }
         if (areaT >= secondDiscountStep && areaT < thirdDiscountStep) {
-            let currentDiscountValue =
-                (preFlightPrice * secondDiscountValue) / 100;
+            let currentDiscountValue = (preFlightPrice * secondDiscountValue) / 100;
             preFlightPrice = preFlightPrice - currentDiscountValue;
         }
         if (areaT >= thirdDiscountStep && areaT < 1000) {
             // Заглушка пока не готовы все ступени скидки
-            let currentDiscountValue =
-                (preFlightPrice * secondDiscountValue) / 100;
+            let currentDiscountValue = (preFlightPrice * secondDiscountValue) / 100;
             preFlightPrice = preFlightPrice - currentDiscountValue;
         }
 
         let oneCount: number = parseFloat((area * preFlightPrice).toFixed(2)); // Стоимость одной штуки
         if (oneCount < 1) {
             oneCount = 1;
-            setWarrning(
-                "Внимание стоимость наклейки не может быть ниже 1 рубля"
-            );
+            setWarrning("Внимание стоимость наклейки не может быть ниже 1 рубля");
         } else {
             setWarrning("");
         }
-        let totalCount: number = parseFloat(
-            (areaT * preFlightPrice).toFixed(2)
-        ); // Общая стоимость
+        let totalCount: number = parseFloat((oneCount * count).toFixed(2)); // Общая стоимость
         let minOrder: number = Math.ceil(minOrderValue / oneCount); // Колличество штук на сумму минимального заказа
         if (minOrder === Infinity) {
             minOrder = null;
@@ -205,9 +190,7 @@ const CalcInputBlock = observer(() => {
                             type="number"
                             variant="standard"
                             value={count}
-                            onChange={(event) =>
-                                setCount(Number(event.target.value))
-                            }
+                            onChange={(event) => setCount(Number(event.target.value))}
                         />
                     </Col>
                     {/*<Col md={2}>*/}
@@ -229,9 +212,8 @@ const CalcInputBlock = observer(() => {
                     <thead>
                         <tr>
                             <th colSpan={4}>
-                                Размеры изделия: {width}x{height} м. Количество:{" "}
-                                {count} шт. <br /> Материал:{" "}
-                                {materialList.selectedMaterial.name}
+                                Размеры изделия: {width}x{height} м. Количество: {count} шт. <br />{" "}
+                                Материал: {materialList.selectedMaterial.name}
                             </th>
                         </tr>
                         <tr>
@@ -297,11 +279,7 @@ const CalcInputBlock = observer(() => {
                 <Button variant="success" style={{ width: 150, height: 62 }}>
                     Сброс значний
                 </Button>
-                <Button
-                    variant="warning"
-                    onClick={start}
-                    style={{ width: 150 }}
-                >
+                <Button variant="warning" onClick={start} style={{ width: 150 }}>
                     Добавить в заказ
                 </Button>
             </div>
