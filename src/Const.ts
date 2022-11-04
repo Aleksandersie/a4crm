@@ -8,5 +8,7 @@ export const wholesalePrice:string  = "wholesale";
 ///////////////////////////////////
 export const minOrderValue: number = 500
 ////////discount steps///////
-export const firstDiscountStep:number = 1
-export const firstDiscountValue:number = 10
+export const firstDiscountStep:number = 1 // Количество кв.м. для скидки
+export const firstDiscountValue:number = 10// Процент скидки
+export const secondDiscountStep:number = 3
+export const secondDiscountValue:number = 15

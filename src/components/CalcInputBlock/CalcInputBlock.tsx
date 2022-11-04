@@ -17,7 +17,7 @@ import MaterialSurfaceCheck from "../MaterialSurfaceCheck/MaterialSurfaceCheck";
 import LaminationCheck from "../LaminationCheck/LaminationCheck";
 import BorderCutCheck from "../BorderCutCheck/BorderCutCheck";
 import { orderList } from "../../calcLogic/calc";
-import { firstDiscountStep, firstDiscountValue, minOrderValue } from "../../Const";
+import { firstDiscountStep, firstDiscountValue, minOrderValue, secondDiscountStep, secondDiscountValue } from "../../Const";
 const CalcInputBlock = observer(() => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -59,21 +59,24 @@ const CalcInputBlock = observer(() => {
     useEffect(() => {
         let area: number = parseFloat((width * height).toFixed(4));
         let areaT: number = parseFloat((area * count).toFixed(4));
-        let preFlightPrice:number = price.currentPrice
-        if(areaT>firstDiscountStep){
+        let preFlightPrice:number = price.currentPrice/////Подтягивает стоимость выбранного маетриала 
+        if(areaT>firstDiscountStep){/////Считаем процент скидки в зависимости от общей площади
            let curentDicscountValue = (preFlightPrice*firstDiscountValue)/100
+           preFlightPrice =  preFlightPrice - curentDicscountValue
+        }if(areaT>secondDiscountStep){
+           let curentDicscountValue = (preFlightPrice*secondDiscountValue)/100
            preFlightPrice =  preFlightPrice - curentDicscountValue
         }
         
-        let oneCount: number = Math.ceil( area * preFlightPrice);
+        let oneCount: number = parseFloat( ( area * preFlightPrice).toFixed(2));// Стоимость одной штуки
         if(oneCount<1){
             oneCount = 1
             setWarrning( "Внимание стоимость наклейки не может быть ниже 1 рубля")
         }else{
             setWarrning("")
         }
-        let totalCount: number = Math.ceil( areaT * preFlightPrice);
-        let minOrder: number = Math.ceil(minOrderValue/ oneCount);
+        let totalCount: number = parseFloat( ( areaT * preFlightPrice).toFixed(2));// Общая стоимость
+        let minOrder: number = Math.ceil(minOrderValue/ oneCount);// Колличество штук на сумму минимального заказа
         if (minOrder === Infinity) {
             minOrder = null;
         }
