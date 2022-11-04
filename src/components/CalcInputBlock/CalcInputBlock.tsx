@@ -17,6 +17,7 @@ import MaterialSurfaceCheck from "../MaterialSurfaceCheck/MaterialSurfaceCheck";
 import LaminationCheck from "../LaminationCheck/LaminationCheck";
 import BorderCutCheck from "../BorderCutCheck/BorderCutCheck";
 import { orderList } from "../../calcLogic/calc";
+import { minOrderValue } from "../../Const";
 const CalcInputBlock = observer(() => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -30,6 +31,9 @@ const CalcInputBlock = observer(() => {
         minOrder: 0,
         countPerMeter: 0,
     });
+    const [warning,setWarrning] = useState('test')
+
+
     const { price } = useContext(Context);
     const { materialList } = useContext(Context);
     const { order } = useContext(Context);
@@ -50,13 +54,22 @@ const CalcInputBlock = observer(() => {
         order.setOrder(result);
     }
     console.log(`w:${width} h:${height}`);
+    
 
     useEffect(() => {
-        let area: number = parseFloat((width * height).toFixed(3));
-        let areaT: number = parseFloat((area * count).toFixed(2));
+        
+     
+        let area: number = parseFloat((width * height).toFixed(4));
+        let areaT: number = parseFloat((area * count).toFixed(4));
         let oneCount: number = area * price.currentPrice;
+        if(oneCount<1){
+            oneCount = 1
+            setWarrning( "Внимание стоимость наклейки не может быть ниже 1 рубля")
+        }else{
+            setWarrning("")
+        }
         let totalCount: number = areaT * price.currentPrice;
-        let minOrder: number = Math.ceil(500 / oneCount);
+        let minOrder: number = Math.ceil(minOrderValue/ oneCount);
         if (minOrder === Infinity) {
             minOrder = null;
         }
@@ -218,6 +231,7 @@ const CalcInputBlock = observer(() => {
                         </tr>
                     </tbody>
                 </Table>
+                <div>{warning}</div>
                 {/*</div>*/}
             </div>
 
