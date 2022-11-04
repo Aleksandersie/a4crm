@@ -17,7 +17,7 @@ import MaterialSurfaceCheck from "../MaterialSurfaceCheck/MaterialSurfaceCheck";
 import LaminationCheck from "../LaminationCheck/LaminationCheck";
 import BorderCutCheck from "../BorderCutCheck/BorderCutCheck";
 import { orderList } from "../../calcLogic/calc";
-import { firstDiscountStep, firstDiscountValue, minOrderValue, secondDiscountStep, secondDiscountValue } from "../../Const";
+import { firstDiscountStep, firstDiscountValue, minOrderValue, secondDiscountStep, secondDiscountValue, thirdDiscountStep } from "../../Const";
 const CalcInputBlock = observer(() => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -60,10 +60,10 @@ const CalcInputBlock = observer(() => {
         let area: number = parseFloat((width * height).toFixed(4));
         let areaT: number = parseFloat((area * count).toFixed(4));
         let preFlightPrice:number = price.currentPrice/////Подтягивает стоимость выбранного маетриала 
-        if(areaT>firstDiscountStep){/////Считаем процент скидки в зависимости от общей площади
+        if(areaT>firstDiscountStep&&areaT<secondDiscountStep){/////Считаем процент скидки в зависимости от общей площади
            let curentDicscountValue = (preFlightPrice*firstDiscountValue)/100
            preFlightPrice =  preFlightPrice - curentDicscountValue
-        }if(areaT>secondDiscountStep){
+        }if(areaT>secondDiscountStep&&areaT<thirdDiscountStep){
            let curentDicscountValue = (preFlightPrice*secondDiscountValue)/100
            preFlightPrice =  preFlightPrice - curentDicscountValue
         }

@@ -1,3 +1,5 @@
+import { firstDiscountStep, firstDiscountValue, secondDiscountStep, secondDiscountValue } from "../Const";
+
 export let orderList:any[] = [];
 export function orderClear() {
   orderList = [];
@@ -41,6 +43,8 @@ let startCalc:IStartCalc = function(
     onePcsArea:number
     onePcsCost:number
     totalCost:number
+    totalCostTest:any
+    
     constructor(
       width,
       height,
@@ -62,11 +66,24 @@ let startCalc:IStartCalc = function(
       this.random = parseInt((Math.random() * 10000).toFixed());
       this.orderCategory = orderCategory;
       this.price = price;
-      this.totalArea = parseInt((this.width * this.height * this.count).toFixed(3));
-      this.onePcsArea = this.width * this.height;
+      this.totalArea = parseFloat((this.width * this.height * this.count).toFixed(3));
+      this.onePcsArea = parseFloat( (this.width * this.height).toFixed(3));
       this.onePcsCost = this.onePcsArea * this.price;
       this.totalCost = this.totalArea * this.price;
+      this.totalCostTest = this.discountCalc()
     }
+    discountCalc():number{
+     if(this.totalArea>firstDiscountStep){
+      let curentDicscountValue:number = (this.price*firstDiscountValue)/100
+      let discountPrice:number =  this.price - curentDicscountValue
+      return this.totalArea * discountPrice
+     } if(this.totalArea>secondDiscountStep){
+      let curentDicscountValue:number = (this.price*secondDiscountValue)/100
+      let discountPrice:number =  this.price - curentDicscountValue
+      return this.totalArea * discountPrice
+     }
+    }
+    
   }
 
   let order = new OrderItem(
@@ -82,6 +99,7 @@ let startCalc:IStartCalc = function(
   );
 
   orderList.push(order);
+  console.log(orderList)
   return orderList;
 }
 export default startCalc;

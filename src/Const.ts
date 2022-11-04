@@ -12,3 +12,5 @@ export const firstDiscountStep:number = 1 // Количество кв.м. дл�
 export const firstDiscountValue:number = 10// Процент скидки
 export const secondDiscountStep:number = 3
 export const secondDiscountValue:number = 15
+export const thirdDiscountStep:number = 6
+export const thirdDiscountValue:number = 20
