@@ -12,7 +12,7 @@ import { getRetailPrice } from "../components/axios/PriceApi";
 import { Context } from "../index";
 
 const MainPage = () => {
-    // const { order } = useState();
+    //  const { order } = useState();
     const { price } = useContext(Context);
 
     useEffect(() => {

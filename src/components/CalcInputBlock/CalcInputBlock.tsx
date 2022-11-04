@@ -8,7 +8,7 @@ import {
     Row,
     Table,
 } from "react-bootstrap";
-import startTest from "../../calcLogic/calc";
+import startCalc from "../../calcLogic/calc";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 import { TextField } from "@mui/material";
@@ -17,6 +17,7 @@ import MaterialSurfaceCheck from "../MaterialSurfaceCheck/MaterialSurfaceCheck";
 import LaminationCheck from "../LaminationCheck/LaminationCheck";
 import BorderCutCheck from "../BorderCutCheck/BorderCutCheck";
 import { orderList } from "../../calcLogic/calc";
+import { firstDiscountStep, firstDiscountValue, minOrderValue, secondDiscountStep, secondDiscountValue, thirdDiscountStep } from "../../Const";
 const CalcInputBlock = observer(() => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -30,13 +31,16 @@ const CalcInputBlock = observer(() => {
         minOrder: 0,
         countPerMeter: 0,
     });
+    const [warning,setWarrning] = useState('test')
+
+
     const { price } = useContext(Context);
     const { materialList } = useContext(Context);
     const { order } = useContext(Context);
     const { checkStore } = useContext(Context);
 
     function start() {
-        let result = startTest(
+        let result = startCalc(
             width,
             height,
             description,
@@ -50,13 +54,29 @@ const CalcInputBlock = observer(() => {
         order.setOrder(result);
     }
     console.log(`w:${width} h:${height}`);
+    
 
     useEffect(() => {
-        let area: number = parseFloat((width * height).toFixed(3));
-        let areaT: number = parseFloat((area * count).toFixed(2));
-        let oneCount: number = area * price.currentPrice;
-        let totalCount: number = areaT * price.currentPrice;
-        let minOrder: number = Math.ceil(500 / oneCount);
+        let area: number = parseFloat((width * height).toFixed(4));
+        let areaT: number = parseFloat((area * count).toFixed(4));
+        let preFlightPrice:number = price.currentPrice/////Подтягивает стоимость выбранного маетриала 
+        if(areaT>firstDiscountStep&&areaT<secondDiscountStep){/////Считаем процент скидки в зависимости от общей площади
+           let curentDicscountValue = (preFlightPrice*firstDiscountValue)/100
+           preFlightPrice =  preFlightPrice - curentDicscountValue
+        }if(areaT>secondDiscountStep&&areaT<thirdDiscountStep){
+           let curentDicscountValue = (preFlightPrice*secondDiscountValue)/100
+           preFlightPrice =  preFlightPrice - curentDicscountValue
+        }
+        
+        let oneCount: number = parseFloat( ( area * preFlightPrice).toFixed(2));// Стоимость одной штуки
+        if(oneCount<1){
+            oneCount = 1
+            setWarrning( "Внимание стоимость наклейки не может быть ниже 1 рубля")
+        }else{
+            setWarrning("")
+        }
+        let totalCount: number = parseFloat( ( areaT * preFlightPrice).toFixed(2));// Общая стоимость
+        let minOrder: number = Math.ceil(minOrderValue/ oneCount);// Колличество штук на сумму минимального заказа
         if (minOrder === Infinity) {
             minOrder = null;
         }
@@ -85,8 +105,7 @@ const CalcInputBlock = observer(() => {
             console.log(`printCut ${price.retailPrice.vinylPC}`);
         }
     }, [materialList.selectedCategory, width, height, count]);
-    // @ts-ignore
-    // @ts-ignore
+
     return (
         <div className=" ">
             <Form className="mt-4 m-auto">
@@ -218,6 +237,7 @@ const CalcInputBlock = observer(() => {
                         </tr>
                     </tbody>
                 </Table>
+                <div>{warning}</div>
                 {/*</div>*/}
             </div>
 
