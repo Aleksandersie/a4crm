@@ -1,8 +1,21 @@
-export let orderList = [];
+export let orderList:any[] = [];
 export function orderClear() {
   orderList = [];
 }
-function startTest(
+interface IStartCalc{
+  (width:number,
+  height:number,
+  description:string,
+  count:number,
+  material:string,
+  lamination:string,
+  borderCut:string,
+  orderCategory:string,
+  price:number):any[]
+  
+}
+
+let startCalc:IStartCalc = function(
   width,
   height,
   description,
@@ -12,8 +25,22 @@ function startTest(
   borderCut,
   orderCategory,
   price
-) {
+){
   class OrderItem {
+    width:number
+    height:number
+    description:string
+    count:number
+    material:string
+    lamination:boolean
+    borderCut:boolean
+    orderCategory:string
+    price:number
+    random:number
+    totalArea:number
+    onePcsArea:number
+    onePcsCost:number
+    totalCost:number
     constructor(
       width,
       height,
@@ -32,10 +59,10 @@ function startTest(
       this.material = material;
       this.lamination = lamination;
       this.borderCut = borderCut;
-      this.random = (Math.random() * 10000).toFixed();
+      this.random = parseInt((Math.random() * 10000).toFixed());
       this.orderCategory = orderCategory;
       this.price = price;
-      this.totalArea = (this.width * this.height * this.count).toFixed(3);
+      this.totalArea = parseInt((this.width * this.height * this.count).toFixed(3));
       this.onePcsArea = this.width * this.height;
       this.onePcsCost = this.onePcsArea * this.price;
       this.totalCost = this.totalArea * this.price;
@@ -57,4 +84,4 @@ function startTest(
   orderList.push(order);
   return orderList;
 }
-export default startTest;
+export default startCalc;

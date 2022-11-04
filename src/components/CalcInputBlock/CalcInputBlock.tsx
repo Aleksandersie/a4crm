@@ -8,7 +8,7 @@ import {
     Row,
     Table,
 } from "react-bootstrap";
-import startTest from "../../calcLogic/calc";
+import startCalc from "../../calcLogic/calc";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 import { TextField } from "@mui/material";
@@ -17,7 +17,7 @@ import MaterialSurfaceCheck from "../MaterialSurfaceCheck/MaterialSurfaceCheck";
 import LaminationCheck from "../LaminationCheck/LaminationCheck";
 import BorderCutCheck from "../BorderCutCheck/BorderCutCheck";
 import { orderList } from "../../calcLogic/calc";
-import { minOrderValue } from "../../Const";
+import { firstDiscountStep, firstDiscountValue, minOrderValue } from "../../Const";
 const CalcInputBlock = observer(() => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -40,7 +40,7 @@ const CalcInputBlock = observer(() => {
     const { checkStore } = useContext(Context);
 
     function start() {
-        let result = startTest(
+        let result = startCalc(
             width,
             height,
             description,
@@ -57,18 +57,22 @@ const CalcInputBlock = observer(() => {
     
 
     useEffect(() => {
-        
-     
         let area: number = parseFloat((width * height).toFixed(4));
         let areaT: number = parseFloat((area * count).toFixed(4));
-        let oneCount: number = area * price.currentPrice;
+        let preFlightPrice:number = price.currentPrice
+        if(areaT>firstDiscountStep){
+           let curentDicscountValue = (preFlightPrice*firstDiscountValue)/100
+           preFlightPrice =  preFlightPrice - curentDicscountValue
+        }
+        
+        let oneCount: number = Math.ceil( area * preFlightPrice);
         if(oneCount<1){
             oneCount = 1
             setWarrning( "Внимание стоимость наклейки не может быть ниже 1 рубля")
         }else{
             setWarrning("")
         }
-        let totalCount: number = areaT * price.currentPrice;
+        let totalCount: number = Math.ceil( areaT * preFlightPrice);
         let minOrder: number = Math.ceil(minOrderValue/ oneCount);
         if (minOrder === Infinity) {
             minOrder = null;
@@ -98,8 +102,7 @@ const CalcInputBlock = observer(() => {
             console.log(`printCut ${price.retailPrice.vinylPC}`);
         }
     }, [materialList.selectedCategory, width, height, count]);
-    // @ts-ignore
-    // @ts-ignore
+
     return (
         <div className=" ">
             <Form className="mt-4 m-auto">
