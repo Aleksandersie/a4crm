@@ -28,14 +28,6 @@ const OrderPage = observer(() => {
                     {order.orderInProgress.data.map((el) => (
                         <OrderPanelString key={el.randomNumber} orderString={el} />
                     ))}
-                    {/*{order.orderInProgress.data.map((el) => (*/}
-                    {/*    <div>*/}
-                    {/*        {el.randomNumber}*/}
-                    {/*        {el.orderItems.map((el) => (*/}
-                    {/*            <div>{el.orderCategory}</div>*/}
-                    {/*        ))}*/}
-                    {/*    </div>*/}
-                    {/*))}*/}
                 </Card>
             </Container>
         </div>

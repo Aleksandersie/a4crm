@@ -1,5 +1,8 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Accordion, Card, Table } from "react-bootstrap";
+import { AiFillDelete } from "react-icons/ai";
+import { BiRuble } from "react-icons/bi";
+import OrderElementAccordion from "./OrderElementAccordion";
 interface IOrderString {
     key: number;
     orderString: any;
@@ -7,11 +10,42 @@ interface IOrderString {
 
 const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
     return (
-        <div>
-            {orderString.orderItems.map((el) => (
-                <div key={el.createdAt}>{el.price}</div>
-            ))}
-        </div>
+        <Accordion className="m-auto mt-2" style={{ width: 800 }}>
+            <Accordion.Item eventKey="0">
+                <Accordion.Header>
+                    <Card
+                        className=" pb-2 pt-3 d-flex flex-row justify-content-evenly  ms-5 me-5 shadow-sm gap-4"
+                        style={{
+                            minWidth: 300,
+                            backgroundColor: "whitesmoke",
+                            width: "100% ",
+                        }}
+                    >
+                        <div style={{ textAlign: "center" }}>
+                            <h6>{"Заказчик"}</h6>
+                            <p>{orderString.owner}</p>
+                        </div>
+
+                        <div style={{ textAlign: "center" }}>
+                            <h6>{"Время создания заказа"}</h6>
+                            <p>{orderString.createdDate}</p>
+                        </div>
+                        {/*<div style={{ textAlign: "center" }}>*/}
+                        {/*    <h6>{"Удалить"}</h6>*/}
+                        {/*    <AiFillDelete*/}
+                        {/*        style={{ fontSize: 22 }}*/}
+                        {/*        onClick={() => removeItem(orderItem.random)}*/}
+                        {/*    />*/}
+                        {/*</div>*/}
+                    </Card>
+                </Accordion.Header>
+                <Accordion.Body>
+                    {orderString.orderItems.map((el) => (
+                        <OrderElementAccordion key={el.createdAt} orderAccordion={el} />
+                    ))}
+                </Accordion.Body>
+            </Accordion.Item>
+        </Accordion>
     );
 };
 
