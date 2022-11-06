@@ -8,6 +8,7 @@ import {
     ADMIN_PANEL,
     LOGIN_ROUTE,
     MAIN_ROUTE,
+    ORDER_PAGE_ROUTE,
     TODO_ROUTE,
 } from "../../routeConst/routeConst";
 import { observer } from "mobx-react-lite";
@@ -16,8 +17,9 @@ import { Context } from "../../index";
 // const nav = useNavigate();
 
 import { AiOutlineUnorderedList, AiOutlineSetting } from "react-icons/ai";
+import { adminConst, managerConst, workerConst } from "../../Const";
 
-const TopBar = observer(() => {
+const TopBar: React.FC = observer(() => {
     const { user } = useContext(Context);
 
     function logOut() {
@@ -36,11 +38,7 @@ const TopBar = observer(() => {
                 >
                     <div>
                         {" "}
-                        <TbCalculator
-                            size="25"
-                            className="me-2 mb-1"
-                            style={{}}
-                        />
+                        <TbCalculator size="25" className="me-2 mb-1" style={{}} />
                         A4 CRM
                     </div>
                 </NavLink>
@@ -58,17 +56,10 @@ const TopBar = observer(() => {
                     {/*    Панель менеджера*/}
                     {/*  </Button>*/}
                     {/*</NavLink>*/}
-                    {user.user.role === "admin" ? (
+                    {user.user.role === adminConst ? (
                         <NavLink to={ADMIN_PANEL}>
-                            <Button
-                                variant={"warning"}
-                                style={{ height: 41 }}
-                                className={"me-3"}
-                            >
-                                <AiOutlineSetting
-                                    style={{ fontSize: 22 }}
-                                    className="me-2"
-                                />
+                            <Button variant={"warning"} style={{ height: 41 }} className={"me-3"}>
+                                <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />
                                 Панель администратора
                             </Button>
                         </NavLink>
@@ -76,16 +67,19 @@ const TopBar = observer(() => {
                         ""
                     )}
                     {user.isAuth ? (
+                        <NavLink to={ORDER_PAGE_ROUTE}>
+                            <Button variant={"warning"} style={{ height: 41 }} className={"me-3"}>
+                                <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />
+                                Тестовые заказы
+                            </Button>
+                        </NavLink>
+                    ) : (
+                        "123"
+                    )}
+                    {user.isAuth ? (
                         <NavLink to={TODO_ROUTE}>
-                            <Button
-                                variant={"warning"}
-                                style={{ height: 41 }}
-                                className={"me-3"}
-                            >
-                                <AiOutlineUnorderedList
-                                    style={{ fontSize: 22 }}
-                                    className="me-2"
-                                />
+                            <Button variant={"warning"} style={{ height: 41 }} className={"me-3"}>
+                                <AiOutlineUnorderedList style={{ fontSize: 22 }} className="me-2" />
                                 Список задач
                             </Button>
                         </NavLink>
