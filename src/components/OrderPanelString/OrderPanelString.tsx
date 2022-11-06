@@ -10,7 +10,7 @@ interface IOrderString {
 
 const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
     return (
-        <Accordion className="m-auto mt-2" style={{ width: 800 }}>
+        <Accordion className="m-auto mt-2 mb-2" style={{ width: 800 }}>
             <Accordion.Item eventKey="0">
                 <Accordion.Header>
                     <Card
@@ -41,7 +41,7 @@ const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
                 </Accordion.Header>
                 <Accordion.Body>
                     {orderString.orderItems.map((el) => (
-                        <OrderElementAccordion key={el.createdAt} orderAccordion={el} />
+                        <OrderElementAccordion key={el.id} orderAccordion={el} />
                     ))}
                 </Accordion.Body>
             </Accordion.Item>

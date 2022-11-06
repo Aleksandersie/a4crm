@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { getAllOrders } from "../components/axios/OrderApi";
@@ -15,6 +15,10 @@ const OrderPage = observer(() => {
         // console.log({ order });
     }
 
+    useEffect(() => {
+        getAllOrders().then(({ data }) => order.setOrderInProgress({ data }));
+    }, []);
+
     const { order } = useContext(Context);
 
     return (
@@ -24,7 +28,14 @@ const OrderPage = observer(() => {
                     <Card.Header>
                         <h4>Список заказов</h4>
                     </Card.Header>
-                    <Button onClick={get}>get</Button>
+                    <Button
+                        onClick={get}
+                        variant={"warning"}
+                        style={{ width: 200 }}
+                        className={"m-auto mt-2"}
+                    >
+                        Обновить вручную
+                    </Button>
                     {order.orderInProgress.data.map((el) => (
                         <OrderPanelString key={el.randomNumber} orderString={el} />
                     ))}

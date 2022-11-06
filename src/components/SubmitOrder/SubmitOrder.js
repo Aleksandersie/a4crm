@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Table } from "react-bootstrap";
+import { Button, Card, Modal, Table } from "react-bootstrap";
 import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 import { createOrder } from "../axios/OrderApi";
 
 const SubmitOrder = observer(() => {
     const { order } = useContext(Context);
+
+    const [show, setShow] = useState(false);
 
     const [totalCost, setTotalCost] = useState("0");
     useEffect(() => {
@@ -17,7 +19,7 @@ const SubmitOrder = observer(() => {
     }, [order.order]);
 
     async function submitOrder() {
-        await createOrder(order.order);
+        await createOrder(order.order).finally(() => setShow(false));
     }
 
     return (
@@ -59,10 +61,25 @@ const SubmitOrder = observer(() => {
                     variant="warning"
                     className="mt-3 mb-3 m-auto"
                     style={{ width: 200 }}
-                    onClick={submitOrder}
+                    // onClick={submitOrder}
+                    onClick={() => setShow(true)}
                 >
                     Подтвердить и отправить в работу
                 </Button>
+                <Modal show={show} onHide={() => setShow(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Подтверждение заказа</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Подтвердить заказ и отправить в работу?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShow(false)}>
+                            Отмена
+                        </Button>
+                        <Button variant="warning" onClick={submitOrder}>
+                            Подтвердить
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </Card>
         </div>
     );
