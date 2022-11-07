@@ -10,14 +10,18 @@ import CategoryBlock from "../components/CategoryCard/CategoryBlock";
 import OrderTotal from "../components/OrderTotal/OrderTotal";
 import { getRetailPrice } from "../components/axios/PriceApi";
 import { Context } from "../index";
+import { getAllOrders } from "../components/axios/OrderApi";
 
 const MainPage = () => {
     //  const { order } = useState();
-    const { price } = useContext(Context);
+    const { price, order } = useContext(Context);
 
     useEffect(() => {
         getRetailPrice().then((data) => price.setRetailPrice(data));
         console.log({ price });
+    }, []);
+    useEffect(() => {
+        getAllOrders().then(({ data }) => order.setOrderInProgress({ data }));
     }, []);
 
     return (
