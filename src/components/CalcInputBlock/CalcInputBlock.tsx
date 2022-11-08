@@ -40,7 +40,16 @@ const CalcInputBlock = observer(() => {
     const { checkStore } = useContext(Context);
 
     function addFile(e) {
-        uploadFile(e.target.files);
+        setFile(e.target.files[0]);
+        console.log(file);
+        upload();
+    }
+    function upload() {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("name", materialList.selectedMaterial.name);
+        console.log(formData);
+        uploadFile(formData);
     }
 
     interface IStartCalc {
