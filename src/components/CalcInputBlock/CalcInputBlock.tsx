@@ -17,7 +17,7 @@ import {
     secondDiscountValue,
     thirdDiscountStep,
 } from "../../Const";
-import { createOrder } from "../axios/OrderApi";
+import { createOrder, uploadFile } from "../axios/OrderApi";
 const CalcInputBlock = observer(() => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -32,16 +32,15 @@ const CalcInputBlock = observer(() => {
         countPerMeter: 0,
     });
     const [warning, setWarrning] = useState("test");
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState(null);
 
     const { price } = useContext(Context);
     const { materialList } = useContext(Context);
     const { order } = useContext(Context);
     const { checkStore } = useContext(Context);
 
-
-    function addFile(e){
-        console.log(e.target.files)
+    function addFile(e) {
+        uploadFile(e.target.files);
     }
 
     interface IStartCalc {
@@ -279,7 +278,7 @@ const CalcInputBlock = observer(() => {
                     <h6 className="m-auto" style={{ textAlign: "center" }}>
                         {"Прикрепите файл"}
                     </h6>
-                    <Form.Control className="mt-2" placeholder="" type="file" onChange={addFile}/>
+                    <Form.Control className="mt-2" placeholder="" type="file" onChange={addFile} />
                 </Col>
             </Row>
             <div className="mt-4 gap-3 d-flex justify-content-center mb-3">
