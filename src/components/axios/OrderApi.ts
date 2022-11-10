@@ -5,12 +5,12 @@ export const createOrder = async function (data) {
 };
 
 export const uploadFile = async function (formData) {
-    console.log(formData);
     const res = await host.post("api/order/file", formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
     });
+    return res;
 };
 export const getAllOrders = async function () {
     const response = await host.get("api/order");

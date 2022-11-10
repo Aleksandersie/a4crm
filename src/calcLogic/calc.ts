@@ -20,7 +20,8 @@ interface IStartCalc {
         lamination: string,
         borderCut: string,
         orderCategory: string,
-        price: number
+        price: number,
+        path: string
     ): any[];
 }
 
@@ -33,7 +34,8 @@ let startCalc: IStartCalc = function (
     lamination,
     borderCut,
     orderCategory,
-    price
+    price,
+    path
 ) {
     class OrderItem {
         width: number;
@@ -50,6 +52,7 @@ let startCalc: IStartCalc = function (
         onePcsArea: number;
         onePcsCost: number;
         totalCost: number;
+        path: string;
         constructor(
             width,
             height,
@@ -59,7 +62,8 @@ let startCalc: IStartCalc = function (
             lamination,
             borderCut,
             orderCategory,
-            price
+            price,
+            path
         ) {
             this.width = width;
             this.height = height;
@@ -78,6 +82,7 @@ let startCalc: IStartCalc = function (
             //this.totalCost = this.totalArea * this.price;
             //this.totalCost = this.totalDiscountCalc();
             this.totalCost = this.onePcsCost * count;
+            this.path = path;
         }
         totalDiscountCalc(): number {
             if (this.totalArea <= firstDiscountStep) {
@@ -138,7 +143,8 @@ let startCalc: IStartCalc = function (
         lamination,
         borderCut,
         orderCategory,
-        price
+        price,
+        path
     );
 
     orderList.push(order);

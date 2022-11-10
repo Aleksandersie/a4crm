@@ -18,6 +18,7 @@ import {
     thirdDiscountStep,
 } from "../../Const";
 import { createOrder, uploadFile } from "../axios/OrderApi";
+import { log } from "util";
 const CalcInputBlock = observer(() => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -33,6 +34,7 @@ const CalcInputBlock = observer(() => {
     });
     const [warning, setWarrning] = useState("test");
     const [file, setFile] = useState(null);
+    const [path, setPath] = useState("");
 
     const { price } = useContext(Context);
     const { materialList } = useContext(Context);
@@ -41,33 +43,36 @@ const CalcInputBlock = observer(() => {
 
     function addFile(e) {
         setFile(e.target.files[0]);
-        console.log(file);
+        console.log(e.target.files);
         upload();
     }
-    function upload() {
+    async function upload() {
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("name", materialList.selectedMaterial.name);
-        console.log(formData);
-        uploadFile(formData);
+        formData.append("material", materialList.selectedMaterial.name);
+        formData.append("width", String(width));
+        formData.append("height", String(height));
+        formData.append("count", String(count));
+        formData.append("random", (Math.random() * 100).toFixed());
+        const res = await uploadFile(formData);
+        setPath(res.data);
     }
 
     interface IStartCalc {
-        (
-            width: number,
-            height: number,
-            description: string,
-            count: number,
-            currentMaterial: string,
-            lamination: boolean,
-            borderCut: boolean,
-            materialCategory: string,
-            currentPrice: number
-        ): any[];
+        width: number;
+        height: number;
+        description: string;
+        count: number;
+        currentMaterial: string;
+        lamination: boolean;
+        borderCut: boolean;
+        materialCategory: string;
+        currentPrice: number;
+        path: string;
     }
 
     function start() {
-        let result: any[] = startCalc(
+        let result: IStartCalc[] = startCalc(
             width,
             height,
             description,
@@ -76,9 +81,13 @@ const CalcInputBlock = observer(() => {
             checkStore.lamination,
             checkStore.borderCut,
             materialList.selectedCategory.name,
-            price.currentPrice
+            price.currentPrice,
+            path
         );
         order.setOrder(result);
+        // setFile(null);
+        // setWidth(0);
+        // setHeight(0);
     }
     console.log(`w:${width} h:${height}`);
 
