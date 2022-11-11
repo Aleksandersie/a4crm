@@ -41,14 +41,14 @@ const CalcInputBlock = observer(() => {
     const { order } = useContext(Context);
     const { checkStore } = useContext(Context);
 
-    function addFile(e) {
-        setFile(e.target.files[0]);
-        console.log(e.target.files);
-        upload();
-    }
-    async function upload() {
+    // function addFile(e) {
+    //     setFile(e.target.files[0]);
+    //     console.log(e.target.files);
+    //     upload();
+    // }
+    async function upload(e) {
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("file", e.target.files[0]);
         formData.append("material", materialList.selectedMaterial.name);
         formData.append("width", String(width));
         formData.append("height", String(height));
@@ -296,7 +296,7 @@ const CalcInputBlock = observer(() => {
                     <h6 className="m-auto" style={{ textAlign: "center" }}>
                         {"Прикрепите файл"}
                     </h6>
-                    <Form.Control className="mt-2" placeholder="" type="file" onChange={addFile} />
+                    <Form.Control className="mt-2" placeholder="" type="file" onChange={upload} />
                 </Col>
             </Row>
             <div className="mt-4 gap-3 d-flex justify-content-center mb-3">
