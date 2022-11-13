@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Col, Form, FormControl, Row, Table } from "react-bootstrap";
-import startCalc from "../../calcLogic/calc";
+import startCalc, { IOrderItem } from "../../calcLogic/calc";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 import { TextField } from "@mui/material";
@@ -18,13 +18,22 @@ import {
     thirdDiscountStep,
 } from "../../Const";
 import { createOrder, uploadFile } from "../axios/OrderApi";
-import { log } from "util";
-const CalcInputBlock = observer(() => {
+
+interface IPreFlight {
+    area: number;
+    areaTotal: number;
+    priceOneCount: number;
+    priceTotal: number;
+    minOrder: number;
+    countPerMeter: number;
+}
+
+const CalcInputBlock: React.FC = observer(() => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const [description, setDescription] = useState("Наклейки");
     const [count, setCount] = useState(1);
-    const [preFlight, setPreFlight] = useState({
+    const [preFlight, setPreFlight] = useState<IPreFlight>({
         area: 0,
         areaTotal: 0,
         priceOneCount: 0,
@@ -33,7 +42,7 @@ const CalcInputBlock = observer(() => {
         countPerMeter: 0,
     });
     const [warning, setWarrning] = useState("test");
-    const [file, setFile] = useState(null);
+
     const [path, setPath] = useState("");
 
     const { price } = useContext(Context);
@@ -41,12 +50,7 @@ const CalcInputBlock = observer(() => {
     const { order } = useContext(Context);
     const { checkStore } = useContext(Context);
 
-    // function addFile(e) {
-    //     setFile(e.target.files[0]);
-    //     console.log(e.target.files);
-    //     upload();
-    // }
-    async function upload(e) {
+    async function upload(e: React.ChangeEvent<HTMLInputElement>) {
         const formData = new FormData();
         formData.append("file", e.target.files[0]);
         formData.append("material", materialList.selectedMaterial.name);
@@ -72,7 +76,7 @@ const CalcInputBlock = observer(() => {
     }
 
     function start() {
-        let result: IStartCalc[] = startCalc(
+        let result: IOrderItem[] = startCalc(
             width,
             height,
             description,
@@ -85,9 +89,8 @@ const CalcInputBlock = observer(() => {
             path
         );
         order.setOrder(result);
-        // setFile(null);
-        // setWidth(0);
-        // setHeight(0);
+        setWidth(0);
+        setHeight(0);
     }
     console.log(`w:${width} h:${height}`);
 
@@ -109,6 +112,7 @@ const CalcInputBlock = observer(() => {
             let currentDiscountValue = (preFlightPrice * secondDiscountValue) / 100;
             preFlightPrice = preFlightPrice - currentDiscountValue;
         }
+        ////////////////////////////////////////////////
 
         let oneCount: number = parseFloat((area * preFlightPrice).toFixed(2)); // Стоимость одной штуки
         if (oneCount < 1) {
@@ -117,6 +121,7 @@ const CalcInputBlock = observer(() => {
         } else {
             setWarrning("");
         }
+        /////////////////////////////////
         let totalCount: number = parseFloat((oneCount * count).toFixed(2)); // Общая стоимость
         let minOrder: number = Math.ceil(minOrderValue / oneCount); // Колличество штук на сумму минимального заказа
         if (minOrder === Infinity) {

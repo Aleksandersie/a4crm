@@ -22,7 +22,25 @@ interface IStartCalc {
         orderCategory: string,
         price: number,
         path: string
-    ): any[];
+    ): IOrderItem[];
+}
+export interface IOrderItem {
+    //Интерфейс строки заказа
+    width: number;
+    height: number;
+    description: string;
+    count: number;
+    material: string;
+    lamination: boolean;
+    borderCut: boolean;
+    orderCategory: string;
+    price: number;
+    random: number;
+    totalArea: number;
+    onePcsArea: number;
+    onePcsCost: number;
+    totalCost: number;
+    path: string;
 }
 
 let startCalc: IStartCalc = function (

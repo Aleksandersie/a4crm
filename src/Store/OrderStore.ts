@@ -1,8 +1,11 @@
+import { IOrderItem } from "../calcLogic/calc";
+import { IIncomingOrder } from "../components/axios/OrderApi";
+
 const { makeAutoObservable } = require("mobx");
 
 export default class OrderStore {
-    private _order = {};
-    private _ordersInProgress = {};
+    private _order: IOrderItem[];
+    private _ordersInProgress: IIncomingOrder[];
 
     constructor() {
         this._order = [];
@@ -11,7 +14,7 @@ export default class OrderStore {
         makeAutoObservable(this);
     }
 
-    setOrder(order) {
+    setOrder(order: IOrderItem[]) {
         this._order = order;
     }
 
@@ -19,7 +22,7 @@ export default class OrderStore {
         return this._order;
     }
 
-    setOrderInProgress(order) {
+    setOrderInProgress(order: IIncomingOrder[]) {
         this._ordersInProgress = order;
     }
 
