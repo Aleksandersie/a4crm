@@ -21,7 +21,7 @@ const MainPage = () => {
         console.log({ price });
     }, []);
     useEffect(() => {
-        getAllOrders().then(({ data }) => order.setOrderInProgress({ data }));
+        getAllOrders().then((data) => order.setOrderInProgress(data));
     }, []);
 
     return (

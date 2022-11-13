@@ -4,7 +4,7 @@ import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 import { createOrder } from "../axios/OrderApi";
 
-const SubmitOrder = observer(() => {
+const SubmitOrder: React.FC = observer(() => {
     const { order } = useContext(Context);
 
     const [show, setShow] = useState(false);

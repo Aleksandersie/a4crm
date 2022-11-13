@@ -2,31 +2,11 @@ import React from "react";
 import { Accordion, Card, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
+import { IOrderItem } from "../../calcLogic/calc";
 
 interface IOrderAccordion {
     key: any;
-    orderAccordion: IAccordionElement;
-}
-
-interface IAccordionElement {
-    id: number;
-    width: string;
-    height: string;
-    description: string;
-    count: number;
-    material: string;
-    lamination: boolean;
-    borderCut: boolean;
-    orderCategory: string;
-    price: number;
-    random: number;
-    totalArea: number;
-    onePcsArea: number;
-    onePcsCost: number;
-    totalCost: number;
-    createdAt: Date;
-    updatedAt: Date;
-    orderId: number;
+    orderAccordion: IOrderItem;
 }
 
 const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) => {

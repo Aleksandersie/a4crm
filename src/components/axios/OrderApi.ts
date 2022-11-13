@@ -23,5 +23,5 @@ export const uploadFile = async function (formData) {
 };
 export const getAllOrders = async function () {
     const response = await host.get<IIncomingOrder[]>("api/order");
-    return response;
+    return response.data;
 };

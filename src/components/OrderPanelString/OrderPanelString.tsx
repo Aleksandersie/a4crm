@@ -3,9 +3,10 @@ import { Accordion, Card, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
 import OrderElementAccordion from "./OrderElementAccordion";
+import { IIncomingOrder } from "../axios/OrderApi";
 interface IOrderString {
     key: number;
-    orderString: any;
+    orderString: IIncomingOrder;
 }
 
 const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
@@ -25,6 +26,10 @@ const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
                             <h6>{"Заказчик"}</h6>
                             <p>{orderString.owner}</p>
                         </div>
+                        <div style={{ textAlign: "center" }}>
+                            <h6>{"Код заказа"}</h6>
+                            <p>{orderString.randomNumber}</p>
+                        </div>
 
                         <div style={{ textAlign: "center" }}>
                             <h6>{"Время создания заказа"}</h6>
@@ -41,7 +46,7 @@ const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
                 </Accordion.Header>
                 <Accordion.Body>
                     {orderString.orderItems.map((el) => (
-                        <OrderElementAccordion key={el.id} orderAccordion={el} />
+                        <OrderElementAccordion key={el.random} orderAccordion={el} />
                     ))}
                 </Accordion.Body>
             </Accordion.Item>
