@@ -1,8 +1,10 @@
 import React from "react";
-import { Accordion, Card, Table } from "react-bootstrap";
+import { Accordion, Button, Card, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
 import { IOrderItem } from "../../calcLogic/calc";
+import { NavLink } from "react-router-dom";
+import { MAIN_ROUTE } from "../../routeConst/routeConst";
 
 interface IOrderAccordion {
     key: any;
@@ -95,6 +97,9 @@ const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) =>
                             </tr>
                         </tbody>
                     </Table>
+                    <NavLink to={orderAccordion.path} download target="_self">
+                        <Button>Скачать файл</Button>
+                    </NavLink>
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
