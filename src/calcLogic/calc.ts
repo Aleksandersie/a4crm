@@ -21,7 +21,7 @@ interface IStartCalc {
         borderCut: string,
         orderCategory: string,
         price: number,
-        path: string
+        filePath: string
     ): IOrderItem[];
 }
 export interface IOrderItem {
@@ -40,7 +40,7 @@ export interface IOrderItem {
     onePcsArea: number;
     onePcsCost: number;
     totalCost: number;
-    path: string;
+    filePath: string;
 }
 
 let startCalc: IStartCalc = function (
@@ -53,7 +53,7 @@ let startCalc: IStartCalc = function (
     borderCut,
     orderCategory,
     price,
-    path
+    filePath
 ) {
     class OrderItem {
         width: number;
@@ -70,7 +70,7 @@ let startCalc: IStartCalc = function (
         onePcsArea: number;
         onePcsCost: number;
         totalCost: number;
-        path: string;
+        filePath: string;
         constructor(
             width,
             height,
@@ -81,7 +81,7 @@ let startCalc: IStartCalc = function (
             borderCut,
             orderCategory,
             price,
-            path
+            filePath
         ) {
             this.width = width;
             this.height = height;
@@ -100,7 +100,7 @@ let startCalc: IStartCalc = function (
             //this.totalCost = this.totalArea * this.price;
             //this.totalCost = this.totalDiscountCalc();
             this.totalCost = this.onePcsCost * count;
-            this.path = path;
+            this.filePath = filePath;
         }
         totalDiscountCalc(): number {
             if (this.totalArea <= firstDiscountStep) {
@@ -162,7 +162,7 @@ let startCalc: IStartCalc = function (
         borderCut,
         orderCategory,
         price,
-        path
+        filePath
     );
 
     orderList.push(order);

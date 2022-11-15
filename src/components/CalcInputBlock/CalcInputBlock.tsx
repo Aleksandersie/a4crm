@@ -43,7 +43,7 @@ const CalcInputBlock: React.FC = observer(() => {
     });
     const [warning, setWarrning] = useState("test");
 
-    const [path, setPath] = useState("");
+    const [filePath, setFilePath] = useState("");
 
     const { price } = useContext(Context);
     const { materialList } = useContext(Context);
@@ -59,7 +59,7 @@ const CalcInputBlock: React.FC = observer(() => {
         formData.append("count", String(count));
         formData.append("random", (Math.random() * 100).toFixed());
         const res = await uploadFile(formData);
-        setPath(res.data);
+        setFilePath(res.data);
     }
 
     interface IStartCalc {
@@ -86,7 +86,7 @@ const CalcInputBlock: React.FC = observer(() => {
             checkStore.borderCut,
             materialList.selectedCategory.name,
             price.currentPrice,
-            path
+            filePath
         );
         order.setOrder(result);
         setWidth(0);

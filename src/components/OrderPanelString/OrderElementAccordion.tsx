@@ -5,10 +5,29 @@ import { BiRuble } from "react-icons/bi";
 import { IOrderItem } from "../../calcLogic/calc";
 import { NavLink } from "react-router-dom";
 import { MAIN_ROUTE } from "../../routeConst/routeConst";
+import axios from "axios";
 
 interface IOrderAccordion {
     key: any;
     orderAccordion: IOrderItem;
+}
+
+async function download(path) {
+    const fileName = path.split("\\");
+    console.log(fileName);
+
+    const res = await axios
+        .get("http://localhost:3002/api/order/download", { responseType: "blob", params: { path } })
+        .then((response) => {
+            const href = URL.createObjectURL(response.data);
+            const link = document.createElement("a");
+            link.href = href;
+            link.setAttribute("download", fileName[fileName.length - 1]);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(href);
+        });
 }
 
 const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) => {
@@ -97,9 +116,10 @@ const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) =>
                             </tr>
                         </tbody>
                     </Table>
-                    <NavLink to={orderAccordion.path} download target="_self">
-                        <Button>Скачать файл</Button>
-                    </NavLink>
+
+                    <Button variant={"warning"} onClick={() => download(orderAccordion.filePath)}>
+                        Скачать файл
+                    </Button>
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
