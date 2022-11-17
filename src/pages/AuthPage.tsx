@@ -4,7 +4,6 @@ import { Button, Card, Container, Form } from "react-bootstrap";
 import { MAIN_ROUTE } from "../routeConst/routeConst";
 import { login } from "../components/axios/UserApi";
 import { Context } from "../index";
-import axios, { AxiosError } from "axios";
 
 const AuthPage = () => {
     const navigate = useNavigate();
@@ -12,16 +11,16 @@ const AuthPage = () => {
     const [loginData, setLoginData] = useState({ email: "", password: "" });
 
     async function logIn() {
-        try{
+        try {
             const userData = await login(loginData.email, loginData.password);
+            console.log(userData);
             user.setUser(userData);
             user.setIsAuth(true);
-            console.log(userData);
+
             navigate(MAIN_ROUTE);
-        }catch (e){
+        } catch (e) {
             console.log(e.message);
         }
-
     }
 
     return (
@@ -29,10 +28,7 @@ const AuthPage = () => {
             className="d-flex justify-content-center align-content-center"
             style={{ marginTop: 50 }}
         >
-            <Card
-                className="p-5"
-                style={{ width: 600, backgroundColor: "whitesmoke" }}
-            >
+            <Card className="p-5" style={{ width: 600, backgroundColor: "whitesmoke" }}>
                 <Form className="d-flex flex-column">
                     <h3 className="m-auto" style={{ textAlign: "center" }}>
                         {"Авторизация"}
@@ -60,11 +56,7 @@ const AuthPage = () => {
                         }
                         type="password"
                     />
-                    <Button
-                        variant={"success"}
-                        className=" mt-3 "
-                        onClick={logIn}
-                    >
+                    <Button variant={"success"} className=" mt-3 " onClick={logIn}>
                         Войти
                     </Button>
                 </Form>

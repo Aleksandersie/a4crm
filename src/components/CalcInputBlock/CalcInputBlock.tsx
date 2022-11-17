@@ -49,6 +49,7 @@ const CalcInputBlock: React.FC = observer(() => {
     const { materialList } = useContext(Context);
     const { order } = useContext(Context);
     const { checkStore } = useContext(Context);
+    const { user } = useContext(Context);
 
     async function upload(e: React.ChangeEvent<HTMLInputElement>) {
         const formData = new FormData();
@@ -62,19 +63,6 @@ const CalcInputBlock: React.FC = observer(() => {
         setFilePath(res.data);
     }
 
-    interface IStartCalc {
-        width: number;
-        height: number;
-        description: string;
-        count: number;
-        currentMaterial: string;
-        lamination: boolean;
-        borderCut: boolean;
-        materialCategory: string;
-        currentPrice: number;
-        path: string;
-    }
-
     function start() {
         let result: IOrderItem[] = startCalc(
             width,
@@ -86,11 +74,14 @@ const CalcInputBlock: React.FC = observer(() => {
             checkStore.borderCut,
             materialList.selectedCategory.name,
             price.currentPrice,
-            filePath
+            filePath, //TODO ПАДЕТ ЕСЛИ НЕТ ФАЙЛА В ИНПУТЕ
+            user.user.alias,
+            user.user.alias
         );
         order.setOrder(result);
         setWidth(0);
         setHeight(0);
+        console.log(user.user.alias);
     }
     console.log(`w:${width} h:${height}`);
 

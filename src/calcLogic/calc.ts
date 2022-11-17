@@ -21,7 +21,9 @@ interface IStartCalc {
         borderCut: string,
         orderCategory: string,
         price: number,
-        filePath: string
+        filePath: string,
+        orderOwner: string,
+        orderAuthor: string
     ): IOrderItem[];
 }
 export interface IOrderItem {
@@ -41,6 +43,8 @@ export interface IOrderItem {
     onePcsCost: number;
     totalCost: number;
     filePath: string;
+    orderOwner: string;
+    orderAuthor: string;
 }
 
 let startCalc: IStartCalc = function (
@@ -53,7 +57,9 @@ let startCalc: IStartCalc = function (
     borderCut,
     orderCategory,
     price,
-    filePath
+    filePath,
+    orderOwner,
+    orderAuthor
 ) {
     class OrderItem {
         width: number;
@@ -71,6 +77,8 @@ let startCalc: IStartCalc = function (
         onePcsCost: number;
         totalCost: number;
         filePath: string;
+        orderOwner: string;
+        orderAuthor: string;
         constructor(
             width,
             height,
@@ -81,7 +89,9 @@ let startCalc: IStartCalc = function (
             borderCut,
             orderCategory,
             price,
-            filePath
+            filePath,
+            orderOwner,
+            orderAuthor
         ) {
             this.width = width;
             this.height = height;
@@ -101,6 +111,8 @@ let startCalc: IStartCalc = function (
             //this.totalCost = this.totalDiscountCalc();
             this.totalCost = this.onePcsCost * count;
             this.filePath = filePath;
+            this.orderAuthor = orderAuthor;
+            this.orderOwner = orderOwner;
         }
         totalDiscountCalc(): number {
             if (this.totalArea <= firstDiscountStep) {
@@ -162,7 +174,9 @@ let startCalc: IStartCalc = function (
         borderCut,
         orderCategory,
         price,
-        filePath
+        filePath,
+        orderOwner,
+        orderAuthor
     );
 
     orderList.push(order);
