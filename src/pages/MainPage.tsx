@@ -11,10 +11,11 @@ import OrderTotal from "../components/OrderTotal/OrderTotal";
 import { getRetailPrice } from "../components/axios/PriceApi";
 import { Context } from "../index";
 import { getAllOrders } from "../components/axios/OrderApi";
+import { getAllCustomers } from "../components/axios/UserApi";
 
 const MainPage = () => {
     //  const { order } = useState();
-    const { price, order } = useContext(Context);
+    const { price, order, user } = useContext(Context);
 
     useEffect(() => {
         getRetailPrice().then((data) => price.setRetailPrice(data));
@@ -22,6 +23,10 @@ const MainPage = () => {
     }, []);
     useEffect(() => {
         getAllOrders().then((data) => order.setOrderInProgress(data));
+    }, []);
+    useEffect(() => {
+        getAllCustomers().then((data) => user.setCustomers(data));
+        console.log(user.customers);
     }, []);
 
     return (

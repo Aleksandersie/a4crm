@@ -23,3 +23,8 @@ export const getEmployees = async function () {
     const { data } = await host.get("api/user/getall");
     return data;
 };
+
+export const getAllCustomers = async function () {
+    const { data } = await host.get<IUser[]>("api/user/getAllCustomers");
+    return data;
+};

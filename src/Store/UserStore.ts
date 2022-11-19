@@ -1,3 +1,5 @@
+import { runInThisContext } from "vm";
+
 const { makeAutoObservable } = require("mobx");
 
 export interface IUser {
@@ -12,11 +14,15 @@ export default class UserStore {
     private _user: IUser;
     private _employees: [];
     private _selectedEmployees: {};
+    private _customers: IUser[];
+    private _selectedCustomer: IUser;
     constructor() {
         this._isAuth = false;
         this._user = <IUser>{};
         this._employees = [];
         this._selectedEmployees = {};
+        this._customers = [];
+        this._selectedCustomer = <IUser>{};
         makeAutoObservable(this);
     }
 
@@ -45,5 +51,17 @@ export default class UserStore {
     }
     get selectedEmployees() {
         return this._selectedEmployees;
+    }
+    setCustomers(customers: IUser[]) {
+        this._customers = customers;
+    }
+    get customers() {
+        return this._customers;
+    }
+    setSelectedCustomer(customer: IUser) {
+        this._selectedCustomer = customer;
+    }
+    get selectedCustomer() {
+        return this._selectedCustomer;
     }
 }

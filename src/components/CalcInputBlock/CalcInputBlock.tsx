@@ -75,7 +75,7 @@ const CalcInputBlock: React.FC = observer(() => {
             materialList.selectedCategory.name,
             price.currentPrice,
             filePath, //TODO ПАДЕТ ЕСЛИ НЕТ ФАЙЛА В ИНПУТЕ
-            user.user.alias,
+            user.selectedCustomer.alias,
             user.user.alias
         );
         order.setOrder(result);
