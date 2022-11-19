@@ -3,6 +3,7 @@ import { Button, Card, Modal, Table } from "react-bootstrap";
 import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 import { createOrder } from "../axios/OrderApi";
+import { orderClear } from "../../calcLogic/calc";
 
 const SubmitOrder: React.FC = observer(() => {
     const { order } = useContext(Context);
@@ -20,6 +21,8 @@ const SubmitOrder: React.FC = observer(() => {
 
     async function submitOrder() {
         await createOrder(order.order).finally(() => setShow(false));
+        order.setOrder([]);
+        orderClear();
     }
 
     return (

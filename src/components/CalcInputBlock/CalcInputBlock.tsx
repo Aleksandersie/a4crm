@@ -59,8 +59,15 @@ const CalcInputBlock: React.FC = observer(() => {
         formData.append("height", String(height));
         formData.append("count", String(count));
         formData.append("random", (Math.random() * 100).toFixed());
-        const res = await uploadFile(formData);
-        setFilePath(res.data);
+        if (width === 0 || height === 0) {
+            alert("Перед загрузкой файла укажите размеры изделия");
+            formData.append("file", null);
+        } else {
+            const res = await uploadFile(formData);
+            setFilePath(res.data);
+            setWidth(0);
+            setHeight(0);
+        }
     }
 
     function start() {

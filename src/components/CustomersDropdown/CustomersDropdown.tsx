@@ -18,7 +18,7 @@ const CustomersDropdown: React.FC = observer(() => {
                 id="dropdown-basic"
                 style={{ color: "black" }}
             >
-                {user.selectedCustomer.alias || "Выберите категорию"}
+                {user.selectedCustomer.alias || "Выберите заказчика"}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>

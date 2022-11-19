@@ -16,10 +16,9 @@ const AuthPage = () => {
             console.log(userData);
             user.setUser(userData);
             user.setIsAuth(true);
-
             navigate(MAIN_ROUTE);
         } catch (e) {
-            console.log(e.message);
+            alert(e);
         }
     }
 

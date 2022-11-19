@@ -23,6 +23,10 @@ const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
                         }}
                     >
                         <div style={{ textAlign: "center" }}>
+                            <h6>{"Автор заказа"}</h6>
+                            <p>{orderString.author}</p>
+                        </div>
+                        <div style={{ textAlign: "center" }}>
                             <h6>{"Заказчик"}</h6>
                             <p>{orderString.owner}</p>
                         </div>

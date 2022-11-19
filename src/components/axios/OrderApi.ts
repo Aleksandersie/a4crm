@@ -6,6 +6,7 @@ export interface IIncomingOrder {
     id: number;
     randomNumber: number;
     owner: string;
+    author: string;
     createdDate: string;
     orderItems: IOrderItem[];
 }

@@ -37,8 +37,11 @@ const CalcBlock = observer(() => {
                     </div>
                 </Card.Header>
                 <Card.Body>
-                    <CustomersDropdown />
                     <Card.Subtitle>
+                        <div>
+                            <div className="mb-2">Выберите заказчика:</div>
+                            <CustomersDropdown />
+                        </div>
                         <div className="d-flex justify-content-center align-items-center gap-5 mt-2">
                             <div>
                                 <div className="mb-2">Категория заказа:</div>
