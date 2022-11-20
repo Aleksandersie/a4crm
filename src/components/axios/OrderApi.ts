@@ -41,7 +41,12 @@ export const downloadFile = async function (path) {
             URL.revokeObjectURL(href);
         });
 };
-export const getAllOrders = async function () {
-    const response = await host.get<IIncomingOrder[]>("api/order");
+export const getAllOrders = async function (page: number, limit: number) {
+    const response = await host.get<IIncomingOrder[]>("api/order", {
+        params: {
+            page,
+            limit,
+        },
+    });
     return response.data;
 };

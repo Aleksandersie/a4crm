@@ -65,8 +65,8 @@ const CalcInputBlock: React.FC = observer(() => {
         } else {
             const res = await uploadFile(formData);
             setFilePath(res.data);
-            setWidth(0);
-            setHeight(0);
+            //setWidth(0);
+            //setHeight(0);
         }
     }
 
@@ -86,8 +86,8 @@ const CalcInputBlock: React.FC = observer(() => {
             user.user.alias
         );
         order.setOrder(result);
-        setWidth(0);
-        setHeight(0);
+        // setWidth(0);
+        // setHeight(0);
         console.log(user.user.alias);
     }
     console.log(`w:${width} h:${height}`);

@@ -22,7 +22,9 @@ const MainPage = () => {
         console.log({ price });
     }, []);
     useEffect(() => {
-        getAllOrders().then((data) => order.setOrderInProgress(data));
+        getAllOrders(order.orderPage, order.orderLimit).then((data) =>
+            order.setOrderInProgress(data)
+        );
     }, []);
     useEffect(() => {
         getAllCustomers().then((data) => user.setCustomers(data));

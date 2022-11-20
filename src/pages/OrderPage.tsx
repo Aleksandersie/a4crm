@@ -5,10 +5,14 @@ import { getAllOrders, IIncomingOrder } from "../components/axios/OrderApi";
 import { Context } from "../index";
 import { log } from "util";
 import OrderPanelString from "../components/OrderPanelString/OrderPanelString";
+import OrderPagination from "../orderPagination/OrderPagination";
 
 const OrderPage = observer(() => {
+    const { order } = useContext(Context);
     async function get() {
-        const get = await getAllOrders().then((data) => order.setOrderInProgress(data));
+        const get = await getAllOrders(order.orderPage, order.orderLimit).then((data) =>
+            order.setOrderInProgress(data)
+        );
 
         // order.setOrderInProgress(get);
 
@@ -16,14 +20,14 @@ const OrderPage = observer(() => {
     }
 
     useEffect(() => {
-        getAllOrders().then((data): IIncomingOrder[] => order.setOrderInProgress(data));
+        getAllOrders(order.orderPage, order.orderLimit).then((data): IIncomingOrder[] =>
+            order.setOrderInProgress(data)
+        );
         console.log({ order });
     }, []);
 
-    const { order } = useContext(Context);
-
     return (
-        <div className={"mt-5"}>
+        <div className={"mt-5 mb-5"}>
             <Container>
                 <Card style={{ textAlign: "center" }}>
                     <Card.Header>
@@ -38,9 +42,10 @@ const OrderPage = observer(() => {
                         Обновить вручную
                     </Button>
 
-                    {order.orderInProgress.map((el) => (
+                    {order.orderInProgress.findAll.rows.map((el) => (
                         <OrderPanelString key={el.randomNumber} orderString={el} />
                     ))}
+                    <OrderPagination />
                 </Card>
             </Container>
         </div>

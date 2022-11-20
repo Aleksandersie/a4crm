@@ -4,12 +4,13 @@ import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
 import OrderElementAccordion from "./OrderElementAccordion";
 import { IIncomingOrder } from "../axios/OrderApi";
+import { observer } from "mobx-react-lite";
 interface IOrderString {
     key: number;
     orderString: IIncomingOrder;
 }
 
-const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
+const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
     return (
         <Accordion className="m-auto mt-2 mb-2" style={{ width: 800 }}>
             <Accordion.Item eventKey="0">
@@ -56,6 +57,6 @@ const OrderPanelString: React.FC<IOrderString> = ({ orderString }) => {
             </Accordion.Item>
         </Accordion>
     );
-};
+});
 
 export default OrderPanelString;
