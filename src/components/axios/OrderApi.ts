@@ -10,10 +10,11 @@ export interface IIncomingOrder {
     createdDate: string;
     orderStatus: string;
     orderTotalCost: number;
+    orderMessage: string;
     orderItems: IOrderItem[];
 }
 
-export const createOrder = async function (data: IOrderItem[], orderMessage) {
+export const createOrder = async function (data: IOrderItem[], orderMessage: string) {
     const res = await host.post("api/order", { data, orderMessage });
 };
 

@@ -36,11 +36,11 @@ function download(path) {
 
 const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) => {
     return (
-        <Accordion className="">
+        <Accordion className="mt-2">
             <Accordion.Item eventKey="0">
                 <Accordion.Header>
                     <Card
-                        className=" pb-2 pt-3 d-flex flex-row justify-content-center ms-5 me-5 shadow-sm gap-4"
+                        className="  pb-1 pt-2 d-flex flex-row justify-content-center ms-5 me-5 shadow-sm gap-4"
                         style={{
                             minWidth: 300,
                             backgroundColor: "whitesmoke",
@@ -75,7 +75,7 @@ const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) =>
                     </Card>
                 </Accordion.Header>
                 <Accordion.Body>
-                    <Table striped bordered hover size="sm" className="mt-4">
+                    <Table striped bordered hover size="sm" className="mt-2">
                         <thead>
                             <tr>
                                 <th colSpan={4}>

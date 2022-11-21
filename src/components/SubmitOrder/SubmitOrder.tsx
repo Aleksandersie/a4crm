@@ -12,7 +12,7 @@ const SubmitOrder: React.FC = observer(() => {
 
     const [totalCost, setTotalCost] = useState("0");
 
-    const orderMessage = "Тестовое сообщение";
+    const orderMessage: string = "Тестовое сообщение";
 
     useEffect(() => {
         setTotalCost(

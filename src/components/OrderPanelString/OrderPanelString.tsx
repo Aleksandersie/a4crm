@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Accordion, Card, Table } from "react-bootstrap";
+import { Accordion, Card, FloatingLabel, Form, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
 import OrderElementAccordion from "./OrderElementAccordion";
@@ -66,7 +66,25 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                     {orderString.orderItems.map((el) => (
                         <OrderElementAccordion key={el.random} orderAccordion={el} />
                     ))}
-                    {orderCost}
+                    <Card
+                        className={"mt-3 p-3 d-flex flex-row"}
+                        style={{ backgroundColor: "whitesmoke" }}
+                    >
+                        <div style={{ width: 50 + "%" }}>
+                            <FloatingLabel
+                                controlId="floatingTextarea2"
+                                label="Примечания к заказу"
+                            >
+                                <Form.Control
+                                    as="textarea"
+                                    placeholder="Leave a comment here"
+                                    value={orderString.orderMessage}
+                                    style={{ height: "100px" }}
+                                />
+                            </FloatingLabel>
+                        </div>
+                        Итого к оплате: {orderCost}
+                    </Card>
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
