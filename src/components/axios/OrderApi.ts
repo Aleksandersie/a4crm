@@ -8,11 +8,13 @@ export interface IIncomingOrder {
     owner: string;
     author: string;
     createdDate: string;
+    orderStatus: string;
+    orderTotalCost: number;
     orderItems: IOrderItem[];
 }
 
-export const createOrder = async function (data: IOrderItem[]) {
-    const res = await host.post("api/order", { data });
+export const createOrder = async function (data: IOrderItem[], orderMessage) {
+    const res = await host.post("api/order", { data, orderMessage });
 };
 
 export const uploadFile = async function (formData) {

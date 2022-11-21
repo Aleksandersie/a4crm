@@ -11,6 +11,9 @@ const SubmitOrder: React.FC = observer(() => {
     const [show, setShow] = useState(false);
 
     const [totalCost, setTotalCost] = useState("0");
+
+    const orderMessage = "Тестовое сообщение";
+
     useEffect(() => {
         setTotalCost(
             order.order.reduce(function (sum, order) {
@@ -20,7 +23,7 @@ const SubmitOrder: React.FC = observer(() => {
     }, [order.order]);
 
     async function submitOrder() {
-        await createOrder(order.order).finally(() => setShow(false));
+        await createOrder(order.order, orderMessage).finally(() => setShow(false));
         order.setOrder([]);
         orderClear();
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Accordion, Card, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
@@ -12,8 +12,12 @@ interface IOrderString {
 }
 
 const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
+    let orderCost = orderString.orderItems.reduce(function (sum, orderItem) {
+        return sum + orderItem.totalCost;
+    }, 0);
+
     return (
-        <Accordion className="m-auto mt-2 mb-2" style={{ width: 930 }}>
+        <Accordion className="m-auto mt-2 mb-2" style={{ width: 1000 }}>
             <Accordion.Item eventKey="0">
                 <Accordion.Header>
                     <Card
@@ -37,12 +41,16 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                             <p>{orderString.owner}</p>
                         </div>
                         <div style={{ textAlign: "center" }}>
+                            <h6>{"Статус"}</h6>
+                            <p>{orderString.orderStatus}</p>
+                        </div>
+                        <div style={{ textAlign: "center" }}>
                             <h6>{"Код заказа"}</h6>
                             <p>{orderString.randomNumber}</p>
                         </div>
 
                         <div style={{ textAlign: "center" }}>
-                            <h6>{"Время создания заказа"}</h6>
+                            <h6>{"Время создания"}</h6>
                             <p>{orderString.createdDate}</p>
                         </div>
                         {/*<div style={{ textAlign: "center" }}>*/}
@@ -58,6 +66,7 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                     {orderString.orderItems.map((el) => (
                         <OrderElementAccordion key={el.random} orderAccordion={el} />
                     ))}
+                    {orderCost}
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
