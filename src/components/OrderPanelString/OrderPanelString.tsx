@@ -6,13 +6,14 @@ import OrderElementAccordion from "./OrderElementAccordion";
 import { IIncomingOrder } from "../axios/OrderApi";
 import { observer } from "mobx-react-lite";
 interface IOrderString {
+    id: number;
     key: number;
     orderString: IIncomingOrder;
 }
 
 const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
     return (
-        <Accordion className="m-auto mt-2 mb-2" style={{ width: 800 }}>
+        <Accordion className="m-auto mt-2 mb-2" style={{ width: 930 }}>
             <Accordion.Item eventKey="0">
                 <Accordion.Header>
                     <Card
@@ -23,6 +24,10 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                             width: "100% ",
                         }}
                     >
+                        <div style={{ textAlign: "center" }}>
+                            <h6>{"Номер"}</h6>
+                            <p>{orderString.id}</p>
+                        </div>
                         <div style={{ textAlign: "center" }}>
                             <h6>{"Автор заказа"}</h6>
                             <p>{orderString.author}</p>

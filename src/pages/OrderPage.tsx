@@ -43,7 +43,7 @@ const OrderPage = observer(() => {
                     </Button>
 
                     {order.orderInProgress.findAll.rows.map((el) => (
-                        <OrderPanelString key={el.randomNumber} orderString={el} />
+                        <OrderPanelString key={el.randomNumber} orderString={el} id={el.id} />
                     ))}
                     <OrderPagination />
                 </Card>
