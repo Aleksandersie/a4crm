@@ -36,7 +36,7 @@ function download(path) {
 
 const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) => {
     return (
-        <Accordion className="mt-2">
+        <Accordion className="mt-2 shadow">
             <Accordion.Item eventKey="0">
                 <Accordion.Header>
                     <Card

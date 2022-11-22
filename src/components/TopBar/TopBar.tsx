@@ -3,9 +3,12 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { TbCalculator } from "react-icons/tb";
 import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
+import { GrMoney } from "react-icons/gr";
+import { RiAdminFill } from "react-icons/ri";
 // import { useNavigate } from "react-router-dom";
 import {
     ADMIN_PANEL,
+    FINANCE_PAGE,
     LOGIN_ROUTE,
     MAIN_ROUTE,
     ORDER_PAGE_ROUTE,
@@ -56,10 +59,20 @@ const TopBar: React.FC = observer(() => {
                     {/*    Панель менеджера*/}
                     {/*  </Button>*/}
                     {/*</NavLink>*/}
+                    {user.user.role === (adminConst || managerConst) ? (
+                        <NavLink to={FINANCE_PAGE}>
+                            <Button variant={"warning"} style={{ height: 41 }} className={"me-3"}>
+                                <GrMoney style={{ fontSize: 22 }} className="me-2" />
+                                Финансы
+                            </Button>
+                        </NavLink>
+                    ) : (
+                        ""
+                    )}
                     {user.user.role === adminConst ? (
                         <NavLink to={ADMIN_PANEL}>
                             <Button variant={"warning"} style={{ height: 41 }} className={"me-3"}>
-                                <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />
+                                <RiAdminFill style={{ fontSize: 22 }} className="me-2" />
                                 Панель администратора
                             </Button>
                         </NavLink>
@@ -70,7 +83,7 @@ const TopBar: React.FC = observer(() => {
                         <NavLink to={ORDER_PAGE_ROUTE}>
                             <Button variant={"warning"} style={{ height: 41 }} className={"me-3"}>
                                 <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />
-                                Тестовые заказы
+                                Заказы
                             </Button>
                         </NavLink>
                     ) : (

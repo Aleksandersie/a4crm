@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Accordion, Card, FloatingLabel, Form, Table } from "react-bootstrap";
+import { Accordion, Button, Card, FloatingLabel, Form, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
 import OrderElementAccordion from "./OrderElementAccordion";
@@ -17,7 +17,7 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
     }, 0);
 
     return (
-        <Accordion className="m-auto mt-2 mb-2" style={{ width: 1000 }}>
+        <Accordion className="m-auto mt-2 mb-2" style={{ width: 1150 }}>
             <Accordion.Item eventKey="0">
                 <Accordion.Header>
                     <Card
@@ -45,6 +45,10 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                             <p>{orderString.orderStatus}</p>
                         </div>
                         <div style={{ textAlign: "center" }}>
+                            <h6>{"Оплата"}</h6>
+                            <p>{orderString.orderPaid ? "Оплачен" : "Не оплачен"}</p>
+                        </div>
+                        <div style={{ textAlign: "center" }}>
                             <h6>{"Код заказа"}</h6>
                             <p>{orderString.randomNumber}</p>
                         </div>
@@ -62,12 +66,12 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                         {/*</div>*/}
                     </Card>
                 </Accordion.Header>
-                <Accordion.Body>
+                <Accordion.Body style={{ backgroundColor: "whitesmoke" }}>
                     {orderString.orderItems.map((el) => (
                         <OrderElementAccordion key={el.random} orderAccordion={el} />
                     ))}
                     <Card
-                        className={"mt-3 p-3 d-flex flex-row"}
+                        className={"mt-3 p-3 d-flex flex-row shadow"}
                         style={{ backgroundColor: "whitesmoke" }}
                     >
                         <div style={{ width: 50 + "%" }}>
@@ -83,7 +87,24 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                                 />
                             </FloatingLabel>
                         </div>
-                        Итого к оплате: {orderCost}
+                        <div style={{ width: 50 + "%" }}>
+                            <div
+                                className={"d-flex flex-column gap-2 m-auto mb-3"}
+                                style={{ width: 250 }}
+                            >
+                                <Button variant={"warning"}>Принять в работу</Button>
+                                <Button variant={"warning"}>Начать выполнение</Button>
+                                <Button variant={"warning"}>Заказ готов</Button>
+                            </div>
+
+                            <div>
+                                <h5>
+                                    {"  "}
+                                    Сумма заказа:{orderCost}
+                                    <BiRuble />
+                                </h5>
+                            </div>
+                        </div>
                     </Card>
                 </Accordion.Body>
             </Accordion.Item>

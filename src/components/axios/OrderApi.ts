@@ -11,6 +11,7 @@ export interface IIncomingOrder {
     orderStatus: string;
     orderTotalCost: number;
     orderMessage: string;
+    orderPaid: boolean;
     orderItems: IOrderItem[];
 }
 

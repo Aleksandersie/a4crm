@@ -8,3 +8,5 @@ export const INT_PRINT_CUT: string = "/printCut";
 export const TODO_ROUTE: string = "/tasks";
 
 export const ORDER_PAGE_ROUTE: string = "/oderPage";
+
+export const FINANCE_PAGE: string = "/finances";
