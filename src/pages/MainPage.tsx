@@ -12,6 +12,7 @@ import { getRetailPrice } from "../components/axios/PriceApi";
 import { Context } from "../index";
 import { getAllOrders } from "../components/axios/OrderApi";
 import { getAllCustomers } from "../components/axios/UserApi";
+import { getDebtors } from "../components/axios/financeApi";
 
 const MainPage = () => {
     //  const { order } = useState();
@@ -19,7 +20,6 @@ const MainPage = () => {
 
     useEffect(() => {
         getRetailPrice().then((data) => price.setRetailPrice(data));
-        console.log({ price });
     }, []);
     useEffect(() => {
         getAllOrders(order.orderPage, order.orderLimit).then((data) =>
@@ -28,7 +28,9 @@ const MainPage = () => {
     }, []);
     useEffect(() => {
         getAllCustomers().then((data) => user.setCustomers(data));
-        console.log(user.customers);
+    }, []);
+    useEffect(() => {
+        getDebtors().then((data) => console.log(data));
     }, []);
 
     return (
