@@ -4,12 +4,17 @@ import OrderElementAccordion from "../OrderPanelString/OrderElementAccordion";
 import { BiRuble } from "react-icons/bi";
 import { observer } from "mobx-react-lite";
 import { IDebtors } from "../../Store/FinanceStore";
+import OrderPanelString from "../OrderPanelString/OrderPanelString";
+import DebtorOrder from "../DebtorOrder/DebtorOrder";
 
 interface IDebtorString {
     debtor: IDebtors;
 }
 
 const DebtorString: React.FC<IDebtorString> = observer(({ debtor }) => {
+    const totalDebt = debtor.orders.reduce(function (sum, debtor) {
+        return sum + debtor.orderTotalCost;
+    }, 0);
     return (
         <Accordion className="m-auto mt-2 mb-2" style={{ width: 1150 }}>
             <Accordion.Item eventKey="0">
@@ -26,10 +31,13 @@ const DebtorString: React.FC<IDebtorString> = observer(({ debtor }) => {
                             <h6>{"Название"}</h6>
                             <p>{debtor.alias}</p>
                         </div>
-                        {/*<div style={{ textAlign: "center" }}>*/}
-                        {/*    <h6>{"Автор заказа"}</h6>*/}
-                        {/*    <p>{orderString.author}</p>*/}
-                        {/*</div>*/}
+                        <div style={{ textAlign: "center" }}>
+                            <h6>{"Сумма задолжености"}</h6>
+                            <p>
+                                {totalDebt}
+                                <BiRuble />
+                            </p>
+                        </div>
                         {/*<div style={{ textAlign: "center" }}>*/}
                         {/*    <h6>{"Заказчик"}</h6>*/}
                         {/*    <p>{orderString.owner}</p>*/}
@@ -61,45 +69,9 @@ const DebtorString: React.FC<IDebtorString> = observer(({ debtor }) => {
                     </Card>
                 </Accordion.Header>
                 <Accordion.Body style={{ backgroundColor: "whitesmoke" }}>
-                    {/*{orderString.orderItems.map((el) => (*/}
-                    {/*    <OrderElementAccordion key={el.random} orderAccordion={el} />*/}
-                    {/*))}*/}
-                    {/*<Card*/}
-                    {/*    className={"mt-3 p-3 d-flex flex-row shadow"}*/}
-                    {/*    style={{ backgroundColor: "whitesmoke" }}*/}
-                    {/*>*/}
-                    {/*    <div style={{ width: 50 + "%" }}>*/}
-                    {/*        <FloatingLabel*/}
-                    {/*            controlId="floatingTextarea2"*/}
-                    {/*            label="Примечания к заказу"*/}
-                    {/*        >*/}
-                    {/*            <Form.Control*/}
-                    {/*                as="textarea"*/}
-                    {/*                placeholder="Leave a comment here"*/}
-                    {/*                value={orderString.orderMessage}*/}
-                    {/*                style={{ height: "100px" }}*/}
-                    {/*            />*/}
-                    {/*        </FloatingLabel>*/}
-                    {/*    </div>*/}
-                    {/*    <div style={{ width: 50 + "%" }}>*/}
-                    {/*        <div*/}
-                    {/*            className={"d-flex flex-column gap-2 m-auto mb-3"}*/}
-                    {/*            style={{ width: 250 }}*/}
-                    {/*        >*/}
-                    {/*            <Button variant={"warning"}>Принять в работу</Button>*/}
-                    {/*            <Button variant={"warning"}>Начать выполнение</Button>*/}
-                    {/*            <Button variant={"warning"}>Заказ готов</Button>*/}
-                    {/*        </div>*/}
-
-                    {/*        <div>*/}
-                    {/*            <h5>*/}
-                    {/*                {"  "}*/}
-                    {/*                Сумма заказа:{orderCost}*/}
-                    {/*                <BiRuble />*/}
-                    {/*            </h5>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</Card>*/}
+                    {debtor.orders.map((el) => (
+                        <DebtorOrder key={el.randomNumber} debtorOrder={el} />
+                    ))}
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>

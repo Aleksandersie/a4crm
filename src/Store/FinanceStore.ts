@@ -1,3 +1,5 @@
+import { IIncomingOrder } from "../components/axios/OrderApi";
+
 const { makeAutoObservable } = require("mobx");
 
 export interface IDebtors {
@@ -9,7 +11,7 @@ export interface IDebtors {
     priceCategory: string;
     createdAt: Date;
     updatedAt: Date;
-    orders: any[];
+    orders: IIncomingOrder[];
 }
 
 export default class FinanceStore {
