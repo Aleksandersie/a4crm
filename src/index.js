@@ -8,24 +8,26 @@ import MaterialStore from "./Store/MaterialStore";
 import CheckBoxStore from "./Store/CheckBoxStore";
 import AdditionalStore from "./Store/AdditionalSrevices";
 import ToDoStore from "./Store/ToDo";
+import FinanceStore from "./Store/FinanceStore";
 
 export const Context = createContext(null);
 
 export const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Context.Provider
-    value={{
-      user: new UserStore(),
-      order: new OrderStore(),
-      price: new PriceStore(),
-      materialList: new MaterialStore(),
-      checkStore: new CheckBoxStore(),
-      AddService: new AdditionalStore(),
-      toDoStore: new ToDoStore(),
-    }}
-  >
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Context.Provider>
+    <Context.Provider
+        value={{
+            user: new UserStore(),
+            order: new OrderStore(),
+            price: new PriceStore(),
+            materialList: new MaterialStore(),
+            checkStore: new CheckBoxStore(),
+            AddService: new AdditionalStore(),
+            toDoStore: new ToDoStore(),
+            financeStore: new FinanceStore(),
+        }}
+    >
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    </Context.Provider>
 );

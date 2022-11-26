@@ -15,9 +15,8 @@ import { getAllCustomers } from "../components/axios/UserApi";
 import { getDebtors } from "../components/axios/financeApi";
 
 const MainPage = () => {
-    //  const { order } = useState();
-    const { price, order, user } = useContext(Context);
-
+    const { price, order, user, financeStore } = useContext(Context);
+    console.log(financeStore);
     useEffect(() => {
         getRetailPrice().then((data) => price.setRetailPrice(data));
     }, []);
@@ -30,7 +29,7 @@ const MainPage = () => {
         getAllCustomers().then((data) => user.setCustomers(data));
     }, []);
     useEffect(() => {
-        getDebtors().then((data) => console.log(data));
+        getDebtors().then((data) => financeStore.setDebtors(data));
     }, []);
 
     return (
