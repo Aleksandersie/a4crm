@@ -58,41 +58,13 @@ const DebtorOrder: React.FC<IDebtorOrder> = ({ debtorOrder }) => {
                     {/*{debtorOrder.orderItems.map((el) => (*/}
                     {/*    <div>{el.random}</div>*/}
                     {/*))}*/}
-                    //Заказ приходит без строк заказа
+                    {/*Заказ приходит без строк заказа*/}
                     <Card
                         className={"mt-3 p-3 d-flex flex-row shadow"}
                         style={{ backgroundColor: "whitesmoke" }}
                     >
-                        <div style={{ width: 50 + "%" }}>
-                            <FloatingLabel
-                                controlId="floatingTextarea2"
-                                label="Примечания к заказу"
-                            >
-                                <Form.Control
-                                    as="textarea"
-                                    placeholder="Leave a comment here"
-                                    value={debtorOrder.orderMessage}
-                                    style={{ height: "100px" }}
-                                />
-                            </FloatingLabel>
-                        </div>
-                        <div style={{ width: 50 + "%" }}>
-                            <div
-                                className={"d-flex flex-column gap-2 m-auto mb-3"}
-                                style={{ width: 250 }}
-                            >
-                                <Button variant={"warning"}>Принять в работу</Button>
-                                <Button variant={"warning"}>Начать выполнение</Button>
-                                <Button variant={"warning"}>Заказ готов</Button>
-                            </div>
-
-                            <div>
-                                <h5>
-                                    {"  "}
-                                    Сумма заказа:123
-                                    <BiRuble />
-                                </h5>
-                            </div>
+                        <div className={"m-auto"}>
+                            <Button variant={"warning"}>Проставить оплату</Button>
                         </div>
                     </Card>
                 </Accordion.Body>
