@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Accordion, Button, Card, FloatingLabel, Form, Table } from "react-bootstrap";
+import { Accordion, Button, Card, FloatingLabel, Form, Modal, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
 import OrderElementAccordion from "./OrderElementAccordion";
-import { IIncomingOrder } from "../axios/OrderApi";
+import { IIncomingOrder, sendOrderStatus } from "../axios/OrderApi";
 import { observer } from "mobx-react-lite";
+import { completeStatus, inProgressStatus, takeToWorkStatus } from "../../Const";
 interface IOrderString {
     id: number;
     key: number;
@@ -15,6 +16,17 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
     let orderCost = orderString.orderItems.reduce(function (sum, orderItem) {
         return sum + orderItem.totalCost;
     }, 0);
+
+    function sendStatus(status, randomNumber) {
+        sendOrderStatus(status, randomNumber);
+        showTakeOrderModal(false);
+        showInProgressModal(false);
+        showCompleteModal(false);
+    }
+
+    const [takeOrderModal, showTakeOrderModal] = useState<boolean>(false);
+    const [inProgressModal, showInProgressModal] = useState<boolean>(false);
+    const [completeModal, showCompleteModal] = useState<boolean>(false);
 
     return (
         <Accordion className="m-auto mt-2 mb-2" style={{ width: 1150 }}>
@@ -92,9 +104,104 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                                 className={"d-flex flex-column gap-2 m-auto mb-3"}
                                 style={{ width: 250 }}
                             >
-                                <Button variant={"warning"}>Принять в работу</Button>
-                                <Button variant={"warning"}>Начать выполнение</Button>
-                                <Button variant={"warning"}>Заказ готов</Button>
+                                <Button
+                                    variant={"warning"}
+                                    onClick={() => showTakeOrderModal(true)}
+                                >
+                                    {takeToWorkStatus}
+                                </Button>
+                                {/*///////////////////////*/}
+                                <Modal
+                                    show={takeOrderModal}
+                                    onHide={() => showTakeOrderModal(false)}
+                                >
+                                    <Modal.Header closeButton>
+                                        <Modal.Title></Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>Принять заказ в работу?</Modal.Body>
+                                    <Modal.Footer>
+                                        <Button
+                                            variant="secondary"
+                                            onClick={() => showTakeOrderModal(false)}
+                                        >
+                                            Отмена
+                                        </Button>
+                                        <Button
+                                            variant="warning"
+                                            onClick={() =>
+                                                sendStatus(
+                                                    takeToWorkStatus,
+                                                    orderString.randomNumber
+                                                )
+                                            }
+                                        >
+                                            Подтвердить
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                                {/*////////////////////////////*/}
+                                <Button
+                                    variant={"warning"}
+                                    onClick={() => showInProgressModal(true)}
+                                >
+                                    {inProgressStatus}
+                                </Button>
+                                {/*////////////////////////////////////////*/}
+                                <Modal
+                                    show={inProgressModal}
+                                    onHide={() => showInProgressModal(false)}
+                                >
+                                    <Modal.Header closeButton>
+                                        <Modal.Title></Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>Начать выполнение заказа?</Modal.Body>
+                                    <Modal.Footer>
+                                        <Button
+                                            variant="secondary"
+                                            onClick={() => showInProgressModal(false)}
+                                        >
+                                            Отмена
+                                        </Button>
+                                        <Button
+                                            variant="warning"
+                                            onClick={() =>
+                                                sendStatus(
+                                                    inProgressStatus,
+                                                    orderString.randomNumber
+                                                )
+                                            }
+                                        >
+                                            Подтвердить
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                                {/*////////////////////////////////////////////////*/}
+                                <Modal show={completeModal} onHide={() => showCompleteModal(false)}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title></Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>Заказ готов?</Modal.Body>
+                                    <Modal.Footer>
+                                        <Button
+                                            variant="secondary"
+                                            onClick={() => showCompleteModal(false)}
+                                        >
+                                            Отмена
+                                        </Button>
+                                        <Button
+                                            variant="warning"
+                                            onClick={() =>
+                                                sendStatus(completeStatus, orderString.randomNumber)
+                                            }
+                                        >
+                                            Подтвердить
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                                {/*//////////////////////////////////////////////*/}
+                                <Button variant={"warning"} onClick={() => showCompleteModal(true)}>
+                                    {completeStatus}
+                                </Button>
                             </div>
 
                             <div>

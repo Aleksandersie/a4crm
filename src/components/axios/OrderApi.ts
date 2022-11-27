@@ -55,3 +55,8 @@ export const getAllOrders = async function (page: number, limit: number) {
     });
     return response.data;
 };
+
+export const sendOrderStatus = async function (status: string, randomNumber: number) {
+    const res = await host.put("api/order/changeStatus", { status, randomNumber });
+    return res.data;
+};
