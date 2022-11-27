@@ -13,10 +13,6 @@ const OrderPage = observer(() => {
         const get = await getAllOrders(order.orderPage, order.orderLimit).then((data) =>
             order.setOrderInProgress(data)
         );
-
-        // order.setOrderInProgress(get);
-
-        // console.log({ order });
     }
 
     useEffect(() => {

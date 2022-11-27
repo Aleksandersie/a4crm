@@ -5,13 +5,14 @@ import { Context } from "../index";
 import { observer } from "mobx-react-lite";
 import { getDebtors } from "../components/axios/financeApi";
 
-const FinancePage: React.FC = () => {
+const FinancePage: React.FC = observer(() => {
     const { financeStore } = useContext(Context);
     useEffect(() => {
         getDebtors().then((data) => financeStore.setDebtors(data));
     }, []);
     function get() {
         getDebtors().then((data) => financeStore.setDebtors(data));
+        console.log({ financeStore });
     }
 
     return (
@@ -36,6 +37,6 @@ const FinancePage: React.FC = () => {
             </Card>
         </Container>
     );
-};
+});
 
 export default FinancePage;
