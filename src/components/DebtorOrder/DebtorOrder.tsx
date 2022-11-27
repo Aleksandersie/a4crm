@@ -1,14 +1,28 @@
-import React from "react";
-import { Accordion, Button, Card, FloatingLabel, Form } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Accordion, Button, Card, FloatingLabel, Form, Modal } from "react-bootstrap";
 import OrderElementAccordion from "../OrderPanelString/OrderElementAccordion";
 import { BiRuble } from "react-icons/bi";
 import { IIncomingOrder } from "../axios/OrderApi";
+import { getDebtors, makePayment } from "../axios/financeApi";
+import { Context } from "../../index";
+import { observer } from "mobx-react-lite";
 
 interface IDebtorOrder {
     debtorOrder: IIncomingOrder;
 }
 
-const DebtorOrder: React.FC<IDebtorOrder> = ({ debtorOrder }) => {
+const DebtorOrder: React.FC<IDebtorOrder> = observer(({ debtorOrder }) => {
+    const { financeStore } = useContext(Context);
+
+    function payment(randomNumber: number): any {
+        makePayment(randomNumber);
+        getDebtors() //нужно дождаться выполнения промиса от оплаты
+            .then((data) => financeStore.setDebtors(data))
+            .finally(() => setShow(false));
+    }
+
+    const [show, setShow] = useState<boolean>(false);
+
     return (
         <Accordion className="m-auto mt-2 mb-2" style={{ width: 950 }}>
             <Accordion.Item eventKey="0">
@@ -64,13 +78,32 @@ const DebtorOrder: React.FC<IDebtorOrder> = ({ debtorOrder }) => {
                         style={{ backgroundColor: "whitesmoke" }}
                     >
                         <div className={"m-auto"}>
-                            <Button variant={"warning"}>Проставить оплату</Button>
+                            <Button variant={"warning"} onClick={() => setShow(true)}>
+                                Проставить оплату
+                            </Button>
                         </div>
                     </Card>
+                    <Modal show={show} onHide={() => setShow(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Оплата заказа</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Заказ оплачен?</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShow(false)}>
+                                Отмена
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => payment(debtorOrder.randomNumber)}
+                            >
+                                Подтвердить
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
     );
-};
+});
 
 export default DebtorOrder;

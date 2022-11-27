@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Card, Container } from "react-bootstrap";
 import DebtorString from "../components/DebtorString/DebtorString";
 import { Context } from "../index";
+import { observer } from "mobx-react-lite";
 
 const FinancePage: React.FC = () => {
     const { financeStore } = useContext(Context);
