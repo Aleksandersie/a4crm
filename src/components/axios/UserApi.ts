@@ -28,3 +28,21 @@ export const getAllCustomers = async function () {
     const { data } = await host.get<IUser[]>("api/user/getAllCustomers");
     return data;
 };
+
+export const getAllAdmins = async function () {
+    const { data } = await host.get<IUser[]>("api/user/getAllAdmins");
+    return data;
+};
+export const getAllManagers = async function () {
+    const { data } = await host.get<IUser[]>("api/user/getAllManagers");
+    return data;
+};
+export const getAllWorkers = async function () {
+    const { data } = await host.get<IUser[]>("api/user/getAllWorkers");
+    return data;
+};
+
+export const searchUser = async function (word) {
+    const { data } = await host.post<IUser[]>("api/user/searchUser", { word });
+    return data;
+};

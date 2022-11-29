@@ -30,7 +30,7 @@ export const uploadFile = async function (formData) {
 
 export const downloadFile = async function (path) {
     const fileName = path.split("\\");
-    // const fileName = path.split("/"); //для сервера
+    //const fileName = path.split("/"); //для сервера
 
     console.log(fileName);
     const res = await host

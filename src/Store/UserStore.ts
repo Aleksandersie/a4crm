@@ -7,6 +7,8 @@ export interface IUser {
     password: string;
     alias: string;
     role: string;
+    priceList: string;
+    id: number;
 }
 
 export default class UserStore {
@@ -16,6 +18,7 @@ export default class UserStore {
     private _selectedEmployees: {};
     private _customers: IUser[];
     private _selectedCustomer: IUser;
+    private _userList: IUser[]; //User list by category in admin panel
     constructor() {
         this._isAuth = false;
         this._user = <IUser>{};
@@ -23,6 +26,7 @@ export default class UserStore {
         this._selectedEmployees = {};
         this._customers = [];
         this._selectedCustomer = <IUser>{};
+        this._userList = [];
         makeAutoObservable(this);
     }
 
@@ -63,5 +67,11 @@ export default class UserStore {
     }
     get selectedCustomer() {
         return this._selectedCustomer;
+    }
+    setUserList(userList: IUser[]) {
+        this._userList = userList;
+    }
+    get userList() {
+        return this._userList;
     }
 }
