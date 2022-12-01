@@ -24,8 +24,13 @@ export const getEmployees = async function () {
     return data;
 };
 
-export const getAllCustomers = async function () {
-    const { data } = await host.get<IUser[]>("api/user/getAllCustomers");
+export const getAllCustomers = async function (page: number, limit: number) {
+    const { data } = await host.get<IUser[]>("api/user/getAllCustomers", {
+        params: {
+            page,
+            limit,
+        },
+    });
     return data;
 };
 

@@ -19,7 +19,7 @@ const UserPanel = () => {
         getAllWorkers().then((data) => user.setUserList(data));
     }
     function getCustomers() {
-        getAllCustomers().then((data) => user.setUserList(data));
+        getAllCustomers(1, 5).then((data) => user.setUserList(data));
     }
 
     return (

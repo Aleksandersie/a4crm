@@ -26,7 +26,7 @@ const MainPage = () => {
         );
     }, []);
     useEffect(() => {
-        getAllCustomers().then((data) => user.setCustomers(data));
+        getAllCustomers(1, 5).then((data) => user.setCustomers(data));
     }, []);
     useEffect(() => {
         getDebtors().then((data) => financeStore.setDebtors(data));
