@@ -17,6 +17,8 @@ const UserPanel = () => {
     }
     function getWorkers() {
         getAllWorkers().then((data) => user.setUserList(data));
+        console.log(user)
+       // getAllWorkers().then((data) => console.log(data)  );
     }
     function getCustomers() {
         getAllCustomers(1, 10).then((data) => user.setUserList(data));

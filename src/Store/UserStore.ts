@@ -1,6 +1,11 @@
 import { runInThisContext } from "vm";
 
 const { makeAutoObservable } = require("mobx");
+export interface getUser{
+    count: number,
+    rows: IUser []
+
+}
 
 export interface IUser {
     email: string;
@@ -18,7 +23,7 @@ export default class UserStore {
     private _selectedEmployees: {};
     private _customers: IUser[];
     private _selectedCustomer: IUser;
-    private _userList: IUser[]; //User list by category in admin panel
+    private _userList: getUser[]; //User list by category in admin panel
     constructor() {
         this._isAuth = false;
         this._user = <IUser>{};
@@ -68,7 +73,7 @@ export default class UserStore {
     get selectedCustomer() {
         return this._selectedCustomer;
     }
-    setUserList(userList: IUser[]) {
+    setUserList(userList: getUser[]) {
         this._userList = userList;
     }
     get userList() {

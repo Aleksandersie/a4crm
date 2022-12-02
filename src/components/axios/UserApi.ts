@@ -1,6 +1,6 @@
 import { host } from "./axios";
 import jwtDecode from "jwt-decode";
-import { IUser } from "../../Store/UserStore";
+import { getUser, IUser } from "../../Store/UserStore";
 
 export const login = async function (email: string, password: string) {
     const { data } = await host.post("api/user/login", { email, password });
@@ -25,7 +25,7 @@ export const getEmployees = async function () {
 };
 
 export const getAllCustomers = async function (page: number, limit: number) {
-    const { data } = await host.get<IUser[]>("api/user/getAllCustomers", {
+    const { data } = await host.get<getUser[]>("api/user/getAllCustomers", {
         params: {
             page,
             limit,
@@ -35,15 +35,15 @@ export const getAllCustomers = async function (page: number, limit: number) {
 };
 
 export const getAllAdmins = async function () {
-    const { data } = await host.get<IUser[]>("api/user/getAllAdmins");
+    const { data } = await host.get<getUser[]>("api/user/getAllAdmins");
     return data;
 };
 export const getAllManagers = async function () {
-    const { data } = await host.get<IUser[]>("api/user/getAllManagers");
+    const { data } = await host.get<getUser[]>("api/user/getAllManagers");
     return data;
 };
 export const getAllWorkers = async function () {
-    const { data } = await host.get<IUser[]>("api/user/getAllWorkers");
+    const { data } = await host.get<getUser[]>("api/user/getAllWorkers");
     return data;
 };
 

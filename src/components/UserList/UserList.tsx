@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 import { BsFillGearFill } from "react-icons/bs";
+import { getUser } from "../../Store/UserStore";
 
 const UserList: React.FC = observer(() => {
     const { user } = useContext(Context);
@@ -21,7 +22,8 @@ const UserList: React.FC = observer(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    {user.userList.map((user, index) => (
+                    {/* {user.userList.rows.map(el=>console.log(el))} */}
+                    {user.userList.rows.map((user, index) => (
                         <tr key={user.id}>
                             <th>{index + 1}</th>
                             <th>{user.email}</th>
