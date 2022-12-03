@@ -1,6 +1,6 @@
 import { host } from "./axios";
 import jwtDecode from "jwt-decode";
-import { getUser, IUser } from "../../Store/UserStore";
+import { IGetUser, IUser } from "../../Store/UserStore";
 
 export const login = async function (email: string, password: string) {
     const { data } = await host.post("api/user/login", { email, password });
@@ -25,7 +25,7 @@ export const getEmployees = async function () {
 };
 
 export const getAllCustomers = async function (page: number, limit: number) {
-    const { data } = await host.get<getUser[]>("api/user/getAllCustomers", {
+    const { data } = await host.get<IGetUser>("api/user/getAllCustomers", {
         params: {
             page,
             limit,
@@ -35,19 +35,19 @@ export const getAllCustomers = async function (page: number, limit: number) {
 };
 
 export const getAllAdmins = async function () {
-    const { data } = await host.get<getUser[]>("api/user/getAllAdmins");
+    const { data } = await host.get<IGetUser>("api/user/getAllAdmins");
     return data;
 };
 export const getAllManagers = async function () {
-    const { data } = await host.get<getUser[]>("api/user/getAllManagers");
+    const { data } = await host.get<IGetUser>("api/user/getAllManagers");
     return data;
 };
 export const getAllWorkers = async function () {
-    const { data } = await host.get<getUser[]>("api/user/getAllWorkers");
+    const { data } = await host.get<IGetUser>("api/user/getAllWorkers");
     return data;
 };
 
 export const searchUser = async function (word) {
-    const { data } = await host.post<IUser[]>("api/user/searchUser", { word });
+    const { data } = await host.post<IGetUser>("api/user/searchUser", { word });
     return data;
 };

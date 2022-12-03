@@ -14,7 +14,7 @@ export default class OrderStore {
         this._order = [];
         this._ordersInProgress = [];
         this._orderPage = 1;
-        this._orderLimit = 5;
+        this._orderLimit = 10;
         this._orderCount = 0;
         makeAutoObservable(this);
     }

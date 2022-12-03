@@ -1,25 +1,25 @@
 import React, { useContext, useEffect } from "react";
-import { Pagination } from "react-bootstrap";
-import { Context } from "../index";
 import { observer } from "mobx-react-lite";
-import { getAllOrders, IIncomingOrder } from "../components/axios/OrderApi";
-import { getAllCustomers } from "../components/axios/UserApi";
+import { Pagination } from "react-bootstrap";
+import { Context } from "../../index";
+import { getAllOrders, IIncomingOrder } from "../axios/OrderApi";
+import { getAllCustomers } from "../axios/UserApi";
 
-const OrderPagination = observer(() => {
+const UserPagination: React.FC = observer(() => {
     const { order, user } = useContext(Context);
 
-    const pagesCount = Math.ceil(order.orderInProgress.countPages.count / order.orderLimit);
+    const pagesCount = Math.ceil(user.userList.count / order.orderLimit);
     const pages: number[] = [];
     for (let i = 0; i < pagesCount; i++) {
         pages.push(i + 1);
     }
 
+    console.log(user.userList.rows);
     function changePage(p) {
         order.setOrderPage(p);
     }
-
     useEffect(() => {
-        getAllCustomers(1, 10).then((data) => user.setUserList(data));
+        getAllCustomers(order.orderPage, order.orderLimit).then((data) => user.setUserList(data));
     }, [order.orderPage]);
 
     return (
@@ -37,4 +37,4 @@ const OrderPagination = observer(() => {
     );
 });
 
-export default OrderPagination;
+export default UserPagination;

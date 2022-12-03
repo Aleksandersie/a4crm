@@ -29,6 +29,9 @@ const MainPage = () => {
         getAllCustomers(1, 10).then((data) => user.setCustomers(data));
     }, []);
     useEffect(() => {
+        getAllCustomers(order.orderPage, order.orderLimit).then((data) => user.setUserList(data));
+    }, []);
+    useEffect(() => {
         getDebtors().then((data) => financeStore.setDebtors(data));
     }, []);
 

@@ -5,8 +5,10 @@ import UserList from "../UserList/UserList";
 import { getAllAdmins, getAllCustomers, getAllManagers, getAllWorkers } from "../axios/UserApi";
 import { Context } from "../../index";
 import SearchUserBar from "../SearchUserBar/SearchUserBar";
+import UserPagination from "../UserPagination/UserPagination";
+import { observer } from "mobx-react-lite";
 
-const UserPanel = () => {
+const UserPanel = observer(() => {
     const [createModal, setCreateModal] = useState(false);
     const { user } = useContext(Context);
     function getAdmins() {
@@ -17,11 +19,12 @@ const UserPanel = () => {
     }
     function getWorkers() {
         getAllWorkers().then((data) => user.setUserList(data));
-        console.log(user)
-       // getAllWorkers().then((data) => console.log(data)  );
+        console.log(user);
+        // getAllWorkers().then((data) => console.log(data)  );
     }
     function getCustomers() {
         getAllCustomers(1, 10).then((data) => user.setUserList(data));
+        console.log(user);
     }
 
     return (
@@ -54,9 +57,10 @@ const UserPanel = () => {
 
                 <SearchUserBar />
                 <UserList />
+                <UserPagination />
             </Card>
         </div>
     );
-};
+});
 
 export default UserPanel;
