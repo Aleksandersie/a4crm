@@ -1,14 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getOneUser } from "../components/axios/UserApi";
+import UserEditPanel from "../components/UserEditPanel/UserEditPanel";
+import { IUser } from "../Store/UserStore";
+import { Context } from "../index";
+import { observer } from "mobx-react-lite";
 
-const UserInfoPage = () => {
+const UserInfoPage: React.FC = observer(() => {
     const params = useParams();
+    const { user } = useContext(Context);
     useEffect(() => {
-        console.log(params.id);
-        getOneUser(params.id).then((data) => console.log(data));
+        getOneUser(params.id).then((data) => user.setEditableUser(data));
     }, []);
-    return <div>123</div>;
-};
+
+    return (
+        <Container>
+            <UserEditPanel user={user.editableUser} />
+        </Container>
+    );
+});
 
 export default UserInfoPage;

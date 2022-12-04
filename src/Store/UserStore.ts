@@ -23,6 +23,7 @@ export default class UserStore {
     private _customers: IUser[];
     private _selectedCustomer: IUser;
     private _userList: IGetUser; //User list by category in admin panel
+    private _editableUser: IUser; //User from user list
     constructor() {
         this._isAuth = false;
         this._user = <IUser>{};
@@ -31,6 +32,7 @@ export default class UserStore {
         this._customers = [];
         this._selectedCustomer = <IUser>{};
         this._userList = <IGetUser>{};
+        this._editableUser = <IUser>{};
         makeAutoObservable(this);
     }
 
@@ -77,5 +79,11 @@ export default class UserStore {
     }
     get userList() {
         return this._userList;
+    }
+    setEditableUser(user: IUser) {
+        this._editableUser = user;
+    }
+    get editableUser() {
+        return this._editableUser;
     }
 }

@@ -53,7 +53,6 @@ export const searchUser = async function (word) {
 };
 
 export const getOneUser = async function (id) {
-    const { data } = await host.get("api/user/getOne/" + id);
-    console.log(id);
+    const { data } = await host.get<IUser>("api/user/getOne/" + id);
     return data;
 };
