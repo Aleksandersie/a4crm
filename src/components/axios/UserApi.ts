@@ -51,3 +51,9 @@ export const searchUser = async function (word) {
     const { data } = await host.post<IGetUser>("api/user/searchUser", { word });
     return data;
 };
+
+export const getOneUser = async function (id) {
+    const { data } = await host.get("api/user/getOne/" + id);
+    console.log(id);
+    return data;
+};

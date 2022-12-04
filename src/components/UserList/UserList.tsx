@@ -4,9 +4,12 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 import { BsFillGearFill } from "react-icons/bs";
 import { IGetUser, IUser } from "../../Store/UserStore";
+import { useNavigate } from "react-router-dom";
+import { USER_INFO_PAGE } from "../../routeConst/routeConst";
 
 const UserList: React.FC = observer(() => {
     const { user } = useContext(Context);
+    const navigate = useNavigate();
     return (
         <div className={"ps-5 pe-5 mt-4"}>
             <Table striped bordered hover size={"sm"}>
@@ -29,7 +32,10 @@ const UserList: React.FC = observer(() => {
                             <th>{user.alias}</th>
                             <th>{user.role}</th>
                             <th>
-                                <BsFillGearFill style={{ cursor: "pointer" }} />
+                                <BsFillGearFill
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => navigate(USER_INFO_PAGE + "/" + user.alias)}
+                                />
                             </th>
                         </tr>
                     ))}

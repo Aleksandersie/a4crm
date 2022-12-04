@@ -8,6 +8,7 @@ import {
     ADMIN_PANEL,
     ORDER_PAGE_ROUTE,
     FINANCE_PAGE,
+    USER_INFO_PAGE,
 } from "./routeConst/routeConst";
 
 import MainPage from "./pages/MainPage";
@@ -19,6 +20,7 @@ import TodoPage from "./pages/TodoPage";
 import AdminPanel from "./pages/AdminPanel";
 import OrderPage from "./pages/OrderPage";
 import FinancePage from "./pages/FinancePage";
+import UserInfoPage from "./pages/UserInfoPage";
 
 export const routes = [
     {
@@ -56,5 +58,9 @@ export const routes = [
     {
         path: FINANCE_PAGE,
         Component: FinancePage,
+    },
+    {
+        path: USER_INFO_PAGE + "/:id",
+        Component: UserInfoPage,
     },
 ];
