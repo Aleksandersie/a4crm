@@ -6,6 +6,7 @@ import UserEditPanel from "../components/UserEditPanel/UserEditPanel";
 import { IUser } from "../Store/UserStore";
 import { Context } from "../index";
 import { observer } from "mobx-react-lite";
+import UserHistoryPanel from "../components/UserHistoryPanel/UserHistoryPanel";
 
 const UserInfoPage: React.FC = observer(() => {
     const params = useParams();
@@ -17,6 +18,7 @@ const UserInfoPage: React.FC = observer(() => {
     return (
         <Container>
             <UserEditPanel user={user.editableUser} />
+            <UserHistoryPanel />
         </Container>
     );
 });

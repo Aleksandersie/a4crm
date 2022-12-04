@@ -19,24 +19,19 @@ const UserList: React.FC = observer(() => {
                         <th>Логин</th>
                         <th>Имя/Название</th>
                         <th>Роль</th>
-                        <th>
-                            <BsFillGearFill />
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {user.userList.rows.map((user: IUser, index) => (
-                        <tr key={user.id}>
+                        <tr
+                            key={user.id}
+                            style={{ cursor: "pointer" }}
+                            onClick={() => navigate(USER_INFO_PAGE + "/" + user.alias)}
+                        >
                             <th>{index + 1}</th>
                             <th>{user.email}</th>
                             <th>{user.alias}</th>
                             <th>{user.role}</th>
-                            <th>
-                                <BsFillGearFill
-                                    style={{ cursor: "pointer" }}
-                                    onClick={() => navigate(USER_INFO_PAGE + "/" + user.alias)}
-                                />
-                            </th>
                         </tr>
                     ))}
                     {/*{user.userList.rows.map((el) => (*/}
