@@ -1,8 +1,10 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import { Button, Card, Container, Form,Modal } from "react-bootstrap";
+import { Button, Card, Container, Form, Modal } from "react-bootstrap";
 
 import { observer } from "mobx-react-lite";
 import { IUser } from "../../Store/UserStore";
+import { updateUserEmail, updateUserPassword } from "../axios/UserApi";
+import { set } from "mobx";
 
 interface IEditableUser {
     user: IUser;
@@ -11,12 +13,18 @@ interface IEditableUser {
 const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
-    const [showEditEmailModal, setShowEditEmailModal] = useState<boolean>(false)
-    const [newEmail,setNewEmail] = useState<string>("")
+    const [showEditEmailModal, setShowEditEmailModal] = useState<boolean>(false);
+    const [newEmail, setNewEmail] = useState<string>("");
+    const [showEditPasswordModal, setShowEditPasswordModal] = useState<boolean>(false);
+    const [newPassword, setNewPassword] = useState<string>("");
 
-    function editEmail(email,alias) {
-        console.log({email,alias});
-        
+    async function editEmail(email, alias) {
+        await updateUserEmail(newEmail, alias);
+        setShowEditEmailModal(false);
+    }
+    async function editPassword(password, alias) {
+        await updateUserPassword(newPassword, alias);
+        setShowEditPasswordModal(false);
     }
 
     return (
@@ -32,33 +40,42 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
                         value={mail}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}
                     />
-                    <Button variant={"warning"} className={"mt-3"} onClick={()=>setShowEditEmailModal(true)}>
+                    <Button
+                        variant={"warning"}
+                        className={"mt-3"}
+                        onClick={() => setShowEditEmailModal(true)}
+                    >
                         Сменить email
                     </Button>
-                    <Modal show={showEditEmailModal} onHide={()=>setShowEditEmailModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Редактирование email</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Отредактируйте email
-                    <Form.Control
-                        placeholder={user.email}
-                        value={newEmail}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setNewEmail(e.target.value)}
-                    />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={()=>setShowEditEmailModal(false)}>
-                        Отмена
-                    </Button>
-                    <Button
-                        variant="warning"
-                        onClick={() => editEmail(newEmail,user.alias)}
-                    >
-                        Сохранить
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                    <Modal show={showEditEmailModal} onHide={() => setShowEditEmailModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Редактирование email</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            Отредактируйте email
+                            <Form.Control
+                                placeholder={user.email}
+                                value={newEmail}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                    setNewEmail(e.target.value)
+                                }
+                            />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button
+                                variant="secondary"
+                                onClick={() => setShowEditEmailModal(false)}
+                            >
+                                Отмена
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => editEmail(newEmail, user.alias)}
+                            >
+                                Сохранить
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
                 <div>
                     <h6>Пароль</h6>
@@ -67,9 +84,45 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
                         value={password}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     />
-                    <Button variant={"warning"} className={"mt-3"}>
+                    <Button
+                        variant={"warning"}
+                        className={"mt-3"}
+                        onClick={() => setShowEditPasswordModal(true)}
+                    >
                         Сменить пароль
                     </Button>
+                    <Modal
+                        show={showEditPasswordModal}
+                        onHide={() => setShowEditPasswordModal(false)}
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Редактирование пароля</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            Отредактируйте пароль
+                            <Form.Control
+                                placeholder={user.password}
+                                value={newPassword}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                    setNewPassword(e.target.value)
+                                }
+                            />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button
+                                variant="secondary"
+                                onClick={() => setShowEditPasswordModal(false)}
+                            >
+                                Отмена
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => editPassword(newPassword, user.alias)}
+                            >
+                                Сохранить
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
                 <div>
                     <h6>Имя</h6>

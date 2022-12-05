@@ -57,7 +57,11 @@ export const getOneUser = async function (id) {
     return data;
 };
 
-export const updateUserEmail = async function (email,alias) {
-    const { data } = await host.post("api/user/updateUserEmail",{email,alias});
+export const updateUserEmail = async function (email, alias) {
+    const { data } = await host.post("api/user/updateUserEmail", { email, alias });
+    return data;
+};
+export const updateUserPassword = async function (password, alias) {
+    const { data } = await host.post("api/user/updateUserPassword", { password, alias });
     return data;
 };
