@@ -22,7 +22,7 @@ const CustomersDropdown: React.FC = observer(() => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-                {user.customers.map((customer) => (
+                {user.customers.rows.map((customer) => (
                     <Dropdown.Item key={customer.id} onClick={() => selectedCustomer(customer)}>
                         {customer.alias}
                     </Dropdown.Item>
