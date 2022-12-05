@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import { Button, Card, Container, Form } from "react-bootstrap";
+import { Button, Card, Container, Form,Modal } from "react-bootstrap";
 
 import { observer } from "mobx-react-lite";
 import { IUser } from "../../Store/UserStore";
@@ -11,9 +11,12 @@ interface IEditableUser {
 const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
+    const [showEditEmailModal, setShowEditEmailModal] = useState<boolean>(false)
+    const [newEmail,setNewEmail] = useState<string>("")
 
-    function editUser() {
-        console.log();
+    function editEmail(email,alias) {
+        console.log({email,alias});
+        
     }
 
     return (
@@ -29,9 +32,33 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
                         value={mail}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}
                     />
-                    <Button variant={"warning"} className={"mt-3"}>
+                    <Button variant={"warning"} className={"mt-3"} onClick={()=>setShowEditEmailModal(true)}>
                         Сменить email
                     </Button>
+                    <Modal show={showEditEmailModal} onHide={()=>setShowEditEmailModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Редактирование email</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Отредактируйте email
+                    <Form.Control
+                        placeholder={user.email}
+                        value={newEmail}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setNewEmail(e.target.value)}
+                    />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={()=>setShowEditEmailModal(false)}>
+                        Отмена
+                    </Button>
+                    <Button
+                        variant="warning"
+                        onClick={() => editEmail(newEmail,user.alias)}
+                    >
+                        Сохранить
+                    </Button>
+                </Modal.Footer>
+            </Modal>
                 </div>
                 <div>
                     <h6>Пароль</h6>
