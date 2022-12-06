@@ -17,6 +17,8 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
     const [newEmail, setNewEmail] = useState<string>("");
     const [showEditPasswordModal, setShowEditPasswordModal] = useState<boolean>(false);
     const [newPassword, setNewPassword] = useState<string>("");
+    const [showEditAliasModal, setShowEditAliasModal] = useState<boolean>(false);
+    const [newAlias, setNewAlias] = useState<string>("");
 
     async function editEmail(email, alias) {
         await updateUserEmail(newEmail, alias);
@@ -25,6 +27,11 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
     async function editPassword(password, alias) {
         await updateUserPassword(newPassword, alias);
         setShowEditPasswordModal(false);
+    }
+    async function editAlias(alias, email) {
+        console.log({newAlias,email})
+        //await updateUserPassword(newAlias, email);
+        //setShowEditPasswordModal(false);
     }
 
     return (
@@ -131,9 +138,41 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
                         value={mail}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}
                     />
-                    <Button variant={"warning"} className={"mt-3"}>
+                    <Button variant={"warning"} className={"mt-3"} onClick={()=>setShowEditAliasModal(true)}>
                         Сменить имя
                     </Button>
+                    <Modal
+                        show={showEditAliasModal}
+                        onHide={() => setShowEditAliasModal(false)}
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Редактирование имени</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            Отредактируйте имя
+                            <Form.Control
+                                placeholder={user.alias}
+                                value={newAlias}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                    setNewAlias(e.target.value)
+                                }
+                            />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button
+                                variant="secondary"
+                                onClick={() => setShowEditAliasModal(false)}
+                            >
+                                Отмена
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => editAlias(newAlias, user.email)}
+                            >
+                                Сохранить
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
                 <div>
                     <h6>Роль</h6>
