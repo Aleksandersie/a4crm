@@ -60,7 +60,13 @@ export const sendOrderStatus = async function (status: string, randomNumber: num
     const res = await host.put("api/order/changeStatus", { status, randomNumber });
     return res.data;
 };
-export const searchOrder = async function (word) {
-    const res = await host.post("api/order/searchOrder", { word });
+export const searchOrder = async function (limit: number, page: number, word: string) {
+    const res = await host.get("api/order/searchOrder", {
+        params: {
+            limit,
+            page,
+            word,
+        },
+    });
     return res.data;
 };

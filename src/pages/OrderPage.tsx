@@ -7,6 +7,7 @@ import { log } from "util";
 import OrderPanelString from "../components/OrderPanelString/OrderPanelString";
 import OrderPagination from "../orderPagination/OrderPagination";
 import SearchOrderBar from "../components/SearchOrderBar/SearchOrderBar";
+import DropdownOrderFilter from "../components/DropdownOrderFilter/DropdownOrderFilter";
 
 const OrderPage = observer(() => {
     const { order } = useContext(Context);
@@ -34,11 +35,18 @@ const OrderPage = observer(() => {
                         onClick={get}
                         variant={"warning"}
                         style={{ width: 200 }}
-                        className={"m-auto mt-2"}
+                        className={"m-auto mt-3"}
                     >
                         Обновить вручную
                     </Button>
-                    <SearchOrderBar/>
+                    <div
+                        className={
+                            "d-flex flex-row align-items-center justify-content-around mt-5 mb-4"
+                        }
+                    >
+                        <DropdownOrderFilter />
+                        <SearchOrderBar />
+                    </div>
 
                     {order.orderInProgress.findAll.rows.map((el) => (
                         <OrderPanelString key={el.randomNumber} orderString={el} id={el.id} />

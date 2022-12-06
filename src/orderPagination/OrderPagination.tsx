@@ -19,7 +19,9 @@ const OrderPagination = observer(() => {
     }
 
     useEffect(() => {
-        getAllCustomers(1, 10).then((data) => user.setUserList(data));
+        getAllOrders(order.orderPage, order.orderLimit).then((data) =>
+            order.setOrderInProgress(data)
+        );
     }, [order.orderPage]);
 
     return (

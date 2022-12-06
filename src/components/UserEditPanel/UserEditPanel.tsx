@@ -4,7 +4,6 @@ import { Button, Card, Container, Form, Modal } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { IUser } from "../../Store/UserStore";
 import { updateUserAlias, updateUserEmail, updateUserPassword } from "../axios/UserApi";
-import { set } from "mobx";
 
 interface IEditableUser {
     user: IUser;
@@ -29,7 +28,7 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
         setShowEditPasswordModal(false);
     }
     async function editAlias(alias, email) {
-        console.log({newAlias,email})
+        console.log({ newAlias, email });
         await updateUserAlias(newAlias, email);
         setShowEditAliasModal(false);
     }
@@ -138,13 +137,14 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
                         value={mail}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}
                     />
-                    <Button variant={"warning"} className={"mt-3"} onClick={()=>setShowEditAliasModal(true)}>
+                    <Button
+                        variant={"warning"}
+                        className={"mt-3"}
+                        onClick={() => setShowEditAliasModal(true)}
+                    >
                         Сменить имя
                     </Button>
-                    <Modal
-                        show={showEditAliasModal}
-                        onHide={() => setShowEditAliasModal(false)}
-                    >
+                    <Modal show={showEditAliasModal} onHide={() => setShowEditAliasModal(false)}>
                         <Modal.Header closeButton>
                             <Modal.Title>Редактирование имени</Modal.Title>
                         </Modal.Header>

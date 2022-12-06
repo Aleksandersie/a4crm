@@ -10,16 +10,17 @@ const SearchOrderBar: React.FC = () => {
     const [searchWord, setSearchWord] = useState<string>("");
 
     function word() {
-        searchOrder(searchWord)
-        //.then((data) => order.setOrderInProgress(data));
-        .then((data) => console.log(data));
-        console.log({order});
-        
+        //пока ищет без пагинации
+        searchOrder(order.orderLimit, order.orderPage, searchWord).then((data) =>
+            order.setOrderInProgress(data)
+        );
+        //.then((data) => console.log(data));
+        console.log({ order });
     }
 
     return (
-        <div className={"mt-4 m-auto"}>
-            <div className={"d-flex flex-row gap-3"}>
+        <div className={""}>
+            <div className={"d-flex flex-row gap-3 "}>
                 <Form.Control
                     style={{ width: 200 }}
                     placeholder={"Поиск по заказчику"}

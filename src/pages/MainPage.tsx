@@ -26,7 +26,7 @@ const MainPage = () => {
         );
     }, []);
     useEffect(() => {
-        getAllCustomers(1, 10).then((data) => user.setCustomers(data));
+        getAllCustomers(order.orderPage, order.orderLimit).then((data) => user.setCustomers(data));
     }, []);
     useEffect(() => {
         getAllCustomers(order.orderPage, order.orderLimit).then((data) => user.setUserList(data));
