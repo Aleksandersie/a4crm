@@ -6,6 +6,7 @@ import { Context } from "../index";
 import { log } from "util";
 import OrderPanelString from "../components/OrderPanelString/OrderPanelString";
 import OrderPagination from "../orderPagination/OrderPagination";
+import SearchOrderBar from "../components/SearchOrderBar/SearchOrderBar";
 
 const OrderPage = observer(() => {
     const { order } = useContext(Context);
@@ -37,6 +38,7 @@ const OrderPage = observer(() => {
                     >
                         Обновить вручную
                     </Button>
+                    <SearchOrderBar/>
 
                     {order.orderInProgress.findAll.rows.map((el) => (
                         <OrderPanelString key={el.randomNumber} orderString={el} id={el.id} />
