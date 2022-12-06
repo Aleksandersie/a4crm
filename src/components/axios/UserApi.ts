@@ -65,3 +65,7 @@ export const updateUserPassword = async function (password, alias) {
     const { data } = await host.post("api/user/updateUserPassword", { password, alias });
     return data;
 };
+export const updateUserAlias = async function (alias, email) {
+    const { data } = await host.post("api/user/updateUserAlias", { alias, email });
+    return data;
+};

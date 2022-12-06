@@ -3,7 +3,7 @@ import { Button, Card, Container, Form, Modal } from "react-bootstrap";
 
 import { observer } from "mobx-react-lite";
 import { IUser } from "../../Store/UserStore";
-import { updateUserEmail, updateUserPassword } from "../axios/UserApi";
+import { updateUserAlias, updateUserEmail, updateUserPassword } from "../axios/UserApi";
 import { set } from "mobx";
 
 interface IEditableUser {
@@ -30,8 +30,8 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
     }
     async function editAlias(alias, email) {
         console.log({newAlias,email})
-        //await updateUserPassword(newAlias, email);
-        //setShowEditPasswordModal(false);
+        await updateUserAlias(newAlias, email);
+        setShowEditAliasModal(false);
     }
 
     return (
