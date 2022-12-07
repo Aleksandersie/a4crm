@@ -1,5 +1,13 @@
 const { makeAutoObservable } = require("mobx");
 
+export interface IPrice{
+    vinyl:number,
+    vinylPC:number,
+    banner:number,
+    photopaper:number
+}
+
+
 export default class PriceStore {
     private _retailPrice: {};
     private _priceList: {};
@@ -7,11 +15,11 @@ export default class PriceStore {
 
     constructor() {
         this._retailPrice = {};
-        this._priceList = {};
+        this._priceList = <IPrice>{};
         this._currentPrice = {};
         makeAutoObservable(this);
     }
-    setPriceList(price) {
+    setPriceList(price:IPrice) {
         this._priceList = price;
     }
     get priceList() {
