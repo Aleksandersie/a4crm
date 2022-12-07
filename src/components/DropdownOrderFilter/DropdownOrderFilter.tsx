@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { Dropdown } from "react-bootstrap";
+import { Context } from "../..";
 import { takeToWorkStatus, completeStatus, inProgressStatus } from "../../Const";
+import { getOrdersByFilter } from "../axios/OrderApi";
 
 const DropdownOrderFilter = () => {
+    const {order} = useContext(Context)
     const [category, setCategory] = useState("");
     const list = [
         { id: 1, name: "Создан" },
@@ -12,7 +15,9 @@ const DropdownOrderFilter = () => {
     ];
 
     useEffect(() => {
-        console.log(category);
+        getOrdersByFilter(order.orderLimit, order.orderPage,category)
+        //.then(data=>console.log(data))
+        .then(data=>order.setOrderInProgress(data))
     }, [category]);
 
     return (

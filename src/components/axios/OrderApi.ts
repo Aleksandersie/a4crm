@@ -70,3 +70,13 @@ export const searchOrder = async function (limit: number, page: number, word: st
     });
     return res.data;
 };
+export const getOrdersByFilter = async function (limit: number, page: number, filter: string) {
+    const res = await host.get("api/order/getOrdersByFilter", {
+        params: {
+            limit,
+            page,
+            filter,
+        },
+    });
+    return res.data;
+};
