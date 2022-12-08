@@ -18,7 +18,7 @@ const MainPage = () => {
     const { price, order, user, financeStore } = useContext(Context);
     console.log(financeStore);
     useEffect(() => {
-        getRetailPrice().then((data) => price.setRetailPrice(data));
+        getRetailPrice().then((data) => price.setCurrentPriceList(data));
     }, []);
     useEffect(() => {
         getAllOrders(order.orderPage, order.orderLimit).then((data) =>

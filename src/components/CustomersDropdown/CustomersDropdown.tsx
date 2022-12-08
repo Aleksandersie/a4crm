@@ -3,12 +3,21 @@ import { Dropdown } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 import { IUser } from "../../Store/UserStore";
+import { getWholesalePrice,getRetailPrice } from "../axios/PriceApi";
 
 const CustomersDropdown: React.FC = observer(() => {
-    const { user } = useContext(Context);
+    const { user,price } = useContext(Context);
 
     function selectedCustomer(customer: IUser) {
         user.setSelectedCustomer(customer);
+        if(user.selectedCustomer.priceCategory === "wholesale"){
+          console.log("Опт")
+          getWholesalePrice().then(data=>price.setCurrentPriceList(data))
+        }
+        if(user.selectedCustomer.priceCategory === "retail"){
+            console.log("Розничный")
+            getRetailPrice().then(data=>price.setCurrentPriceList(data))
+          }
     }
 
     return (

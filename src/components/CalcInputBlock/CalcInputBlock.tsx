@@ -142,14 +142,14 @@ const CalcInputBlock: React.FC = observer(() => {
     useEffect(() => {
         // Подтягивание стоимость в зависимости от выбраной категории
         if (materialList.selectedCategory.name === "Интерьерная печать") {
-            price.setCurrentPrice(price.retailPrice.vinyl);
-            console.log(`intPrint ${price.retailPrice.vinyl}`);
+            price.setCurrentPrice(price.currentPriceList.vinyl);
+            console.log(`intPrint ${price.currentPriceList.vinyl}`);
         }
         if (materialList.selectedCategory.name === "Печать и резка") {
-            price.setCurrentPrice(price.retailPrice.vinylPC);
-            console.log(`printCut ${price.retailPrice.vinylPC}`);
+            price.setCurrentPrice(price.currentPriceList.vinylPC);
+            console.log(`printCut ${price.currentPriceList.vinylPC}`);
         }
-    }, [materialList.selectedCategory, width, height, count]);
+    }, [materialList.selectedCategory, width, height, count,price.currentPriceList]);
 
     return (
         <div className=" ">

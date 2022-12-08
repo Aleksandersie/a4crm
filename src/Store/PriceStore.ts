@@ -1,29 +1,37 @@
 const { makeAutoObservable } = require("mobx");
 
 export interface IPrice{
+    priceCategory:string,
     vinyl:number,
     vinylPC:number,
     banner:number,
     photopaper:number
 }
 
+export enum enumCurrentPrice{
+    vinyl,
+    vinylPC,
+    banner,
+    photopaper
+}
+
 
 export default class PriceStore {
     private _retailPrice: {};
-    private _priceList: {};
+    private _currentPriceList: {};
     private _currentPrice: {};
 
     constructor() {
         this._retailPrice = {};
-        this._priceList = <IPrice>{};
+        this._currentPriceList = <IPrice>{};
         this._currentPrice = {};
         makeAutoObservable(this);
     }
-    setPriceList(price:IPrice) {
-        this._priceList = price;
+    setCurrentPriceList(price:IPrice) {
+        this._currentPriceList = price;
     }
-    get priceList() {
-        return this._priceList;
+    get currentPriceList() {
+        return this._currentPriceList;
     }
     setCurrentPrice(price: number) {
         this._currentPrice = price;
