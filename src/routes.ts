@@ -9,6 +9,7 @@ import {
     ORDER_PAGE_ROUTE,
     FINANCE_PAGE,
     USER_INFO_PAGE,
+    EDIT_RETAIL_PRICE_PAGE,
 } from "./routeConst/routeConst";
 
 import MainPage from "./pages/MainPage";
@@ -21,6 +22,7 @@ import AdminPanel from "./pages/AdminPanel";
 import OrderPage from "./pages/OrderPage";
 import FinancePage from "./pages/FinancePage";
 import UserInfoPage from "./pages/UserInfoPage";
+import EditRetailPricePage from "./pages/EditRetailPricePage";
 
 export const routes = [
     {
@@ -62,5 +64,9 @@ export const routes = [
     {
         path: USER_INFO_PAGE + "/:id",
         Component: UserInfoPage,
+    },
+    {
+        path: EDIT_RETAIL_PRICE_PAGE,
+        Component: EditRetailPricePage,
     },
 ];

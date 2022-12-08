@@ -12,3 +12,5 @@ export const ORDER_PAGE_ROUTE: string = "/oderPage";
 export const FINANCE_PAGE: string = "/finances";
 
 export const USER_INFO_PAGE: string = "/userInfo";
+
+export const EDIT_RETAIL_PRICE_PAGE:string = "/editRetailPricePage"
