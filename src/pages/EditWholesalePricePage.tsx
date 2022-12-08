@@ -1,31 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Form, Table, Container } from "react-bootstrap";
+import {
+     getWholesalePrice,
+     updateRetailPriceList,
+     updateWholesalePriceList,
+} from "../components/axios/PriceApi";
+import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
-import { Context } from "..";
-import { getRetailPrice, updateRetailPriceList } from "../components/axios/PriceApi";
-import { IUser } from "../Store/UserStore";
-import { USER_INFO_PAGE } from "../routeConst/routeConst";
+import { Context } from "../index";
 
-const EditRetailPricePage = observer(() => {
+const EditWholesalePricePage = () => {
      const { price } = useContext(Context);
 
-     const [editRetail, setEditRetail] = useState({
-          vinyl: null,
-          vinylPC: null,
-          banner: null,
+     const [edit, setEdit] = useState({
+          vinyl: "" || price.currentPriceList.vinyl,
+          vinylPC: "" || price.currentPriceList.vinylPC,
+          banner: "" || price.currentPriceList.banner,
      });
 
      useEffect(() => {
-          getRetailPrice().then((data) => price.setCurrentPriceList(data));
-          console.log({ price });
+          getWholesalePrice().then((data) => price.setCurrentPriceList(data));
      }, []);
 
-     function updatePrice() {
-          updateRetailPriceList(
+     function test() {
+          updateWholesalePriceList(
                price.currentPriceList.priceCategory,
-               editRetail.vinyl,
-               editRetail.vinylPC,
-               editRetail.banner
+               edit.vinyl,
+               edit.vinylPC,
+               edit.banner
           );
      }
 
@@ -33,7 +34,7 @@ const EditRetailPricePage = observer(() => {
           <Container>
                <Card style={{ textAlign: "center", lineHeight: 2 }} className={"mt-5"}>
                     <Card.Header>
-                         <h4>Настройка розничных цен</h4>
+                         <h4>Настройка оптовых цен</h4>
                     </Card.Header>
                     <Table
                          striped
@@ -46,40 +47,33 @@ const EditRetailPricePage = observer(() => {
                          <thead>
                               <tr>
                                    <th>Название</th>
-                                   <th>Текущая цена</th>
-                                   <th>Новая цена</th>
+                                   <th>Цена</th>
                               </tr>
                          </thead>
                          <tbody>
                               <tr>
                                    <th>Пленка</th>
-                                   <th>{price.currentPriceList.vinyl}</th>
                                    <th>
                                         <Form.Control
-                                             value={editRetail.vinyl}
+                                             placeholder={price.currentPriceList.vinyl}
+                                             value={edit.vinyl}
                                              type={"number"}
                                              onChange={(e) =>
-                                                  setEditRetail({
-                                                       ...editRetail,
-                                                       vinyl: e.target.value,
-                                                  })
+                                                  setEdit({ ...edit, vinyl: e.target.value })
                                              }
                                         />
                                    </th>
                               </tr>
                               <tr>
                                    <th>Печать и резка</th>
-                                   <th>{price.currentPriceList.vinylPC}</th>
                                    <th>
                                         <div>
                                              <Form.Control
-                                                  value={editRetail.vinylPC}
+                                                  placeholder={price.currentPriceList.vinylPC}
+                                                  value={edit.vinylPC}
                                                   type={"number"}
                                                   onChange={(e) =>
-                                                       setEditRetail({
-                                                            ...editRetail,
-                                                            vinylPC: e.target.value,
-                                                       })
+                                                       setEdit({ ...edit, vinylPC: e.target.value })
                                                   }
                                              />
                                         </div>
@@ -87,17 +81,14 @@ const EditRetailPricePage = observer(() => {
                               </tr>
                               <tr>
                                    <th>Баннер</th>
-                                   <th>{price.currentPriceList.banner}</th>
                                    <th>
                                         <div>
                                              <Form.Control
-                                                  value={editRetail.banner}
+                                                  placeholder={price.currentPriceList.banner}
+                                                  value={edit.banner}
                                                   type={"number"}
                                                   onChange={(e) =>
-                                                       setEditRetail({
-                                                            ...editRetail,
-                                                            banner: e.target.value,
-                                                       })
+                                                       setEdit({ ...edit, banner: e.target.value })
                                                   }
                                              />
                                         </div>
@@ -107,7 +98,7 @@ const EditRetailPricePage = observer(() => {
                     </Table>
 
                     <Button
-                         onClick={updatePrice}
+                         onClick={test}
                          variant={"warning"}
                          style={{ width: 90 + "%" }}
                          className={"m-auto mt-4 mb-4"}
@@ -117,6 +108,6 @@ const EditRetailPricePage = observer(() => {
                </Card>
           </Container>
      );
-});
+};
 
-export default EditRetailPricePage;
+export default EditWholesalePricePage;

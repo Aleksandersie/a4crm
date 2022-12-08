@@ -13,4 +13,6 @@ export const FINANCE_PAGE: string = "/finances";
 
 export const USER_INFO_PAGE: string = "/userInfo";
 
-export const EDIT_RETAIL_PRICE_PAGE:string = "/editRetailPricePage"
+export const EDIT_RETAIL_PRICE_PAGE: string = "/editRetailPricePage";
+
+export const EDIT_WHOLESALE_PRICE_PAGE: string = "/editWholesalePricePage";
