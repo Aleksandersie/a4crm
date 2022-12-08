@@ -10,9 +10,9 @@ const EditRetailPricePage = observer(() => {
      const { price } = useContext(Context);
 
      const [editRetail, setEditRetail] = useState({
-          vinyl: null,
-          vinylPC: null,
-          banner: null,
+          vinyl: null || price.currentPriceList.vinyl,
+          vinylPC: null || price.currentPriceList.vinylPC,
+          banner: null || price.currentPriceList.banner,
      });
 
      useEffect(() => {
