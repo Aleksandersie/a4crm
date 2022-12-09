@@ -83,7 +83,8 @@ const CalcInputBlock: React.FC = observer(() => {
             price.currentPrice,
             filePath, //TODO ПАДЕТ ЕСЛИ НЕТ ФАЙЛА В ИНПУТЕ
             user.selectedCustomer.alias,
-            user.user.alias
+            user.user.alias,
+            price.currentPriceList.priceCategory
         );
         order.setOrder(result);
         // setWidth(0);

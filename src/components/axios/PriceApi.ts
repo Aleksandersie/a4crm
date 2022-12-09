@@ -12,8 +12,8 @@ export const getWholesalePrice = async function () {
 export const updateRetailPriceList = async function (
      priceCategory: string,
      vinyl: string,
-     vinylPC: number,
-     banner: number
+     vinylPC: string,
+     banner: string
 ) {
      const { data } = await host.put("api/price/updateRetailPrice", {
           priceCategory,
@@ -26,8 +26,8 @@ export const updateRetailPriceList = async function (
 export const updateWholesalePriceList = async function (
      priceCategory: string,
      vinyl: string,
-     vinylPC: number,
-     banner: number
+     vinylPC: string,
+     banner: string
 ) {
      const { data } = await host.put("api/price/updateWholesalePrice", {
           priceCategory,

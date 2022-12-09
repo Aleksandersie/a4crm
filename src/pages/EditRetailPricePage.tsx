@@ -11,30 +11,25 @@ const EditRetailPricePage = observer(() => {
      const { price } = useContext(Context);
      const navigate = useNavigate()
 
-
-     const [editRetail, setEditRetail] = useState({
-          vinyl: null || price.currentPriceList.vinyl,
-          vinylPC: null || price.currentPriceList.vinylPC,
-          banner: null || price.currentPriceList.banner,
-     });
-
      const vinylRef = React.useRef<HTMLInputElement>(null)
+     const vinylPCRef = React.useRef<HTMLInputElement>(null)
+     const bannerRef = React.useRef<HTMLInputElement>(null)
 
      useEffect(() => {
           
           getRetailPrice().then((data) => price.setCurrentPriceList(data));
-          console.log({ price });
+         
      }, []);
 
      function updatePrice() {
           updateRetailPriceList(
                price.currentPriceList.priceCategory,
-               vinylRef.current.value,
-               editRetail.vinylPC,
-               editRetail.banner
+               vinylRef.current.value||price.currentPriceList.vinyl,
+               vinylPCRef.current.value||price.currentPriceList.vinylPC,
+               bannerRef.current.value||price.currentPriceList.banner
           );
-          navigate(MAIN_ROUTE)
-          console.log(vinylRef.current.value)
+      navigate(MAIN_ROUTE)
+         
      }
 
      return (
@@ -63,19 +58,9 @@ const EditRetailPricePage = observer(() => {
                                    <th>Пленка</th>
                                    <th>{price.currentPriceList.vinyl}</th>
                                    <th>
-                                        {/* <Form.Control
-                                             value={editRetail.vinyl}
-                                             type={"number"}
-                                             onChange={(e) =>
-                                                  setEditRetail({
-                                                       ...editRetail,
-                                                       vinyl: e.target.value,
-                                                  })
-                                             }
-                                        /> */}
+                                      
                                         <Form.Control
-                                             placeholder={price.currentPriceList.vinyl}
-                                             
+                                             placeholder={price.currentPriceList.vinyl}                
                                              ref={vinylRef}
                                         />
                                    </th>
@@ -85,16 +70,10 @@ const EditRetailPricePage = observer(() => {
                                    <th>{price.currentPriceList.vinylPC}</th>
                                    <th>
                                         <div>
-                                             <Form.Control
-                                                  value={editRetail.vinylPC}
-                                                  type={"number"}
-                                                  onChange={(e) =>
-                                                       setEditRetail({
-                                                            ...editRetail,
-                                                            vinylPC: e.target.value,
-                                                       })
-                                                  }
-                                             />
+                                        <Form.Control
+                                             placeholder={price.currentPriceList.vinylPC}                
+                                             ref={vinylPCRef}
+                                        />
                                         </div>
                                    </th>
                               </tr>
@@ -103,16 +82,10 @@ const EditRetailPricePage = observer(() => {
                                    <th>{price.currentPriceList.banner}</th>
                                    <th>
                                         <div>
-                                             <Form.Control
-                                                  value={editRetail.banner}
-                                                  type={"number"}
-                                                  onChange={(e) =>
-                                                       setEditRetail({
-                                                            ...editRetail,
-                                                            banner: e.target.value,
-                                                       })
-                                                  }
-                                             />
+                                        <Form.Control
+                                             placeholder={price.currentPriceList.banner}                
+                                             ref={bannerRef}
+                                        />
                                         </div>
                                    </th>
                               </tr>

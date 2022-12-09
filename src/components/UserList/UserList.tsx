@@ -34,16 +34,6 @@ const UserList: React.FC = observer(() => {
                             <th>{user.role}</th>
                         </tr>
                     ))}
-                    {/*{user.userList.rows.map((el) => (*/}
-                    {/*    <div>{el.alias}</div>*/}
-                    {/*))}*/}
-                    {/*))}*/}
-                    {/*<tr>*/}
-                    {/*    <td>1</td>*/}
-                    {/*    <td>Mark</td>*/}
-                    {/*    <td>Otto</td>*/}
-                    {/*    <td>@mdo</td>*/}
-                    {/*</tr>*/}
                 </tbody>
             </Table>
         </div>

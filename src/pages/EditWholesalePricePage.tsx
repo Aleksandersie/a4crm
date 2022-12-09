@@ -14,13 +14,10 @@ const EditWholesalePricePage = observer(() => {
      const { price } = useContext(Context);
      const navigate = useNavigate()
 
-     const [editWholesale, setEditWholesale] = useState({
-          vinyl: "" || price.currentPriceList.vinyl,
-          vinylPC: "" || price.currentPriceList.vinylPC,
-          banner: "" || price.currentPriceList.banner,
-     });
-     
+    
      const vinylRef = React.useRef<HTMLInputElement>(null)
+     const vinylPCRef = React.useRef<HTMLInputElement>(null)
+     const bannerRef = React.useRef<HTMLInputElement>(null)
 
      useEffect(() => {
           getWholesalePrice().then((data) => price.setCurrentPriceList(data));
@@ -30,12 +27,11 @@ const EditWholesalePricePage = observer(() => {
      function updatePrice() {
           updateWholesalePriceList(
                price.currentPriceList.priceCategory,
-               vinylRef.current.value,
-               editWholesale.vinylPC,
-               editWholesale.banner
+               vinylRef.current.value||price.currentPriceList.vinyl,
+               vinylPCRef.current.value||price.currentPriceList.vinylPC,
+               bannerRef.current.value||price.currentPriceList.banner
           );
           navigate(MAIN_ROUTE)
-          console.log(vinylRef.current.value)
      }
 
      return (
@@ -60,63 +56,41 @@ const EditWholesalePricePage = observer(() => {
                          </tr>
                     </thead>
                     <tbody>
-                         <tr>
-                              <th>Пленка</th>
-                              <th>{price.currentPriceList.vinyl}</th>
-                              <th>
-                                   {/* <Form.Control
-                                        value={editWholesale.vinyl}
-                                        type={"number"}
-                                        onChange={(e) =>
-                                             setEditWholesale({
-                                                  ...editWholesale,
-                                                  vinyl: e.target.value,
-                                             })
-                                        }
-                                   /> */}
-                                    <Form.Control
-                                        placeholder={price.currentPriceList.vinyl}
-                                        type={"number"}
-                                        ref = {vinylRef}
-                                   />
-                              </th>
-                         </tr>
-                         <tr>
-                              <th>Печать и резка</th>
-                              <th>{price.currentPriceList.vinylPC}</th>
-                              <th>
-                                   <div>
+                    <tr>
+                                   <th>Пленка</th>
+                                   <th>{price.currentPriceList.vinyl}</th>
+                                   <th>
+                                      
                                         <Form.Control
-                                             value={editWholesale.vinylPC}
-                                             type={"number"}
-                                             onChange={(e) =>
-                                                  setEditWholesale({
-                                                       ...editWholesale,
-                                                       vinylPC: e.target.value,
-                                                  })
-                                             }
+                                             placeholder={price.currentPriceList.vinyl}                
+                                             ref={vinylRef}
                                         />
-                                   </div>
-                              </th>
-                         </tr>
-                         <tr>
-                              <th>Баннер</th>
-                              <th>{price.currentPriceList.banner}</th>
-                              <th>
-                                   <div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Печать и резка</th>
+                                   <th>{price.currentPriceList.vinylPC}</th>
+                                   <th>
+                                        <div>
                                         <Form.Control
-                                             value={editWholesale.banner}
-                                             type={"number"}
-                                             onChange={(e) =>
-                                                  setEditWholesale({
-                                                       ...editWholesale,
-                                                       banner: e.target.value,
-                                                  })
-                                             }
+                                             placeholder={price.currentPriceList.vinylPC}                
+                                             ref={vinylPCRef}
                                         />
-                                   </div>
-                              </th>
-                         </tr>
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Баннер</th>
+                                   <th>{price.currentPriceList.banner}</th>
+                                   <th>
+                                        <div>
+                                        <Form.Control
+                                             placeholder={price.currentPriceList.banner}                
+                                             ref={bannerRef}
+                                        />
+                                        </div>
+                                   </th>
+                              </tr>
                     </tbody>
                </Table>
 
