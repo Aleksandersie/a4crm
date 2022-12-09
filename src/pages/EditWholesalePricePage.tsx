@@ -19,9 +19,10 @@ const EditWholesalePricePage = observer(() => {
           vinylPC: "" || price.currentPriceList.vinylPC,
           banner: "" || price.currentPriceList.banner,
      });
+     
+     const vinylRef = React.useRef<HTMLInputElement>(null)
 
      useEffect(() => {
-          
           getWholesalePrice().then((data) => price.setCurrentPriceList(data));
      }, []);
 
@@ -29,11 +30,12 @@ const EditWholesalePricePage = observer(() => {
      function updatePrice() {
           updateWholesalePriceList(
                price.currentPriceList.priceCategory,
-               editWholesale.vinyl,
+               vinylRef.current.value,
                editWholesale.vinylPC,
                editWholesale.banner
           );
           navigate(MAIN_ROUTE)
+          console.log(vinylRef.current.value)
      }
 
      return (
@@ -62,7 +64,7 @@ const EditWholesalePricePage = observer(() => {
                               <th>Пленка</th>
                               <th>{price.currentPriceList.vinyl}</th>
                               <th>
-                                   <Form.Control
+                                   {/* <Form.Control
                                         value={editWholesale.vinyl}
                                         type={"number"}
                                         onChange={(e) =>
@@ -71,6 +73,11 @@ const EditWholesalePricePage = observer(() => {
                                                   vinyl: e.target.value,
                                              })
                                         }
+                                   /> */}
+                                    <Form.Control
+                                        placeholder={price.currentPriceList.vinyl}
+                                        type={"number"}
+                                        ref = {vinylRef}
                                    />
                               </th>
                          </tr>
