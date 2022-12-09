@@ -11,7 +11,7 @@ export const getWholesalePrice = async function () {
 };
 export const updateRetailPriceList = async function (
      priceCategory: string,
-     vinyl: number,
+     vinyl: any,
      vinylPC: number,
      banner: number
 ) {

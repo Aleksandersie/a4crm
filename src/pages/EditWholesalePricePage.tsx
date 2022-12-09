@@ -7,107 +7,123 @@ import {
 import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
+import { useNavigate } from "react-router-dom";
+import { MAIN_ROUTE } from "../routeConst/routeConst";
 
-const EditWholesalePricePage = () => {
+const EditWholesalePricePage = observer(() => {
      const { price } = useContext(Context);
+     const navigate = useNavigate()
 
-     const [edit, setEdit] = useState({
+     const [editWholesale, setEditWholesale] = useState({
           vinyl: "" || price.currentPriceList.vinyl,
           vinylPC: "" || price.currentPriceList.vinylPC,
           banner: "" || price.currentPriceList.banner,
      });
 
      useEffect(() => {
+          
           getWholesalePrice().then((data) => price.setCurrentPriceList(data));
      }, []);
 
-     function test() {
+    
+     function updatePrice() {
           updateWholesalePriceList(
                price.currentPriceList.priceCategory,
-               edit.vinyl,
-               edit.vinylPC,
-               edit.banner
+               editWholesale.vinyl,
+               editWholesale.vinylPC,
+               editWholesale.banner
           );
+          navigate(MAIN_ROUTE)
      }
 
      return (
           <Container>
-               <Card style={{ textAlign: "center", lineHeight: 2 }} className={"mt-5"}>
-                    <Card.Header>
-                         <h4>Настройка оптовых цен</h4>
-                    </Card.Header>
-                    <Table
-                         striped
-                         bordered
-                         hover
-                         size={"sm"}
-                         className={"mt-4  m-auto"}
-                         style={{ width: 90 + "%" }}
-                    >
-                         <thead>
-                              <tr>
-                                   <th>Название</th>
-                                   <th>Цена</th>
-                              </tr>
-                         </thead>
-                         <tbody>
-                              <tr>
-                                   <th>Пленка</th>
-                                   <th>
+          <Card style={{ textAlign: "center", lineHeight: 2 }} className={"mt-5"}>
+               <Card.Header>
+                    <h4>Настройка оптовых цен</h4>
+               </Card.Header>
+               <Table
+                    striped
+                    bordered
+                    hover
+                    size={"sm"}
+                    className={"mt-4  m-auto"}
+                    style={{ width: 90 + "%" }}
+               >
+                    <thead>
+                         <tr>
+                              <th>Название</th>
+                              <th>Текущая цена</th>
+                              <th>Новая цена</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                              <th>Пленка</th>
+                              <th>{price.currentPriceList.vinyl}</th>
+                              <th>
+                                   <Form.Control
+                                        value={editWholesale.vinyl}
+                                        type={"number"}
+                                        onChange={(e) =>
+                                             setEditWholesale({
+                                                  ...editWholesale,
+                                                  vinyl: e.target.value,
+                                             })
+                                        }
+                                   />
+                              </th>
+                         </tr>
+                         <tr>
+                              <th>Печать и резка</th>
+                              <th>{price.currentPriceList.vinylPC}</th>
+                              <th>
+                                   <div>
                                         <Form.Control
-                                             placeholder={price.currentPriceList.vinyl}
-                                             value={edit.vinyl}
+                                             value={editWholesale.vinylPC}
                                              type={"number"}
                                              onChange={(e) =>
-                                                  setEdit({ ...edit, vinyl: e.target.value })
+                                                  setEditWholesale({
+                                                       ...editWholesale,
+                                                       vinylPC: e.target.value,
+                                                  })
                                              }
                                         />
-                                   </th>
-                              </tr>
-                              <tr>
-                                   <th>Печать и резка</th>
-                                   <th>
-                                        <div>
-                                             <Form.Control
-                                                  placeholder={price.currentPriceList.vinylPC}
-                                                  value={edit.vinylPC}
-                                                  type={"number"}
-                                                  onChange={(e) =>
-                                                       setEdit({ ...edit, vinylPC: e.target.value })
-                                                  }
-                                             />
-                                        </div>
-                                   </th>
-                              </tr>
-                              <tr>
-                                   <th>Баннер</th>
-                                   <th>
-                                        <div>
-                                             <Form.Control
-                                                  placeholder={price.currentPriceList.banner}
-                                                  value={edit.banner}
-                                                  type={"number"}
-                                                  onChange={(e) =>
-                                                       setEdit({ ...edit, banner: e.target.value })
-                                                  }
-                                             />
-                                        </div>
-                                   </th>
-                              </tr>
-                         </tbody>
-                    </Table>
+                                   </div>
+                              </th>
+                         </tr>
+                         <tr>
+                              <th>Баннер</th>
+                              <th>{price.currentPriceList.banner}</th>
+                              <th>
+                                   <div>
+                                        <Form.Control
+                                             value={editWholesale.banner}
+                                             type={"number"}
+                                             onChange={(e) =>
+                                                  setEditWholesale({
+                                                       ...editWholesale,
+                                                       banner: e.target.value,
+                                                  })
+                                             }
+                                        />
+                                   </div>
+                              </th>
+                         </tr>
+                    </tbody>
+               </Table>
 
-                    <Button
-                         onClick={test}
-                         variant={"warning"}
-                         style={{ width: 90 + "%" }}
-                         className={"m-auto mt-4 mb-4"}
-                    >
-                         Сохранить изменения
-                    </Button>
-               </Card>
-          </Container>
+               <Button
+                    onClick={updatePrice}
+                    variant={"warning"}
+                    style={{ width: 90 + "%" }}
+                    className={"m-auto mt-4 mb-4"}
+               >
+                    Сохранить изменения
+               </Button>
+          </Card>
+     </Container>
      );
-};
+});
 
 export default EditWholesalePricePage;

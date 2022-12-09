@@ -3,11 +3,14 @@ import { Button, Card, Form, Table, Container } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
 import { getRetailPrice, updateRetailPriceList } from "../components/axios/PriceApi";
-import { IUser } from "../Store/UserStore";
-import { USER_INFO_PAGE } from "../routeConst/routeConst";
+import { Navigate, useNavigate } from "react-router-dom";
+import { MAIN_ROUTE } from "../routeConst/routeConst";
+import { useRef } from "react";
 
 const EditRetailPricePage = observer(() => {
      const { price } = useContext(Context);
+     const navigate = useNavigate()
+
 
      const [editRetail, setEditRetail] = useState({
           vinyl: null || price.currentPriceList.vinyl,
@@ -15,7 +18,10 @@ const EditRetailPricePage = observer(() => {
           banner: null || price.currentPriceList.banner,
      });
 
+     const vinylRef = React.useRef<HTMLInputElement>(null)
+
      useEffect(() => {
+          
           getRetailPrice().then((data) => price.setCurrentPriceList(data));
           console.log({ price });
      }, []);
@@ -23,10 +29,12 @@ const EditRetailPricePage = observer(() => {
      function updatePrice() {
           updateRetailPriceList(
                price.currentPriceList.priceCategory,
-               editRetail.vinyl,
+               vinylRef.current.value,
                editRetail.vinylPC,
                editRetail.banner
           );
+          navigate(MAIN_ROUTE)
+          console.log(vinylRef.current.value)
      }
 
      return (
@@ -55,7 +63,7 @@ const EditRetailPricePage = observer(() => {
                                    <th>Пленка</th>
                                    <th>{price.currentPriceList.vinyl}</th>
                                    <th>
-                                        <Form.Control
+                                        {/* <Form.Control
                                              value={editRetail.vinyl}
                                              type={"number"}
                                              onChange={(e) =>
@@ -64,6 +72,11 @@ const EditRetailPricePage = observer(() => {
                                                        vinyl: e.target.value,
                                                   })
                                              }
+                                        /> */}
+                                        <Form.Control
+                                             placeholder={price.currentPriceList.vinyl}
+                                             
+                                             ref={vinylRef}
                                         />
                                    </th>
                               </tr>
