@@ -15,37 +15,37 @@ import MaterialTypeList from "../../components/MaterialTypeList/MaterialTypeList
 import SubmitOrder from "../../components/SubmitOrder/SubmitOrder";
 
 const IntPrintCalc = () => {
-  const { materialList } = useContext(Context);
-  // useEffect(() => {
-  //   if (materialList.selectedMaterialType.name === undefined) {
-  //     //materialList.setSelectedMaterialType(materialList.intPrintMaterial);
-  //     materialList.setSelectedMaterialType(materialList.vinyl);
-  //     materialList.setSelectedIntPrintMaterial(materialList.vinyl)
-  //     console.log("empty");
-  //   }
-  // });
-  return (
-    <Container>
-      <Row>
-        <Col className="col-3 mt-4">
-          <SideBar />
-        </Col>
-        <Col className="col-9 mt-4">
-          <TopStepper />
-          <TopBreadCrumbs />
-          <MaterialTypeList />
-          <NewMaterialSelector />
-          <AdditionalBlock />
-          <CalcBlock />
-          <OrderListBlock />
-          <SubmitOrder />
-        </Col>
-      </Row>
+     const { materialList } = useContext(Context);
+     // useEffect(() => {
+     //   if (materialList.selectedMaterialType.name === undefined) {
+     //     //materialList.setSelectedMaterialType(materialList.intPrintMaterial);
+     //     materialList.setSelectedMaterialType(materialList.vinyl);
+     //     materialList.setSelectedIntPrintMaterial(materialList.vinyl)
+     //     console.log("empty");
+     //   }
+     // });
+     return (
+          <Container>
+               {/*<Row>*/}
+               {/*  <Col className="col-3 mt-4">*/}
+               {/*    <SideBar />*/}
+               {/*  </Col>*/}
+               {/*  <Col className="col-9 mt-4">*/}
+               {/*<TopStepper />*/}
+               {/*<TopBreadCrumbs />*/}
+               {/*<MaterialTypeList />*/}
+               {/*<NewMaterialSelector />*/}
+               {/*<AdditionalBlock />*/}
+               <CalcBlock />
+               <OrderListBlock />
+               <SubmitOrder />
+               {/*  </Col>*/}
+               {/*</Row>*/}
 
-      {/*<CalcBlock />*/}
-      {/*<OrderListBlock />*/}
-    </Container>
-  );
+               {/*<CalcBlock />*/}
+               {/*<OrderListBlock />*/}
+          </Container>
+     );
 };
 
 export default IntPrintCalc;

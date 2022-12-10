@@ -13,45 +13,50 @@ import { Context } from "../index";
 import { getAllOrders } from "../components/axios/OrderApi";
 import { getAllCustomers } from "../components/axios/UserApi";
 import { getDebtors } from "../components/axios/financeApi";
+import TemporaryPage from "../components/TemporaryPage/TemporaryPage";
 
 const MainPage = () => {
-    const { price, order, user, financeStore } = useContext(Context);
-    console.log(financeStore);
-    useEffect(() => {
-        getRetailPrice().then((data) => price.setCurrentPriceList(data));
-    }, []);
-    useEffect(() => {
-        getAllOrders(order.orderPage, order.orderLimit).then((data) =>
-            order.setOrderInProgress(data)
-        );
-    }, []);
-    useEffect(() => {
-        getAllCustomers(order.orderPage, order.orderLimit).then((data) => user.setCustomers(data));
-    }, []);
-    useEffect(() => {
-        getAllCustomers(order.orderPage, order.orderLimit).then((data) => user.setUserList(data));
-    }, []);
-    useEffect(() => {
-        getDebtors().then((data) => financeStore.setDebtors(data));
-    }, []);
+     const { price, order, user, financeStore } = useContext(Context);
+     console.log(financeStore);
+     useEffect(() => {
+          getRetailPrice().then((data) => price.setCurrentPriceList(data));
+     }, []);
+     useEffect(() => {
+          getAllOrders(order.orderPage, order.orderLimit).then((data) =>
+               order.setOrderInProgress(data)
+          );
+     }, []);
+     useEffect(() => {
+          getAllCustomers(order.orderPage, order.orderLimit).then((data) =>
+               user.setCustomers(data)
+          );
+     }, []);
+     useEffect(() => {
+          getAllCustomers(order.orderPage, order.orderLimit).then((data) => user.setUserList(data));
+     }, []);
+     useEffect(() => {
+          getDebtors().then((data) => financeStore.setDebtors(data));
+     }, []);
 
-    return (
-        <Container>
-            <Row>
-                <Col className="col-3 mt-4">
-                    <SideBar />
-                </Col>
-                <Col className="col-9 mt-4">
-                    <TopStepper />
-                    <TopBreadCrumbs />
-                    <CategoryBlock />
-                </Col>
-            </Row>
+     return (
+          <Container>
+               <TemporaryPage />
+               {/*<CategoryBlock />*/}
+               {/*<Row>*/}
+               {/*    <Col className="col-3 mt-4">*/}
+               {/*        <SideBar />*/}
+               {/*    </Col>*/}
+               {/*    <Col className="col-9 mt-4">*/}
+               {/*        <TopStepper />*/}
+               {/*        <TopBreadCrumbs />*/}
+               {/*        <CategoryBlock />*/}
+               {/*    </Col>*/}
+               {/*</Row>*/}
 
-            {/*<CalcBlock />*/}
-            {/*<OrderListBlock />*/}
-        </Container>
-    );
+               {/*<CalcBlock />*/}
+               {/*<OrderListBlock />*/}
+          </Container>
+     );
 };
 
 export default MainPage;

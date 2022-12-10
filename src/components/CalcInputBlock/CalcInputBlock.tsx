@@ -158,6 +158,10 @@ const CalcInputBlock: React.FC = observer(() => {
                price.setCurrentPrice(price.currentPriceList.vinylPC);
                console.log(`printCut ${price.currentPriceList.vinylPC}`);
           }
+          if (materialList.selectedCategory.name === "Плоттерная резка") {
+               price.setCurrentPrice(price.currentPriceList.banner);
+               console.log(`banner ${price.currentPriceList.banner}`);
+          }
      }, [materialList.selectedCategory, width, height, count, price.currentPriceList]);
 
      return (
