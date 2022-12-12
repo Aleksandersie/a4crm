@@ -188,7 +188,7 @@ const UserEditPanel: React.FC<IEditableUser> = observer(({ user }) => {
                 <div>
                     <h6>Прайс лист</h6>
                     <Form.Control
-                        placeholder={user.priceList}
+                        placeholder={user.priceCategory}
                         value={mail}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}
                     />

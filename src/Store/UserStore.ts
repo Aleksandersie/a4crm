@@ -11,7 +11,7 @@ export interface IUser {
     password: string;
     alias: string;
     role: string;
-    priceList: string;
+    priceCategory: string;
     id: number;
 }
 
