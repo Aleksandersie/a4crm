@@ -158,11 +158,11 @@ const CalcInputBlock: React.FC = observer(() => {
                price.setCurrentPrice(price.currentPriceList.vinylPC);
                console.log(`printCut ${price.currentPriceList.vinylPC}`);
           }
-          if (materialList.selectedCategory.name === "Плоттерная резка") {
+          if (materialList.selectedCategory.name === "Интерьерная печать" && materialList.selectedMaterial.name==="Баннер 440 гр") {
                price.setCurrentPrice(price.currentPriceList.banner);
                console.log(`banner ${price.currentPriceList.banner}`);
           }
-     }, [materialList.selectedCategory, width, height, count, price.currentPriceList]);
+     }, [materialList.selectedCategory, width, height, count, price.currentPriceList,materialList.selectedMaterial]);
 
      return (
           <div className=" ">

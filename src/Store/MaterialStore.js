@@ -7,6 +7,7 @@ import {
 import { makeAutoObservable } from "mobx";
 
 export default class MaterialStore {
+  // Выбор самого верхнего уровня
   constructor() {
     this._category = [
       {

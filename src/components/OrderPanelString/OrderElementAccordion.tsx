@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Accordion, Button, Card, Table } from "react-bootstrap";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete,AiOutlineSetting } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
 import { IOrderItem } from "../../calcLogic/calc";
 import { NavLink } from "react-router-dom";
 import { MAIN_ROUTE } from "../../routeConst/routeConst";
 import axios from "axios";
 import { downloadFile } from "../axios/OrderApi";
+import userEvent from "@testing-library/user-event";
+import { Context } from "../..";
+import { adminConst } from "../../Const";
 
 interface IOrderAccordion {
     key: any;
@@ -35,6 +38,14 @@ function download(path) {
 }
 
 const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) => {
+const {user} =  useContext(Context)
+
+function editThisPrice(random){
+    
+    console.log(random);
+    
+}
+
     return (
         <Accordion className="mt-2 shadow">
             <Accordion.Item eventKey="0">
@@ -65,6 +76,11 @@ const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) =>
                             <h6>{"Количество"}</h6>
                             <p>{orderAccordion.count}</p>
                         </div>
+                        {user.user.role===adminConst? <div style={{ textAlign: "center" }}>
+                            <h6>{"Редактировать стоимость"}</h6>
+                            <p>{<AiOutlineSetting onClick={()=>editThisPrice(orderAccordion.random)}/>}</p>
+                        </div>:""}
+                        
                         {/*<div style={{ textAlign: "center" }}>*/}
                         {/*    <h6>{"Удалить"}</h6>*/}
                         {/*    <AiFillDelete*/}
