@@ -47,9 +47,9 @@ const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) =>
      }
      async function editThisPrice(random, e) {
           e.stopPropagation();
-          console.log(random);
           console.log(newPrice.current.value);
           await changeOrderCost(+newPrice.current.value, random);
+          setShowEdit(false);
      }
 
      return (
