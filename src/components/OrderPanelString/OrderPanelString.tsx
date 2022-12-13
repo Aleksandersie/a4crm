@@ -32,15 +32,15 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
 
      if(orderString.orderStatus === takeToWorkStatus ){
           console.log("true");
-          setStringColor = "green" 
+          setStringColor = "LimeGreen" 
      }
      if(orderString.orderStatus === inProgressStatus ){
           console.log("true");
-          setStringColor = "red" 
+          setStringColor = "PaleGoldenrod" 
      }
      if(orderString.orderStatus === completeStatus ){
           console.log("true");
-          setStringColor = "wheat" 
+          setStringColor = "Chocolate" 
      }
    
 
