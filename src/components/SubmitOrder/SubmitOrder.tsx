@@ -14,8 +14,19 @@ const SubmitOrder: React.FC = observer(() => {
 
    const orderMessage = React.useRef(null)
 
-    
 
+   const intPrint = []
+
+    useEffect(()=>{
+        for ( let el of order.order){
+           if(el.orderCategory==="Интерьерная печать"){
+              console.log("pass");
+              
+           }
+            
+        }
+    },[order.order])
+    
 
     useEffect(() => {
         setTotalCost(
