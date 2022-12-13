@@ -6,6 +6,7 @@ import OrderElementAccordion from "./OrderElementAccordion";
 import { IIncomingOrder, sendOrderStatus } from "../axios/OrderApi";
 import { observer } from "mobx-react-lite";
 import { completeStatus, inProgressStatus, takeToWorkStatus } from "../../Const";
+import { bgcolor } from "@mui/system";
 interface IOrderString {
      id: number;
      key: number;
@@ -23,10 +24,25 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
           showInProgressModal(false);
           showCompleteModal(false);
      }
-
+     
+     let setStringColor = "whitesmoke"
      const [takeOrderModal, showTakeOrderModal] = useState<boolean>(false);
      const [inProgressModal, showInProgressModal] = useState<boolean>(false);
      const [completeModal, showCompleteModal] = useState<boolean>(false);
+
+     if(orderString.orderStatus === takeToWorkStatus ){
+          console.log("true");
+          setStringColor = "green" 
+     }
+     if(orderString.orderStatus === inProgressStatus ){
+          console.log("true");
+          setStringColor = "red" 
+     }
+     if(orderString.orderStatus === completeStatus ){
+          console.log("true");
+          setStringColor = "wheat" 
+     }
+   
 
      return (
           <Accordion className="m-auto mt-2 mb-2" style={{ width: 1150 }}>
@@ -36,7 +52,7 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                               className=" pb-2 pt-3 d-flex flex-row justify-content-evenly  ms-5 me-5 shadow-sm gap-4"
                               style={{
                                    minWidth: 300,
-                                   backgroundColor: "whitesmoke",
+                                   backgroundColor: setStringColor,
                                    width: "100% ",
                               }}
                          >
