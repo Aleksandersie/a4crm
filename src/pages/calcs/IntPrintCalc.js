@@ -15,7 +15,8 @@ import MaterialTypeList from "../../components/MaterialTypeList/MaterialTypeList
 import SubmitOrder from "../../components/SubmitOrder/SubmitOrder";
 
 const IntPrintCalc = () => {
-     const { materialList } = useContext(Context);
+    
+     const { materialList,user } = useContext(Context);
      // useEffect(() => {
      //   if (materialList.selectedMaterialType.name === undefined) {
      //     //materialList.setSelectedMaterialType(materialList.intPrintMaterial);
@@ -26,7 +27,7 @@ const IntPrintCalc = () => {
      // });
      return (
           <Container>
-               {/*<Row>*/}
+               {/* <Row>*/}
                {/*  <Col className="col-3 mt-4">*/}
                {/*    <SideBar />*/}
                {/*  </Col>*/}
@@ -35,10 +36,19 @@ const IntPrintCalc = () => {
                {/*<TopBreadCrumbs />*/}
                {/*<MaterialTypeList />*/}
                {/*<NewMaterialSelector />*/}
-               {/*<AdditionalBlock />*/}
+               {/*<AdditionalBlock /> */}
                <CalcBlock />
-               <OrderListBlock />
-               <SubmitOrder />
+               {user.isAuth?
+                    
+                    <>
+                    <OrderListBlock />
+                    <SubmitOrder />
+                    </>
+                    :
+                    ''
+          
+               }
+              
                {/*  </Col>*/}
                {/*</Row>*/}
 

@@ -295,32 +295,39 @@ const CalcInputBlock: React.FC = observer(() => {
                     <div>{warning}</div>
                     {/*</div>*/}
                </div>
-
+               {user.isAuth?
                <Row className="d-flex justify-content-center mt-4 gap-5">
-                    <Col md={3}>
-                         <h6 className="m-auto" style={{ textAlign: "center" }}>
-                              {"Описание заказа"}
-                         </h6>
-                         <Form.Control
-                              value={description}
-                              onChange={(event) => setDescription(event.target.value)}
-                              className="mt-2"
-                              placeholder="Введите описание"
-                         />
-                    </Col>
-                    <Col md={3}>
-                         <h6 className="m-auto" style={{ textAlign: "center" }}>
-                              {"Прикрепите файл"}
-                         </h6>
-                         <Form.Control
-                              className="mt-2"
-                              placeholder=""
-                              type="file"
-                              onChange={upload}
-                         />
-                    </Col>
-               </Row>
-               <div className="mt-4 gap-3 d-flex justify-content-center mb-3">
+               <Col md={3}>
+                    <h6 className="m-auto" style={{ textAlign: "center" }}>
+                         {"Описание заказа"}
+                    </h6>
+                    <Form.Control
+                         value={description}
+                         onChange={(event) => setDescription(event.target.value)}
+                         className="mt-2"
+                         placeholder="Введите описание"
+                    />
+               </Col>
+               <Col md={3}>
+                    <h6 className="m-auto" style={{ textAlign: "center" }}>
+                         {"Прикрепите файл"}
+                    </h6>
+                    <Form.Control
+                         className="mt-2"
+                         placeholder=""
+                         type="file"
+                         onChange={upload}
+                    />
+               </Col>
+                     </Row>
+                      :
+                       ""
+               
+          
+               }
+               
+               {user.isAuth?
+                    <div className="mt-4 gap-3 d-flex justify-content-center mb-3">
                     <Button variant="success" style={{ width: 150, height: 62 }}>
                          Сброс значний
                     </Button>
@@ -328,6 +335,11 @@ const CalcInputBlock: React.FC = observer(() => {
                          Добавить в заказ
                     </Button>
                </div>
+                :
+                ""
+          
+               }
+               
           </div>
      );
 });
