@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Modal, Table } from "react-bootstrap";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Button, Card, Modal, Table,Form } from "react-bootstrap";
 import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 import { createOrder } from "../axios/OrderApi";
@@ -12,7 +12,10 @@ const SubmitOrder: React.FC = observer(() => {
 
     const [totalCost, setTotalCost] = useState("0");
 
-    const orderMessage: string = "Тестовое сообщение";
+   const orderMessage = React.useRef(null)
+
+    
+
 
     useEffect(() => {
         setTotalCost(
@@ -23,7 +26,7 @@ const SubmitOrder: React.FC = observer(() => {
     }, [order.order]);
 
     async function submitOrder() {
-        await createOrder(order.order, orderMessage).finally(() => setShow(false));
+        await createOrder(order.order, orderMessage.current.value).finally(() => setShow(false));
         order.setOrder([]);
         orderClear();
     }
@@ -61,6 +64,10 @@ const SubmitOrder: React.FC = observer(() => {
                             </tr>
                         </tbody>
                     </Table>
+                    <h6 >Ведите описание к заказу</h6>
+                    <Form.Control
+                    as='textarea' ref={orderMessage} rows={3}
+                    />
                 </div>
 
                 <Button
