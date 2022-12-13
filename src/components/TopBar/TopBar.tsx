@@ -89,7 +89,7 @@ const TopBar: React.FC = observer(() => {
                     ) : (
                         "123"
                     )}
-                    {user.isAuth ? (
+                    {user.user.role === (adminConst || managerConst) ? (
                         <NavLink to={TODO_ROUTE}>
                             <Button variant={"warning"} style={{ height: 41 }} className={"me-3"}>
                                 <AiOutlineUnorderedList style={{ fontSize: 22 }} className="me-2" />

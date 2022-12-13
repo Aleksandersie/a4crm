@@ -11,10 +11,12 @@ import MaterialDropdown from "../MaterialDropdown/MaterialDropdown";
 import TypeDropdown from "../TypeDropdown/TypeDropdown";
 import CategoryDropdown from "../CategoryDropdown/CategoryDropdown";
 import CustomersDropdown from "../CustomersDropdown/CustomersDropdown";
+import { adminConst,managerConst } from "../../Const";
+
 
 const CalcBlock = observer(() => {
     const navigate = useNavigate();
-    const { materialList } = useContext(Context);
+    const { materialList,user } = useContext(Context);
     const goBack = () => {
         navigate(-1);
     };
@@ -38,10 +40,17 @@ const CalcBlock = observer(() => {
                 </Card.Header>
                 <Card.Body>
                     <Card.Subtitle>
-                        <div>
+                        {
+                            user.user.role === (adminConst || managerConst) ? 
+                            <div>
+
                             <div className="mb-2">Выберите заказчика:</div>
                             <CustomersDropdown />
-                        </div>
+                            </div>
+                            :
+                            ""
+                        }
+                        
                         <div className="d-flex justify-content-center align-items-center gap-5 mt-2">
                             <div>
                                 <div className="mb-2">Категория заказа:</div>
