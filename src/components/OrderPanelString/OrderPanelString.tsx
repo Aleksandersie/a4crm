@@ -3,7 +3,7 @@ import { Accordion, Button, Card, FloatingLabel, Form, Modal, Table } from "reac
 import { AiFillDelete } from "react-icons/ai";
 import { BiRuble } from "react-icons/bi";
 import OrderElementAccordion from "./OrderElementAccordion";
-import { IIncomingOrder, sendOrderStatus } from "../axios/OrderApi";
+import { deleteOrder, IIncomingOrder, sendOrderStatus } from "../axios/OrderApi";
 import { observer } from "mobx-react-lite";
 import { completeStatus, inProgressStatus, takeToWorkStatus } from "../../Const";
 import { bgcolor } from "@mui/system";
@@ -24,11 +24,17 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
           showInProgressModal(false);
           showCompleteModal(false);
      }
+
+     function remove(randomNumber){
+          deleteOrder(randomNumber)
+          showDeleteModal(false)
+     }
      
      let setStringColor = "whitesmoke"
      const [takeOrderModal, showTakeOrderModal] = useState<boolean>(false);
      const [inProgressModal, showInProgressModal] = useState<boolean>(false);
      const [completeModal, showCompleteModal] = useState<boolean>(false);
+     const [deleteModal, showDeleteModal] = useState<boolean>(false);
 
      if(orderString.orderStatus === takeToWorkStatus ){
           console.log("true");
@@ -226,6 +232,39 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
                                         >
                                              {completeStatus}
                                         </Button>
+                                        {/* ///////////////////////////////////////////////////////// */}
+                                        <Button
+                                             variant={"danger"}
+                                             onClick={() => showDeleteModal(true)}
+                                        >
+                                             Удалить заказ
+                                        </Button>
+
+                                        <Modal
+                                             show={deleteModal}
+                                             onHide={() => showDeleteModal(false)}
+                                        >
+                                             <Modal.Header closeButton>
+                                                  <Modal.Title></Modal.Title>
+                                             </Modal.Header>
+                                             <Modal.Body>Удалить заказ?</Modal.Body>
+                                             <Modal.Footer>
+                                                  <Button
+                                                       variant="secondary"
+                                                       onClick={() => showDeleteModal(false)}
+                                                  >
+                                                       Отмена
+                                                  </Button>
+                                                  <Button
+                                                       variant="warning"
+                                                       onClick={() =>
+                                                            remove(orderString.randomNumber)
+                                                       }
+                                                  >
+                                                       Подтвердить
+                                                  </Button>
+                                             </Modal.Footer>
+                                        </Modal>
                                    </div>
 
                                    <div>

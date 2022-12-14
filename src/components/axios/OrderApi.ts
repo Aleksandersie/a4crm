@@ -88,3 +88,7 @@ export const getOrdersByUser = async function (alias){
      const res = await host.get<IIncomingOrder[]>('api/order/searchOrdersByUser',{params:{alias}})
      return res.data
 }
+export const deleteOrder = async function (randomNumber){
+     const res = await host.delete('api/order/deleteOrder',{data:{randomNumber}})
+     return res.data
+}

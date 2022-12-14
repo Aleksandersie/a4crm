@@ -117,7 +117,7 @@ const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) =>
                                              variant="secondary"
                                              onClick={() => setShowEdit(false)}
                                         >
-                                             Close
+                                            Закрыть
                                         </Button>
                                         <Button
                                              variant="primary"
@@ -125,7 +125,7 @@ const OrderElementAccordion: React.FC<IOrderAccordion> = ({ orderAccordion }) =>
                                                   editThisPrice(orderAccordion.random, e)
                                              }
                                         >
-                                             Save Changes
+                                             Применить
                                         </Button>
                                    </Modal.Footer>
                               </Modal>
