@@ -8,20 +8,29 @@ import OrderPanelString from "../components/OrderPanelString/OrderPanelString";
 import OrderPagination from "../orderPagination/OrderPagination";
 import SearchOrderBar from "../components/SearchOrderBar/SearchOrderBar";
 import DropdownOrderFilter from "../components/DropdownOrderFilter/DropdownOrderFilter";
+import { adminConst, customerConst, managerConst, workerConst } from "../Const";
 
 const OrderPage = observer(() => {
-    const { order } = useContext(Context);
+    const { order,user } = useContext(Context);
     async function get() {
         const get = await getAllOrders(order.orderPage, order.orderLimit).then((data) =>
             order.setOrderInProgress(data)
         );
     }
+    
+
 
     useEffect(() => {
-        getAllOrders(order.orderPage, order.orderLimit).then((data): IIncomingOrder[] =>
-            order.setOrderInProgress(data)
-        );
+        if(user.user.role===(adminConst||managerConst||workerConst)){
+            getAllOrders(order.orderPage, order.orderLimit).then((data): IIncomingOrder[] =>
+            order.setOrderInProgress(data));
         console.log({ order });
+        }
+        if(user.user.role===customerConst){
+            console.log('CUS');
+            
+        }
+
     }, []);
 
     return (
@@ -39,14 +48,22 @@ const OrderPage = observer(() => {
                     >
                         Обновить вручную
                     </Button>
-                    <div
-                        className={
-                            "d-flex flex-row align-items-center justify-content-around mt-5 mb-4"
-                        }
-                    >
-                        <DropdownOrderFilter />
-                        <SearchOrderBar />
+                    
+                    {user.user.role===(adminConst||managerConst||workerConst)?
+                     <div
+                     className={
+                         "d-flex flex-row align-items-center justify-content-around mt-5 mb-4"
+                     }
+                     >
+                   
+                     <DropdownOrderFilter />
+                     <SearchOrderBar />
                     </div>
+                    :
+                     ""
+                    }
+
+                   
 
                     {order.orderInProgress.findAll.rows.map((el) => (
                         <OrderPanelString key={el.randomNumber} orderString={el} id={el.id} />

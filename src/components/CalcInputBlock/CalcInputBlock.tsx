@@ -337,7 +337,6 @@ const CalcInputBlock: React.FC = observer(() => {
                </div>
                 :
                 ""
-          
                }
                
           </div>

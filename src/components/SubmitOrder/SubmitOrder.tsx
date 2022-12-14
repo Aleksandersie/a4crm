@@ -22,8 +22,7 @@ const SubmitOrder: React.FC = observer(() => {
            if(el.orderCategory==="Интерьерная печать"){
               console.log("pass");
               
-           }
-            
+           } 
         }
     },[order.order])
     

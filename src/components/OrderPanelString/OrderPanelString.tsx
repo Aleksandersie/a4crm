@@ -39,7 +39,6 @@ const OrderPanelString: React.FC<IOrderString> = observer(({ orderString }) => {
           setStringColor = "PaleGoldenrod" 
      }
      if(orderString.orderStatus === completeStatus ){
-          console.log("true");
           setStringColor = "Chocolate" 
      }
    
