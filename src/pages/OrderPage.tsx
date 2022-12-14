@@ -13,9 +13,14 @@ import { adminConst, customerConst, managerConst, workerConst } from "../Const";
 const OrderPage = observer(() => {
     const { order,user } = useContext(Context);
     async function get() {
-        const get = await getAllOrders(order.orderPage, order.orderLimit).then((data) =>
-            order.setOrderInProgress(data)
-        );
+        if(user.user.role===(adminConst||managerConst||workerConst)){
+            getAllOrders(order.orderPage, order.orderLimit).then((data): IIncomingOrder[] =>
+            order.setOrderInProgress(data));
+        console.log({ order });
+        }
+        if(user.user.role===customerConst){
+           getOrdersByUser(user.user.alias).then((data): IIncomingOrder[]=>order.setOrderInProgress(data))
+        }
     }
     
 

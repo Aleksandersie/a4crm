@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Card } from "react-bootstrap";
 import { IoIosConstruct } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { INT_PRINT_CALC, LOGIN_ROUTE } from "../../routeConst/routeConst";
+import { Context } from "../..";
 
 const TemporaryPage = () => {
      const navigate = useNavigate();
+     const {user} = useContext(Context)
      return (
           <Card className={"mt-5 shadow"} style={{ textAlign: "center" }}>
                <Card.Header>
@@ -28,7 +30,8 @@ const TemporaryPage = () => {
                          </Button>
                          <Button variant="warning" onClick={() => navigate(INT_PRINT_CALC)}>
                               <FaUserCircle size="25px" className="me-2" />
-                              Войти как гость
+                              {user.isAuth?"Подолжить работу": "Войти как гость"}
+                              
                          </Button>
                     </div>
                </Card.Body>
