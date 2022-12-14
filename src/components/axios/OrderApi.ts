@@ -84,3 +84,7 @@ export const changeOrderCost = async function (newPrice: number, random: number)
      const res = await host.put("api/order/changeOrderPrice", { newPrice, random });
      return res.data;
 };
+export const getOrdersByUser = async function (alias){
+     const res = await host.get<IIncomingOrder[]>('api/order/searchOrdersByUser',{params:{alias}})
+     return res.data
+}

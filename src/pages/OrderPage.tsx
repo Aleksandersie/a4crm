@@ -1,7 +1,7 @@
 import React, { FC, useContext, useEffect } from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
-import { getAllOrders, IIncomingOrder } from "../components/axios/OrderApi";
+import { getAllOrders, getOrdersByUser, IIncomingOrder } from "../components/axios/OrderApi";
 import { Context } from "../index";
 import { log } from "util";
 import OrderPanelString from "../components/OrderPanelString/OrderPanelString";
@@ -27,8 +27,7 @@ const OrderPage = observer(() => {
         console.log({ order });
         }
         if(user.user.role===customerConst){
-            console.log('CUS');
-            
+           getOrdersByUser(user.user.alias).then((data): IIncomingOrder[]=>order.setOrderInProgress(data))
         }
 
     }, []);
