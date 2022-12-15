@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Button, Card, Modal, Table,Form } from "react-bootstrap";
+import { Button, Card, Modal, Table,Form,Spinner } from "react-bootstrap";
 import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 import { createOrder } from "../axios/OrderApi";
@@ -11,6 +11,8 @@ const SubmitOrder: React.FC = observer(() => {
     const [show, setShow] = useState(false);
 
     const [totalCost, setTotalCost] = useState("0");
+
+    const [orderSpinner,setOrderSpinner] = useState(false)
 
    const orderMessage = React.useRef(null)
 
@@ -93,7 +95,14 @@ const SubmitOrder: React.FC = observer(() => {
                     <Modal.Header closeButton>
                         <Modal.Title>Подтверждение заказа</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Подтвердить заказ и отправить в работу?</Modal.Body>
+                    <Modal.Body>
+                        <div className="d-flex flex-column justify-content-center align-items-center">
+                        Подтвердить заказ и отправить в работу?
+                       <Spinner animation="border" variant="primary" style={{marginTop:20, width:50,height:50}}/>       
+                        </div>
+                       
+                    </Modal.Body>
+
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => setShow(false)}>
                             Отмена
