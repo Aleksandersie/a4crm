@@ -12,14 +12,19 @@ export const getWholesalePrice = async function () {
 export const updateRetailPriceList = async function (
      priceCategory: string,
      vinyl: string,
+     banner: string,
      vinylPC: string,
-     banner: string
+     
 ) {
      const { data } = await host.put("api/price/updateRetailPrice", {
           priceCategory,
+          ////////////////////PRINT////////////////////////////
           vinyl,
-          vinylPC,
           banner,
+          ////////////////////PRINT&CUT////////////////////////
+          vinylPC,
+          ////////////////////CUT//////////////////////////////
+          
      });
      return data;
 };

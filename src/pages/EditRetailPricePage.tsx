@@ -6,14 +6,19 @@ import { getRetailPrice, updateRetailPriceList } from "../components/axios/Price
 import { Navigate, useNavigate } from "react-router-dom";
 import { MAIN_ROUTE } from "../routeConst/routeConst";
 import { useRef } from "react";
+import { FaBlackTie } from "react-icons/fa";
 
 const EditRetailPricePage = observer(() => {
      const { price } = useContext(Context);
      const navigate = useNavigate()
-
+      
+     ////////////////////PRINT////////////////////////////
      const vinylRef = React.useRef<HTMLInputElement>(null)
-     const vinylPCRef = React.useRef<HTMLInputElement>(null)
      const bannerRef = React.useRef<HTMLInputElement>(null)
+     ////////////////////PRINT&CUT////////////////////////
+     const vinylPCRef = React.useRef<HTMLInputElement>(null)
+     ////////////////////CUT//////////////////////////////
+    
 
      useEffect(() => {
           
@@ -24,10 +29,17 @@ const EditRetailPricePage = observer(() => {
      function updatePrice() {
           updateRetailPriceList(
                price.currentPriceList.priceCategory,
+               ////////////////////PRINT////////////////////////////
                vinylRef.current.value||price.currentPriceList.vinyl,
+               bannerRef.current.value||price.currentPriceList.banner,
+                ////////////////////PRINT&CUT////////////////////////
                vinylPCRef.current.value||price.currentPriceList.vinylPC,
-               bannerRef.current.value||price.currentPriceList.banner
+               ////////////////////CUT//////////////////////////////
+               
+               
           );
+
+          console.log(vinylPCRef.current.value);
       navigate(MAIN_ROUTE)
          
      }
@@ -47,6 +59,9 @@ const EditRetailPricePage = observer(() => {
                          style={{ width: 90 + "%" }}
                     >
                          <thead>
+                               <tr>
+                                   <th colSpan={3} style={{backgroundColor:"gray", color:"white"}}>Печать </th>
+                              </tr>
                               <tr>
                                    <th>Название</th>
                                    <th>Текущая цена</th>
@@ -54,6 +69,7 @@ const EditRetailPricePage = observer(() => {
                               </tr>
                          </thead>
                          <tbody>
+                              
                               <tr>
                                    <th>Пленка</th>
                                    <th>{price.currentPriceList.vinyl}</th>
@@ -65,6 +81,31 @@ const EditRetailPricePage = observer(() => {
                                         />
                                    </th>
                               </tr>
+                              <tr>
+                                   <th>Баннер</th>
+                                   <th>{price.currentPriceList.banner}</th>
+                                   <th>
+                                        <div>
+                                        <Form.Control
+                                             placeholder={price.currentPriceList.banner}                
+                                             ref={bannerRef}
+                                        />
+                                        </div>
+                                   </th>
+                              </tr>
+                         </tbody>
+                         {/* ///////////////////////////////////////////////////////// */}
+                         <thead>
+                               <tr>
+                                   <th colSpan={3} style={{backgroundColor:"gray", color:"white"}}>Печать и резка</th>
+                              </tr>
+                              <tr>
+                                   <th>Название</th>
+                                   <th>Текущая цена</th>
+                                   <th>Новая цена</th>
+                              </tr>
+                         </thead>
+                         <tbody>
                               <tr>
                                    <th>Печать и резка</th>
                                    <th>{price.currentPriceList.vinylPC}</th>
@@ -78,13 +119,39 @@ const EditRetailPricePage = observer(() => {
                                    </th>
                               </tr>
                               <tr>
-                                   <th>Баннер</th>
-                                   <th>{price.currentPriceList.banner}</th>
+                                   <th>Печать и резка с ламинацией</th>
+                                   <th>{price.currentPriceList.vinylPC}</th>
                                    <th>
                                         <div>
                                         <Form.Control
-                                             placeholder={price.currentPriceList.banner}                
-                                             ref={bannerRef}
+                                             placeholder={price.currentPriceList.vinylPC}                
+                                             // ref={vinylPCRef}
+                                        />
+                                        </div>
+                                   </th>
+                              </tr>
+                         </tbody>
+                         
+               {/* ////////////////////////////////////////////////////////////////////////////// */}
+               <thead>
+                               <tr>
+                                   <th colSpan={3} style={{backgroundColor:"gray", color:"white"}}>Плоттерная резка</th>
+                              </tr>
+                              <tr>
+                                   <th>Название</th>
+                                   <th>Текущая цена</th>
+                                   <th>Новая цена</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              <tr>
+                                   <th>Резка пленки</th>
+                                   <th>{price.currentPriceList.vinylPC}</th>
+                                   <th>
+                                        <div>
+                                        <Form.Control
+                                             placeholder={price.currentPriceList.vinylPC}                
+                                             // ref={vinylPCRef}
                                         />
                                         </div>
                                    </th>

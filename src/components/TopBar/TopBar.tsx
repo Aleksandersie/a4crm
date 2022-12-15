@@ -42,7 +42,7 @@ const TopBar: React.FC = observer(() => {
                     <div>
                         {" "}
                         <TbCalculator size="25" className="me-2 mb-1" style={{}} />
-                        A4 CRM
+                        A4Юг
                     </div>
                 </NavLink>
                 <div style={{ color: "white", fontSize: 22 }}>

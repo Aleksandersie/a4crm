@@ -9,6 +9,7 @@ import CheckBoxStore from "./Store/CheckBoxStore";
 import AdditionalStore from "./Store/AdditionalSrevices";
 import ToDoStore from "./Store/ToDo";
 import FinanceStore from "./Store/FinanceStore";
+import style from './app.css'
 
 export const Context = createContext(null);
 
@@ -27,7 +28,7 @@ root.render(
         }}
     >
         <React.StrictMode>
-            <App />
+            <App  />
         </React.StrictMode>
     </Context.Provider>
 );
