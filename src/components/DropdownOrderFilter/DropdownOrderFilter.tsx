@@ -8,7 +8,7 @@ const DropdownOrderFilter = () => {
     const {order} = useContext(Context)
     const [category, setCategory] = useState("");
     const list = [
-        { id: 1, name: "Создан" },
+        { id: 1, name: "Заказ создан" },
         { id: 2, name: takeToWorkStatus },
         { id: 3, name: inProgressStatus },
         { id: 4, name: completeStatus },
