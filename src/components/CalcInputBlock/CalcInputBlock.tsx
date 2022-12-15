@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Col, Form, FormControl, Row, Table } from "react-bootstrap";
+import { Button, Card, Col, Form, FormControl, Row, Table,Modal,Spinner } from "react-bootstrap";
 import startCalc, { IOrderItem } from "../../calcLogic/calc";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
@@ -42,8 +42,8 @@ const CalcInputBlock: React.FC = observer(() => {
           countPerMeter: 0,
      });
      const [warning, setWarrning] = useState("test");
-
      const [filePath, setFilePath] = useState("");
+     const[showSendFile, setShowSendFile] = useState(false)
 
      const { price } = useContext(Context);
      const { materialList } = useContext(Context);
@@ -63,7 +63,8 @@ const CalcInputBlock: React.FC = observer(() => {
                alert("Перед загрузкой файла укажите размеры изделия");
                formData.append("file", null);
           } else {
-               const res = await uploadFile(formData);
+               setShowSendFile(true)
+               const res = await uploadFile(formData).finally(()=>setShowSendFile(false))
                setFilePath(res.data);
                //setWidth(0);
                //setHeight(0);
@@ -322,9 +323,24 @@ const CalcInputBlock: React.FC = observer(() => {
                      </Row>
                       :
                        ""
-               
-          
                }
+                 <Modal show={showSendFile} >
+                    <Modal.Header >
+                        <Modal.Title>Отправка файла</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="m-auto">
+                    <Spinner animation="border" variant="primary" style={{width:100,height:100}} />
+                    {/* <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShowSendFile(false)}>
+                            Отмена
+                        </Button>
+                        <Button variant="warning" >
+                            Подтвердить
+                        </Button>
+                    </Modal.Footer> */}
+                     </Modal.Body>
+                </Modal>
+          
                
                {user.isAuth?
                     <div className="mt-4 gap-3 d-flex justify-content-center mb-3">
