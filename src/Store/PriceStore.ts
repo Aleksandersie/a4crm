@@ -2,10 +2,15 @@ const { makeAutoObservable } = require("mobx");
 
 export interface IPrice {
      priceCategory: string;
+     ///print
      vinyl: number;
-     vinylPC: number;
      banner: number;
      photoPaper: number;
+     ///print&cut
+     vinylPC: number;
+     vinylPCLam:number
+     //cut
+    
 }
 
 export enum enumCurrentPrice {

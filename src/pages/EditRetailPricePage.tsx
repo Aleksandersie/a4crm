@@ -17,6 +17,7 @@ const EditRetailPricePage = observer(() => {
      const bannerRef = React.useRef<HTMLInputElement>(null)
      ////////////////////PRINT&CUT////////////////////////
      const vinylPCRef = React.useRef<HTMLInputElement>(null)
+     const vinylPCLamRef = React.useRef<HTMLInputElement>(null)
      ////////////////////CUT//////////////////////////////
     
 
@@ -33,13 +34,13 @@ const EditRetailPricePage = observer(() => {
                vinylRef.current.value||price.currentPriceList.vinyl,
                bannerRef.current.value||price.currentPriceList.banner,
                 ////////////////////PRINT&CUT////////////////////////
-               vinylPCRef.current.value||price.currentPriceList.vinylPC,
+               vinylPCRef.current.value||price.currentPriceList.vinylPCLam,
                ////////////////////CUT//////////////////////////////
                
                
           );
 
-          console.log(vinylPCRef.current.value);
+          console.log(vinylPCLamRef.current.value);
       navigate(MAIN_ROUTE)
          
      }
@@ -94,7 +95,7 @@ const EditRetailPricePage = observer(() => {
                                    </th>
                               </tr>
                          </tbody>
-                         {/* ///////////////////////////////////////////////////////// */}
+                         {/* /////////////////////////PRINT&CUT//////////////////////////////// */}
                          <thead>
                                <tr>
                                    <th colSpan={3} style={{backgroundColor:"gray", color:"white"}}>Печать и резка</th>
@@ -120,19 +121,19 @@ const EditRetailPricePage = observer(() => {
                               </tr>
                               <tr>
                                    <th>Печать и резка с ламинацией</th>
-                                   <th>{price.currentPriceList.vinylPC}</th>
+                                   <th>{price.currentPriceList.vinylPCLam}</th>
                                    <th>
                                         <div>
                                         <Form.Control
-                                             placeholder={price.currentPriceList.vinylPC}                
-                                             // ref={vinylPCRef}
+                                             placeholder={price.currentPriceList.vinylPCLam}                
+                                             ref={vinylPCLamRef}
                                         />
                                         </div>
                                    </th>
                               </tr>
                          </tbody>
                          
-               {/* ////////////////////////////////////////////////////////////////////////////// */}
+               {/* //////////////////////////////////CUT//////////////////////////////////////////// */}
                <thead>
                                <tr>
                                    <th colSpan={3} style={{backgroundColor:"gray", color:"white"}}>Плоттерная резка</th>
