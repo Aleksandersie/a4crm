@@ -1,22 +1,23 @@
-import React, { useContext } from "react";
-import { Button, Card, Dropdown } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Button, Card, Dropdown,Modal } from "react-bootstrap";
 import CalcInputBlock from "../CalcInputBlock/CalcInputBlock";
 import { Paper } from "@mui/material";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../index";
-import s from "./CalckBlock.module.css";
 import { observer } from "mobx-react-lite";
 import MaterialDropdown from "../MaterialDropdown/MaterialDropdown";
 import TypeDropdown from "../TypeDropdown/TypeDropdown";
 import CategoryDropdown from "../CategoryDropdown/CategoryDropdown";
 import CustomersDropdown from "../CustomersDropdown/CustomersDropdown";
 import { adminConst,managerConst } from "../../Const";
+import SearchCustomers from "../SearchCustomers/SearchCustomers";
 
 
 const CalcBlock = observer(() => {
     const navigate = useNavigate();
     const { materialList,user } = useContext(Context);
+    const [showFind,setShowFind] = useState(false)
     const goBack = () => {
         navigate(-1);
     };
@@ -24,7 +25,7 @@ const CalcBlock = observer(() => {
         <Paper elevation={3} style={{ textAlign: "center" }} className="mt-4">
             <Card className="text-center ">
                 <Card.Header style={{ fontSize: 25, fontWeight: 500 }}>
-                    <div className={s.block}>
+                    <div >
                         <AiOutlineArrowLeft
                             style={{
                                 display: "flex",
@@ -46,7 +47,26 @@ const CalcBlock = observer(() => {
 
                             <div className="mb-2">Выберите заказчика:</div>
                             <CustomersDropdown />
+                            <Button variant="warning" onClick={()=>setShowFind(true)}>Выбрать заказчика</Button>
+
+                            <Modal show={showFind} onHide={()=>setShowFind(false)}>
+                             <Modal.Header closeButton>
+                               <Modal.Title>Выберите заказчика</Modal.Title>
+                             </Modal.Header>
+                             <Modal.Body>
+                                <SearchCustomers/>
+                                </Modal.Body>
+                             <Modal.Footer>
+                               <Button variant="secondary" onClick={()=>setShowFind(false)}>
+                                 Close
+                               </Button>
+                               <Button variant="primary" onClick={()=>setShowFind(false)}>
+                                 Save Changes
+                               </Button>
+                             </Modal.Footer>
+                           </Modal>
                             </div>
+                           
                             :
                             ""
                         }
