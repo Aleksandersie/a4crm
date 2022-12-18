@@ -10,39 +10,34 @@ import { FaBlackTie } from "react-icons/fa";
 
 const EditRetailPricePage = observer(() => {
      const { price } = useContext(Context);
-     const navigate = useNavigate()
-      
+     const navigate = useNavigate();
+
      ////////////////////PRINT////////////////////////////
-     const vinylRef = React.useRef<HTMLInputElement>(null)
-     const bannerRef = React.useRef<HTMLInputElement>(null)
+     const vinylRef = React.useRef<HTMLInputElement>(null);
+     const bannerRef = React.useRef<HTMLInputElement>(null);
      ////////////////////PRINT&CUT////////////////////////
-     const vinylPCRef = React.useRef<HTMLInputElement>(null)
-     const vinylPCLamRef = React.useRef<HTMLInputElement>(null)
+     const vinylPCRef = React.useRef<HTMLInputElement>(null);
+     const vinylPCLamRef = React.useRef<HTMLInputElement>(null);
      ////////////////////CUT//////////////////////////////
-    
 
      useEffect(() => {
-          
           getRetailPrice().then((data) => price.setCurrentPriceList(data));
-         
      }, []);
 
      function updatePrice() {
           updateRetailPriceList(
                price.currentPriceList.priceCategory,
                ////////////////////PRINT////////////////////////////
-               vinylRef.current.value||price.currentPriceList.vinyl,
-               bannerRef.current.value||price.currentPriceList.banner,
-                ////////////////////PRINT&CUT////////////////////////
-               vinylPCRef.current.value||price.currentPriceList.vinylPCLam,
+               vinylRef.current.value || price.currentPriceList.vinyl,
+               bannerRef.current.value || price.currentPriceList.banner,
+               ////////////////////PRINT&CUT////////////////////////
+               vinylPCRef.current.value || price.currentPriceList.vinylPCLam
+
                ////////////////////CUT//////////////////////////////
-               
-               
           );
 
           console.log(vinylPCLamRef.current.value);
-      navigate(MAIN_ROUTE)
-         
+          navigate(MAIN_ROUTE);
      }
 
      return (
@@ -60,8 +55,13 @@ const EditRetailPricePage = observer(() => {
                          style={{ width: 90 + "%" }}
                     >
                          <thead>
-                               <tr>
-                                   <th colSpan={3} style={{backgroundColor:"gray", color:"white"}}>Печать </th>
+                              <tr>
+                                   <th
+                                        colSpan={3}
+                                        style={{ backgroundColor: "gray", color: "white" }}
+                                   >
+                                        Печать{" "}
+                                   </th>
                               </tr>
                               <tr>
                                    <th>Название</th>
@@ -70,14 +70,12 @@ const EditRetailPricePage = observer(() => {
                               </tr>
                          </thead>
                          <tbody>
-                              
                               <tr>
                                    <th>Пленка</th>
                                    <th>{price.currentPriceList.vinyl}</th>
                                    <th>
-                                      
                                         <Form.Control
-                                             placeholder={price.currentPriceList.vinyl}                
+                                             placeholder={price.currentPriceList.vinyl}
                                              ref={vinylRef}
                                         />
                                    </th>
@@ -87,18 +85,23 @@ const EditRetailPricePage = observer(() => {
                                    <th>{price.currentPriceList.banner}</th>
                                    <th>
                                         <div>
-                                        <Form.Control
-                                             placeholder={price.currentPriceList.banner}                
-                                             ref={bannerRef}
-                                        />
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.banner}
+                                                  ref={bannerRef}
+                                             />
                                         </div>
                                    </th>
                               </tr>
                          </tbody>
                          {/* /////////////////////////PRINT&CUT//////////////////////////////// */}
                          <thead>
-                               <tr>
-                                   <th colSpan={3} style={{backgroundColor:"gray", color:"white"}}>Печать и резка</th>
+                              <tr>
+                                   <th
+                                        colSpan={3}
+                                        style={{ backgroundColor: "gray", color: "white" }}
+                                   >
+                                        Печать и резка
+                                   </th>
                               </tr>
                               <tr>
                                    <th>Название</th>
@@ -112,10 +115,10 @@ const EditRetailPricePage = observer(() => {
                                    <th>{price.currentPriceList.vinylPC}</th>
                                    <th>
                                         <div>
-                                        <Form.Control
-                                             placeholder={price.currentPriceList.vinylPC}                
-                                             ref={vinylPCRef}
-                                        />
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.vinylPC}
+                                                  ref={vinylPCRef}
+                                             />
                                         </div>
                                    </th>
                               </tr>
@@ -124,19 +127,24 @@ const EditRetailPricePage = observer(() => {
                                    <th>{price.currentPriceList.vinylPCLam}</th>
                                    <th>
                                         <div>
-                                        <Form.Control
-                                             placeholder={price.currentPriceList.vinylPCLam}                
-                                             ref={vinylPCLamRef}
-                                        />
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.vinylPCLam}
+                                                  ref={vinylPCLamRef}
+                                             />
                                         </div>
                                    </th>
                               </tr>
                          </tbody>
-                         
-               {/* //////////////////////////////////CUT//////////////////////////////////////////// */}
-               <thead>
-                               <tr>
-                                   <th colSpan={3} style={{backgroundColor:"gray", color:"white"}}>Плоттерная резка</th>
+
+                         {/* //////////////////////////////////CUT//////////////////////////////////////////// */}
+                         <thead>
+                              <tr>
+                                   <th
+                                        colSpan={3}
+                                        style={{ backgroundColor: "gray", color: "white" }}
+                                   >
+                                        Плоттерная резка
+                                   </th>
                               </tr>
                               <tr>
                                    <th>Название</th>
@@ -150,10 +158,10 @@ const EditRetailPricePage = observer(() => {
                                    <th>{price.currentPriceList.vinylPC}</th>
                                    <th>
                                         <div>
-                                        <Form.Control
-                                             placeholder={price.currentPriceList.vinylPC}                
-                                             // ref={vinylPCRef}
-                                        />
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.vinylPC}
+                                                  // ref={vinylPCRef}
+                                             />
                                         </div>
                                    </th>
                               </tr>

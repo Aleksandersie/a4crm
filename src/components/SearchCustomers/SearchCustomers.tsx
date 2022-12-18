@@ -13,9 +13,7 @@ const SearchCustomers: React.FC<ISearchCustomers> = observer(({ show }) => {
      const name = React.useRef<HTMLInputElement>(null);
 
      async function search() {
-          await searchUser(name.current.value)
-               .then((data) => user.setCustomers(data))
-               .finally(() => console.log(user.customers));
+          await searchUser(name.current.value).then((data) => user.setCustomers(data));
      }
 
      function setOrderOwner(owner) {

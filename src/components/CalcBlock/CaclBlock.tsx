@@ -43,9 +43,9 @@ const CalcBlock = observer(() => {
                               {user.user.role === (adminConst || managerConst) ? (
                                    <div>
                                         <div className="mb-2">Выберите заказчика:</div>
-                                        <CustomersDropdown />
+                                        {/*<CustomersDropdown />*/}
                                         <Button variant="warning" onClick={() => setShowFind(true)}>
-                                             Выбрать заказчика
+                                             {user.selectedCustomer.alias || "Выберите заказчика"}
                                         </Button>
 
                                         <Modal show={showFind} onHide={() => setShowFind(false)}>
@@ -55,20 +55,6 @@ const CalcBlock = observer(() => {
                                              <Modal.Body>
                                                   <SearchCustomers show={setShowFind} />
                                              </Modal.Body>
-                                             <Modal.Footer>
-                                                  <Button
-                                                       variant="secondary"
-                                                       onClick={() => setShowFind(false)}
-                                                  >
-                                                       Close
-                                                  </Button>
-                                                  <Button
-                                                       variant="primary"
-                                                       onClick={() => setShowFind(false)}
-                                                  >
-                                                       Save Changes
-                                                  </Button>
-                                             </Modal.Footer>
                                         </Modal>
                                    </div>
                               ) : (
