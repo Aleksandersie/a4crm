@@ -31,8 +31,8 @@ const EditRetailPricePage = observer(() => {
                vinylRef.current.value || price.currentPriceList.vinyl,
                bannerRef.current.value || price.currentPriceList.banner,
                ////////////////////PRINT&CUT////////////////////////
-               vinylPCRef.current.value || price.currentPriceList.vinylPCLam
-
+               vinylPCRef.current.value || price.currentPriceList.vinylPCLam,
+               vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam
                ////////////////////CUT//////////////////////////////
           );
 
