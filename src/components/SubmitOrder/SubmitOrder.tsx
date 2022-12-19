@@ -4,9 +4,10 @@ import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 import { createOrder } from "../axios/OrderApi";
 import { orderClear } from "../../calcLogic/calc";
+import { retailPrice, wholesalePrice } from "../../Const";
 
 const SubmitOrder: React.FC = observer(() => {
-    const { order } = useContext(Context);
+    const { order,user } = useContext(Context);
 
     const [show, setShow] = useState(false);
 
@@ -35,9 +36,24 @@ const SubmitOrder: React.FC = observer(() => {
                 return sum + order.totalCost;
             }, 0)
         );
+        
+            console.log(user.selectedCustomer.priceCategory);
+            
+       
     }, [order.order]);
 
     async function submitOrder() {
+        // проверка на минимальный заказ
+        let minOrder = null
+        if(user.selectedCustomer.priceCategory===retailPrice)
+        {
+            minOrder = 500
+        }else if(user.selectedCustomer.priceCategory===wholesalePrice){
+            minOrder = 300
+        }
+        if(Number(totalCost) < minOrder){
+            return alert(`Сумма заказа не может быть меньше ${minOrder} руб.`)
+        }
         await createOrder(order.order, orderMessage.current.value).finally(() => setShow(false));
         order.setOrder([]);
         orderClear();
