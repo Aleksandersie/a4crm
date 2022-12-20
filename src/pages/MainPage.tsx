@@ -26,11 +26,11 @@ const MainPage = () => {
                order.setOrderInProgress(data)
           );
      }, []);
-     useEffect(() => {
-          getAllCustomers(order.orderPage, order.orderLimit).then((data) =>
-               user.setCustomers(data)
-          );
-     }, []);
+     // useEffect(() => {
+     //      getAllCustomers(order.orderPage, order.orderLimit).then((data) =>
+     //           user.setCustomers(data)
+     //      );
+     // }, []);
      useEffect(() => {
           getAllCustomers(order.orderPage, order.orderLimit).then((data) => user.setUserList(data));
      }, []);

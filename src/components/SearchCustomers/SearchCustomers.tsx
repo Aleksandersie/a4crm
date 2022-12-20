@@ -31,7 +31,10 @@ const SearchCustomers: React.FC<ISearchCustomers> = observer(({ show }) => {
                          </Button>
                     </div>
                     <Table striped bordered hover style={{ textAlign: "center" }}>
-                         <tbody>
+                         
+                    {user.customers.rows?   
+                    // проверка на пустоту массива
+                    <tbody>
                               {user.customers.rows.map((customer) => (
                                    <tr>
                                         <td
@@ -42,7 +45,21 @@ const SearchCustomers: React.FC<ISearchCustomers> = observer(({ show }) => {
                                         </td>
                                    </tr>
                               ))}
-                         </tbody>
+                    </tbody>
+                         :
+                         "Введите имя для поиска"}
+                         {/* <tbody>
+                              {user.customers.rows.map((customer) => (
+                                   <tr>
+                                        <td
+                                             onClick={() => setOrderOwner(customer)}
+                                             style={{ cursor: "pointer" }}
+                                        >
+                                             {customer.alias}
+                                        </td>
+                                   </tr>
+                              ))}
+                         </tbody> */}
                     </Table>
                </div>
           </div>
