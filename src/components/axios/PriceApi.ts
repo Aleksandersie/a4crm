@@ -14,6 +14,7 @@ export const updateRetailPriceList = async function (
      ////////////////////PRINT////////////////////////////
      vinyl: string,
      banner: string,
+     photoPaper:string,
      ////////////////////PRINT&CUT////////////////////////
      vinylPC: string,
      vinylPCLam: string
@@ -24,6 +25,7 @@ export const updateRetailPriceList = async function (
           ////////////////////PRINT////////////////////////////
           vinyl,
           banner,
+          photoPaper,
           ////////////////////PRINT&CUT////////////////////////
           vinylPC,
           vinylPCLam,

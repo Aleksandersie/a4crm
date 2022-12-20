@@ -15,6 +15,7 @@ const EditRetailPricePage = observer(() => {
      ////////////////////PRINT////////////////////////////
      const vinylRef = React.useRef<HTMLInputElement>(null);
      const bannerRef = React.useRef<HTMLInputElement>(null);
+     const photoPaperRef = React.useRef<HTMLInputElement>(null);
      ////////////////////PRINT&CUT////////////////////////
      const vinylPCRef = React.useRef<HTMLInputElement>(null);
      const vinylPCLamRef = React.useRef<HTMLInputElement>(null);
@@ -30,6 +31,7 @@ const EditRetailPricePage = observer(() => {
                ////////////////////PRINT////////////////////////////
                vinylRef.current.value || price.currentPriceList.vinyl,
                bannerRef.current.value || price.currentPriceList.banner,
+               photoPaperRef.current.value|| price.currentPriceList.photoPapper,
                ////////////////////PRINT&CUT////////////////////////
                vinylPCRef.current.value || price.currentPriceList.vinylPCRef,
                vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam
@@ -88,6 +90,18 @@ const EditRetailPricePage = observer(() => {
                                              <Form.Control
                                                   placeholder={price.currentPriceList.banner}
                                                   ref={bannerRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Фотобумага</th>
+                                   <th>{price.currentPriceList.photoPaper}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.photoPaper}
+                                                  ref={photoPaperRef}
                                              />
                                         </div>
                                    </th>

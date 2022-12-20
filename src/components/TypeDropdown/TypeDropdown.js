@@ -20,7 +20,7 @@ const TypeDropdown = observer(() => {
       materialList.setSelectedMaterialType(materialList.intPrintPhotoPaper);
     }
 
-    console.log({ materialList });
+    console.log( materialList.selectedIntPrintMaterial );
   }
   return (
     <Dropdown style={{ color: "black" }}>

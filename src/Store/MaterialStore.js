@@ -142,6 +142,7 @@ export default class MaterialStore {
       },
     ];
     this._intPrintMaterial = [
+      // Второй уровень выбора
       {
         id: 1,
         name: "Плёнка",
@@ -166,6 +167,13 @@ export default class MaterialStore {
       {
         id: 4,
         name: "Беклит",
+        path: INT_PRINT_CALC,
+        desc: "Самоклеящуюся пленку используют для рекламы, декора, хобби. ",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/backlit3-e1603784572542.jpg",
+      },
+      {
+        id: 5,
+        name: "Тест",
         path: INT_PRINT_CALC,
         desc: "Самоклеящуюся пленку используют для рекламы, декора, хобби. ",
         img: "https://a4-yug.ru/wp-content/uploads/2020/10/backlit3-e1603784572542.jpg",
@@ -204,7 +212,12 @@ export default class MaterialStore {
         description: "Баннер с гладкой поверхностью",
         imgLink: "https://a4-yug.ru/wp-content/uploads/2020/10/banner1.jpg",
       },
-    ];
+    ]
+    ///////////////////////////////////////////////
+    this._PVCPlate = [{
+      id:1,
+      name:"Изделие из ПВХ"
+    }]
     this._selectedCategory = {};
     this._selectedMaterial = {};
     this._selectedVinyl = {};
@@ -287,5 +300,12 @@ export default class MaterialStore {
   }
   get intPrintBanner() {
     return this._intPrintBanner;
+  }
+  /////////////
+  setPVCPlate(plate){
+    this._PVCPlate = plate
+  }
+  get PVCPlate(){
+    return this._PVCPlate
   }
 }

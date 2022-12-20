@@ -8,6 +8,13 @@ const CategoryDropdown = observer(() => {
 
   function selectCategory(category) {
     materialList.setSelectedCategory(category);
+  
+    if(category.name==="Стенды и таблички"){
+      console.log(materialList.PVCPlate.name)
+      materialList.setSelectedMaterialType(materialList.PVCPlate)
+      console.log(materialList.selectedMaterialType)
+     // materialList.PVCPlate.name
+    }
   }
   return (
     <Dropdown style={{ color: "black" }}>
