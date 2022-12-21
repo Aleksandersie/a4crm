@@ -20,7 +20,10 @@ const EditRetailPricePage = observer(() => {
      const vinylPCRef = React.useRef<HTMLInputElement>(null);
      const vinylPCLamRef = React.useRef<HTMLInputElement>(null);
      ////////////////////CUT//////////////////////////////
-
+     const whiteVinylCutRef = React.useRef<HTMLInputElement>(null);
+     const colorVinylCutRef = React.useRef<HTMLInputElement>(null);
+     const cutOnlyRef = React.useRef<HTMLInputElement>(null);
+     
      useEffect(() => {
           getRetailPrice().then((data) => price.setCurrentPriceList(data));
      }, []);
@@ -168,13 +171,13 @@ const EditRetailPricePage = observer(() => {
                          </thead>
                          <tbody>
                               <tr>
-                                   <th>Резка пленки</th>
+                                   <th>Резка белой плёнки</th>
                                    <th>{price.currentPriceList.vinylPC}</th>
                                    <th>
                                         <div>
                                              <Form.Control
                                                   placeholder={price.currentPriceList.vinylPC}
-                                                  // ref={vinylPCRef}
+                                                  ref={vinylPCRef}
                                              />
                                         </div>
                                    </th>

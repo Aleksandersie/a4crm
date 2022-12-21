@@ -10,6 +10,9 @@ export interface IPrice {
      vinylPC: number;
      vinylPCLam:number
      //cut
+     whiteVinylCut:number,
+     colorVinylCut:number,
+     cutOnlyRef: number,
     
 }
 
