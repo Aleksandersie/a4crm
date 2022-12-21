@@ -159,6 +159,9 @@ const CalcInputBlock: React.FC = observer(() => {
                price.setCurrentPrice(price.currentPriceList.vinylPC);
                console.log(`printCut ${price.currentPriceList.vinylPC}`);
           }
+          if (materialList.selectedCategory.name === "Печать и резка с ламинацией") {
+               price.setCurrentPrice(price.currentPriceList.vinylPCLam); 
+          }
           if (materialList.selectedCategory.name === "Интерьерная печать" && materialList.selectedMaterial.name==="Баннер 440 гр") {
                price.setCurrentPrice(price.currentPriceList.banner);
                console.log(`banner ${price.currentPriceList.banner}`);
