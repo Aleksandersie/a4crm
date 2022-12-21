@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.85e3654d.css",
-    "main.js": "/static/js/main.a8c120c7.js",
+    "main.js": "/static/js/main.36f7abc8.js",
     "static/media/etiketki1.jpg": "/static/media/etiketki1.da01c8058f4e1e97cf6a.jpg",
     "index.html": "/index.html",
     "main.85e3654d.css.map": "/static/css/main.85e3654d.css.map",
-    "main.a8c120c7.js.map": "/static/js/main.a8c120c7.js.map"
+    "main.36f7abc8.js.map": "/static/js/main.36f7abc8.js.map"
   },
   "entrypoints": [
     "static/css/main.85e3654d.css",
-    "static/js/main.a8c120c7.js"
+    "static/js/main.36f7abc8.js"
   ]
 }

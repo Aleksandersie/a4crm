@@ -15,9 +15,14 @@ const EditWholesalePricePage = observer(() => {
      const navigate = useNavigate()
 
     
-     const vinylRef = React.useRef<HTMLInputElement>(null)
-     const vinylPCRef = React.useRef<HTMLInputElement>(null)
-     const bannerRef = React.useRef<HTMLInputElement>(null)
+      ////////////////////PRINT////////////////////////////
+      const vinylRef = React.useRef<HTMLInputElement>(null);
+      const bannerRef = React.useRef<HTMLInputElement>(null);
+      const photoPaperRef = React.useRef<HTMLInputElement>(null);
+      ////////////////////PRINT&CUT////////////////////////
+      const vinylPCRef = React.useRef<HTMLInputElement>(null);
+      const vinylPCLamRef = React.useRef<HTMLInputElement>(null);
+      ////////////////////CUT//////////////////////////////
 
      useEffect(() => {
           getWholesalePrice().then((data) => price.setCurrentPriceList(data));
@@ -27,56 +32,56 @@ const EditWholesalePricePage = observer(() => {
      function updatePrice() {
           updateWholesalePriceList(
                price.currentPriceList.priceCategory,
-               vinylRef.current.value||price.currentPriceList.vinyl,
-               vinylPCRef.current.value||price.currentPriceList.vinylPC,
-               bannerRef.current.value||price.currentPriceList.banner
+               ////////////////////PRINT////////////////////////////
+               vinylRef.current.value || price.currentPriceList.vinyl,
+               bannerRef.current.value || price.currentPriceList.banner,
+               photoPaperRef.current.value|| price.currentPriceList.photoPapper,
+               ////////////////////PRINT&CUT////////////////////////
+               vinylPCRef.current.value || price.currentPriceList.vinylPCRef,
+               vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam
+               ////////////////////CUT//////////////////////////////
           );
           navigate(MAIN_ROUTE)
      }
 
      return (
           <Container>
-          <Card style={{ textAlign: "center", lineHeight: 2 }} className={"mt-5"}>
-               <Card.Header>
-                    <h4>Настройка оптовых цен</h4>
-               </Card.Header>
-               <Table
-                    striped
-                    bordered
-                    hover
-                    size={"sm"}
-                    className={"mt-4  m-auto"}
-                    style={{ width: 90 + "%" }}
-               >
-                    <thead>
-                         <tr>
-                              <th>Название</th>
-                              <th>Текущая цена</th>
-                              <th>Новая цена</th>
-                         </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                                   <th>Пленка</th>
-                                   <th>{price.currentPriceList.vinyl}</th>
-                                   <th>
-                                      
-                                        <Form.Control
-                                             placeholder={price.currentPriceList.vinyl}                
-                                             ref={vinylRef}
-                                        />
+               <Card style={{ textAlign: "center", lineHeight: 2 }} className={"mt-5"}>
+                    <Card.Header>
+                         <h4>Настройка розничных цен</h4>
+                    </Card.Header>
+                    <Table
+                         striped
+                         bordered
+                         hover
+                         size={"sm"}
+                         className={"mt-4  m-auto"}
+                         style={{ width: 90 + "%" }}
+                    >
+                         <thead>
+                              <tr>
+                                   <th
+                                        colSpan={3}
+                                        style={{ backgroundColor: "gray", color: "white" }}
+                                   >
+                                        Печать{" "}
                                    </th>
                               </tr>
                               <tr>
-                                   <th>Печать и резка</th>
-                                   <th>{price.currentPriceList.vinylPC}</th>
+                                   <th>Название</th>
+                                   <th>Текущая цена</th>
+                                   <th>Новая цена</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              <tr>
+                                   <th>Пленка</th>
+                                   <th>{price.currentPriceList.vinyl}</th>
                                    <th>
-                                        <div>
                                         <Form.Control
-                                             placeholder={price.currentPriceList.vinylPC}                
-                                             ref={vinylPCRef}
+                                             placeholder={price.currentPriceList.vinyl}
+                                             ref={vinylRef}
                                         />
-                                        </div>
                                    </th>
                               </tr>
                               <tr>
@@ -84,26 +89,111 @@ const EditWholesalePricePage = observer(() => {
                                    <th>{price.currentPriceList.banner}</th>
                                    <th>
                                         <div>
-                                        <Form.Control
-                                             placeholder={price.currentPriceList.banner}                
-                                             ref={bannerRef}
-                                        />
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.banner}
+                                                  ref={bannerRef}
+                                             />
                                         </div>
                                    </th>
                               </tr>
-                    </tbody>
-               </Table>
+                              <tr>
+                                   <th>Фотобумага</th>
+                                   <th>{price.currentPriceList.photoPaper}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.photoPaper}
+                                                  ref={photoPaperRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                         </tbody>
+                         {/* /////////////////////////PRINT&CUT//////////////////////////////// */}
+                         <thead>
+                              <tr>
+                                   <th
+                                        colSpan={3}
+                                        style={{ backgroundColor: "gray", color: "white" }}
+                                   >
+                                        Печать и резка
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Название</th>
+                                   <th>Текущая цена</th>
+                                   <th>Новая цена</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              <tr>
+                                   <th>Печать и резка</th>
+                                   <th>{price.currentPriceList.vinylPC}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.vinylPC}
+                                                  ref={vinylPCRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Печать и резка с ламинацией</th>
+                                   <th>{price.currentPriceList.vinylPCLam}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.vinylPCLam}
+                                                  ref={vinylPCLamRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                         </tbody>
 
-               <Button
-                    onClick={updatePrice}
-                    variant={"warning"}
-                    style={{ width: 90 + "%" }}
-                    className={"m-auto mt-4 mb-4"}
-               >
-                    Сохранить изменения
-               </Button>
-          </Card>
-     </Container>
+                         {/* //////////////////////////////////CUT//////////////////////////////////////////// */}
+                         <thead>
+                              <tr>
+                                   <th
+                                        colSpan={3}
+                                        style={{ backgroundColor: "gray", color: "white" }}
+                                   >
+                                        Плоттерная резка
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Название</th>
+                                   <th>Текущая цена</th>
+                                   <th>Новая цена</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              <tr>
+                                   <th>Резка пленки</th>
+                                   <th>{price.currentPriceList.vinylPC}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.vinylPC}
+                                                  // ref={vinylPCRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                         </tbody>
+                    </Table>
+
+                    <Button
+                         onClick={updatePrice}
+                         variant={"warning"}
+                         style={{ width: 90 + "%" }}
+                         className={"m-auto mt-4 mb-4"}
+                    >
+                         Сохранить изменения
+                    </Button>
+               </Card>
+          </Container>
      );
 });
 

@@ -35,15 +35,25 @@ export const updateRetailPriceList = async function (
 };
 export const updateWholesalePriceList = async function (
      priceCategory: string,
+     ////////////////////PRINT////////////////////////////
      vinyl: string,
+     banner: string,
+     photoPaper:string,
+     ////////////////////PRINT&CUT////////////////////////
      vinylPC: string,
-     banner: string
+     vinylPCLam: string
+     ////////////////////CUT//////////////////////////////
 ) {
      const { data } = await host.put("api/price/updateWholesalePrice", {
           priceCategory,
+          ////////////////////PRINT////////////////////////////
           vinyl,
-          vinylPC,
           banner,
+          photoPaper,
+          ////////////////////PRINT&CUT////////////////////////
+          vinylPC,
+          vinylPCLam,
+          ////////////////////CUT//////////////////////////////
      });
      return data;
 };
