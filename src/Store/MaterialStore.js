@@ -18,8 +18,22 @@ export default class MaterialStore {
         img: "https://a4-yug.ru/wp-content/uploads/2020/10/maxresdefault-e1603785569284.jpg",
       },
       {
+        id: 7,
+        name: "Печать с ламинацией",
+        path: INT_PRINT_CUT,
+        desc: "Тестовый текст",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/etiketki1.jpg",
+      },
+      {
         id: 2,
         name: "Печать и резка",
+        path: INT_PRINT_CUT,
+        desc: "Тестовый текст",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/etiketki1.jpg",
+      },
+      {
+        id: 8,
+        name: "Печать и резка с ламинацией",
         path: INT_PRINT_CUT,
         desc: "Тестовый текст",
         img: "https://a4-yug.ru/wp-content/uploads/2020/10/etiketki1.jpg",
@@ -221,6 +235,27 @@ export default class MaterialStore {
         name:"Беклит"
       },
     ]
+    this._materialForCutOnly = [
+      {
+        id:1,
+        name:"Плёнка белая"
+      },
+      {
+        id:2,
+        name:"Плёнка цветная"
+      },
+      {
+        id:3,
+        name:"Термоплёнка"
+      },
+    ]
+    this._materialForPrintAndPrintCutWithLam = [
+      {
+        id:1,
+        name:"Плёнка"
+      },
+     
+    ]
     this._selectedCategory = {};
     this._selectedMaterial = {};
     this._selectedVinyl = {};
@@ -323,5 +358,17 @@ export default class MaterialStore {
   }
   get materialForIntPrint(){
     return this._materialForIntPrint
+  }
+  setMaterialForCutOnly(material){
+    this._materialForCutOnly = material
+  }
+  get materialForCutOnly(){
+    return this._materialForCutOnly
+  }
+  setMaterialForPrintAndPrintCutWithLam(material){
+    this._materialForPrintAndPrintCutWithLam = material
+  }
+  get materialForPrintAndPrintCutWithLam(){
+    return this._materialForPrintAndPrintCutWithLam
   }
 }

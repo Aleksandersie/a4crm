@@ -11,10 +11,19 @@ const CategoryDropdown = observer(() => {
     if(category.name==="Интерьерная печать"){
       materialList.setIntPrintMaterial(materialList.materialForIntPrint)
     }
-    
+    if(category.name==="Печать с ламинацией"){
+      materialList.setIntPrintMaterial(materialList.materialForPrintAndPrintCutWithLam)
+    }
     if(category.name==="Печать и резка"){
       materialList.setIntPrintMaterial(materialList.materialForPrintCut)
     }
+    if(category.name==="Печать и резка с ламинацией"){
+      materialList.setIntPrintMaterial(materialList.materialForPrintAndPrintCutWithLam)
+    }
+    if(category.name==="Плоттерная резка"){
+      materialList.setIntPrintMaterial(materialList.materialForCutOnly)
+    }
+  
   }
   return (
     <Dropdown style={{ color: "black" }}>
