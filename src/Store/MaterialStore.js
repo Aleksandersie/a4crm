@@ -24,13 +24,13 @@ export default class MaterialStore {
         desc: "Тестовый текст",
         img: "https://a4-yug.ru/wp-content/uploads/2020/10/etiketki1.jpg",
       },
-      {
-        id: 3,
-        name: "Цифровая печать",
-        path: INT_PRINT,
-        desc: "В разработке",
-        img: "https://a4-yug.ru/wp-content/uploads/2020/10/flaery.jpg",
-      },
+      // {
+      //   id: 3,
+      //   name: "Цифровая печать",
+      //   path: INT_PRINT,
+      //   desc: "В разработке",
+      //   img: "https://a4-yug.ru/wp-content/uploads/2020/10/flaery.jpg",
+      // },
       {
         id: 4,
         name: "Плоттерная резка",
@@ -45,40 +45,15 @@ export default class MaterialStore {
         desc: "В разработке",
         img: "https://a4-yug.ru/wp-content/uploads/2020/10/ugolok-potrebitelya.jpg",
       },
-      {
-        id: 6,
-        name: "Ролл ап стенды",
-        path: INT_PRINT,
-        desc: "В разработке",
-        img: "https://a4-yug.ru/wp-content/uploads/2020/09/menu7.png",
-      },
+      // {
+      //   id: 6,
+      //   name: "Ролл ап стенды",
+      //   path: INT_PRINT,
+      //   desc: "В разработке",
+      //   img: "https://a4-yug.ru/wp-content/uploads/2020/09/menu7.png",
+      // },
     ];
-    this._list = [
-      {
-        id: 1,
-        name: "Плёнка",
-        path: INT_PRINT_CALC,
-        desc: "Самоклеящуюся пленку используют для рекламы, декора, хобби. ",
-      },
-      {
-        id: 2,
-        name: "Баннер",
-        path: INT_PRINT_CALC,
-        desc: "Самоклеящуюся пленку используют для рекламы, декора, хобби. ",
-      },
-      {
-        id: 3,
-        name: "Бумага",
-        path: INT_PRINT_CALC,
-        desc: "Самоклеящуюся пленку используют для рекламы, декора, хобби. ",
-      },
-      {
-        id: 4,
-        name: "Беклит",
-        path: INT_PRINT_CALC,
-        desc: "Самоклеящуюся пленку используют для рекламы, декора, хобби. ",
-      },
-    ];
+    this._list = []
     this._vinyl = [
       {
         name: "Белая глянцевая пленка",
@@ -213,11 +188,39 @@ export default class MaterialStore {
         imgLink: "https://a4-yug.ru/wp-content/uploads/2020/10/banner1.jpg",
       },
     ]
-    ///////////////////////////////////////////////
-    this._PVCPlate = [{
-      id:1,
-      name:"Изделие из ПВХ"
-    }]
+    //////////////////////////////////////////////
+    this._materialForPrintCut = [
+      {
+        id:1,
+        name:"Плёнка"
+      },
+      {
+        id:2,
+        name:"Термоплёнка"
+      },
+      {
+        id:3,
+        name:"Цветная плёнка"
+      },
+    ]
+    this._materialForIntPrint = [
+      {
+        id:1,
+        name:"Плёнка"
+      },
+      {
+        id:2,
+        name:"Баннер"
+      },
+      {
+        id:3,
+        name:"Фотобумага"
+      },
+      {
+        id:4,
+        name:"Беклит"
+      },
+    ]
     this._selectedCategory = {};
     this._selectedMaterial = {};
     this._selectedVinyl = {};
@@ -307,5 +310,18 @@ export default class MaterialStore {
   }
   get PVCPlate(){
     return this._PVCPlate
+  }
+  //////////////////////////////////////
+  setMaterialForPrintCut(material){
+    this._materialForPrintCut = material
+  }
+  get materialForPrintCut(){
+    return this._materialForPrintCut
+  }
+  setMaterialForIntPrint(material){
+    this._materialForIntPrint = material
+  }
+  get materialForIntPrint(){
+    return this._materialForIntPrint
   }
 }
