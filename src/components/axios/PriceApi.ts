@@ -49,8 +49,11 @@ export const updateWholesalePriceList = async function (
      photoPaper:string,
      ////////////////////PRINT&CUT////////////////////////
      vinylPC: string,
-     vinylPCLam: string
+     vinylPCLam: string,
      ////////////////////CUT//////////////////////////////
+     whiteVinylCut:string,
+     colorVinylCut:string,
+     cutOnly:string
      
 ) {
      const { data } = await host.put("api/price/updateWholesalePrice", {
@@ -63,6 +66,9 @@ export const updateWholesalePriceList = async function (
           vinylPC,
           vinylPCLam,
           ////////////////////CUT//////////////////////////////
+          whiteVinylCut,
+          colorVinylCut,
+          cutOnly
      });
      return data;
 };

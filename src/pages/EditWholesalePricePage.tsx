@@ -15,14 +15,17 @@ const EditWholesalePricePage = observer(() => {
      const navigate = useNavigate()
 
     
-      ////////////////////PRINT////////////////////////////
-      const vinylRef = React.useRef<HTMLInputElement>(null);
-      const bannerRef = React.useRef<HTMLInputElement>(null);
-      const photoPaperRef = React.useRef<HTMLInputElement>(null);
-      ////////////////////PRINT&CUT////////////////////////
-      const vinylPCRef = React.useRef<HTMLInputElement>(null);
-      const vinylPCLamRef = React.useRef<HTMLInputElement>(null);
-      ////////////////////CUT//////////////////////////////
+        ////////////////////PRINT////////////////////////////
+        const vinylRef = React.useRef<HTMLInputElement>(null);
+        const bannerRef = React.useRef<HTMLInputElement>(null);
+        const photoPaperRef = React.useRef<HTMLInputElement>(null);
+        ////////////////////PRINT&CUT////////////////////////
+        const vinylPCRef = React.useRef<HTMLInputElement>(null);
+        const vinylPCLamRef = React.useRef<HTMLInputElement>(null);
+        ////////////////////CUT//////////////////////////////
+        const whiteVinylCutRef = React.useRef<HTMLInputElement>(null);
+        const colorVinylCutRef = React.useRef<HTMLInputElement>(null);
+        const cutOnlyRef = React.useRef<HTMLInputElement>(null);
 
      useEffect(() => {
           getWholesalePrice().then((data) => price.setCurrentPriceList(data));
@@ -38,15 +41,18 @@ const EditWholesalePricePage = observer(() => {
                photoPaperRef.current.value|| price.currentPriceList.photoPapper,
                ////////////////////PRINT&CUT////////////////////////
                vinylPCRef.current.value || price.currentPriceList.vinylPCRef,
-               vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam
+               vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam,
                ////////////////////CUT//////////////////////////////
+               whiteVinylCutRef.current.value|| price.currentPriceList.whiteVinylCut,
+               colorVinylCutRef.current.value|| price.currentPriceList.colorVinylCut,
+               cutOnlyRef.current.value|| price.currentPriceList.cutOnlyRef
           );
           navigate(MAIN_ROUTE)
      }
 
      return (
           <Container>
-               <Card style={{ textAlign: "center", lineHeight: 2 }} className={"mt-5"}>
+                <Card style={{ textAlign: "center", lineHeight: 2 }} className={"mt-5"}>
                     <Card.Header>
                          <h4>Настройка розничных цен</h4>
                     </Card.Header>
@@ -170,13 +176,37 @@ const EditWholesalePricePage = observer(() => {
                          </thead>
                          <tbody>
                               <tr>
-                                   <th>Резка пленки</th>
-                                   <th>{price.currentPriceList.vinylPC}</th>
+                                   <th>Резка белой плёнки</th>
+                                   <th>{price.currentPriceList.whiteVinylCut}</th>
                                    <th>
                                         <div>
                                              <Form.Control
-                                                  placeholder={price.currentPriceList.vinylPC}
-                                                  // ref={vinylPCRef}
+                                                  placeholder={price.currentPriceList.whiteVinylCut}
+                                                  ref={whiteVinylCutRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Резка цветной плёнки</th>
+                                   <th>{price.currentPriceList.colorVinylCut}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.colorVinylCut}
+                                                  ref={colorVinylCutRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Резка без материала</th>
+                                   <th>{price.currentPriceList.cutOnly}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.cutOnly}
+                                                  ref={cutOnlyRef}
                                              />
                                         </div>
                                    </th>
