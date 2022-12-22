@@ -37,8 +37,12 @@ const EditRetailPricePage = observer(() => {
                photoPaperRef.current.value|| price.currentPriceList.photoPapper,
                ////////////////////PRINT&CUT////////////////////////
                vinylPCRef.current.value || price.currentPriceList.vinylPCRef,
-               vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam
+               vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam,
                ////////////////////CUT//////////////////////////////
+               whiteVinylCutRef.current.value|| price.currentPriceList.whiteVinylCut,
+               colorVinylCutRef.current.value|| price.currentPriceList.colorVinylCut,
+               cutOnlyRef.current.value|| price.currentPriceList.cutOnlyRef
+
           );
 
           console.log(vinylPCLamRef.current.value);
@@ -172,12 +176,36 @@ const EditRetailPricePage = observer(() => {
                          <tbody>
                               <tr>
                                    <th>Резка белой плёнки</th>
-                                   <th>{price.currentPriceList.vinylPC}</th>
+                                   <th>{price.currentPriceList.whiteVinylCut}</th>
                                    <th>
                                         <div>
                                              <Form.Control
-                                                  placeholder={price.currentPriceList.vinylPC}
-                                                  ref={vinylPCRef}
+                                                  placeholder={price.currentPriceList.whiteVinylCut}
+                                                  ref={whiteVinylCutRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Резка цветной плёнки</th>
+                                   <th>{price.currentPriceList.colorVinylCut}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.colorVinylCut}
+                                                  ref={colorVinylCutRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Резка без материала</th>
+                                   <th>{price.currentPriceList.cutOnly}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.cutOnly}
+                                                  ref={cutOnlyRef}
                                              />
                                         </div>
                                    </th>
