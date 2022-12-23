@@ -21,6 +21,7 @@ const MainPage = () => {
      useEffect(() => {
           getRetailPrice().then((data) => price.setCurrentPriceList(data));
      }, []);
+     {user.user.isAuth? console.log("y"): console.log("n")}
      useEffect(() => {
           getAllOrders(order.orderPage, order.orderLimit).then((data) =>
                order.setOrderInProgress(data)

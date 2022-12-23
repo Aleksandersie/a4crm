@@ -13,10 +13,20 @@ import NewMaterialSelector from "../../components/NewMaterialSelector/NewMateria
 import AdditionalBlock from "../../components/AdditionalBlock/AdditionalBlock";
 import MaterialTypeList from "../../components/MaterialTypeList/MaterialTypeList";
 import SubmitOrder from "../../components/SubmitOrder/SubmitOrder";
-
+import { getRetailPrice,getWholesalePrice } from '../../components/axios/PriceApi'
 const IntPrintCalc = () => {
     
-     const { materialList,user } = useContext(Context);
+     const { materialList,user,price } = useContext(Context);
+     useEffect(()=>{
+          if (user.user.priceCategory === "retail"){
+               getRetailPrice().then((data) => price.setCurrentPriceList(data))
+          }
+          if (user.user.priceCategory === "wholesale"){
+               getWholesalePrice().then((data) => price.setCurrentPriceList(data))
+          }
+     })
+     
+     console.log(user.user.priceCategory);
      // useEffect(() => {
      //   if (materialList.selectedMaterialType.name === undefined) {
      //     //materialList.setSelectedMaterialType(materialList.intPrintMaterial);
