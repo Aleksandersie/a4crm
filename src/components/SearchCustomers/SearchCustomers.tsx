@@ -1,15 +1,16 @@
 import { observer } from "mobx-react-lite";
 import { Form, Table } from "react-bootstrap";
-import { Button } from "@mui/material";
+import { Button, ownerDocument } from "@mui/material";
 import React, { useContext } from "react";
 import { searchUser } from "../axios/UserApi";
 import { Context } from "../../index";
+import { getRetailPrice,getWholesalePrice } from "../axios/PriceApi";
 
 interface ISearchCustomers {
      show: any;
 }
 const SearchCustomers: React.FC<ISearchCustomers> = observer(({ show }) => {
-     const { user } = useContext(Context);
+     const { user,price } = useContext(Context);
      const name = React.useRef<HTMLInputElement>(null);
 
      async function search() {
@@ -17,7 +18,14 @@ const SearchCustomers: React.FC<ISearchCustomers> = observer(({ show }) => {
      }
 
      function setOrderOwner(owner) {
+          console.log(owner.priceCategory)
           user.setSelectedCustomer(owner);
+          if (owner.priceCategory === "retail"){
+               getRetailPrice().then((data) => price.setCurrentPriceList(data))
+          }
+          if (owner.priceCategory === "wholesale"){
+               getWholesalePrice().then((data) => price.setCurrentPriceList(data))
+          }
           show(false);
      }
 
