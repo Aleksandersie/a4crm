@@ -18,7 +18,6 @@ const SearchCustomers: React.FC<ISearchCustomers> = observer(({ show }) => {
      }
 
      function setOrderOwner(owner) {
-          console.log(owner.priceCategory)
           user.setSelectedCustomer(owner);
           if (owner.priceCategory === "retail"){
                getRetailPrice().then((data) => price.setCurrentPriceList(data))

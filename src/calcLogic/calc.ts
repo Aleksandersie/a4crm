@@ -176,7 +176,17 @@ let startCalc: IStartCalc = function (
                }
                if (this.priceCategory === "wholesale") {
                     console.log("Price method is wholesale");
-                    return this.onePcsArea * this.price;
+                    //Проверка на минимальную стоимость
+                    const minPcsPrice = 1 
+                    const incomingPrice = this.onePcsArea * this.price
+                    let priceCorrection = 0 
+                    if(incomingPrice < minPcsPrice){
+                         priceCorrection = 1
+                         return priceCorrection
+                    }else{
+                         return this.onePcsArea * this.price
+                    }
+                    
                }
           }
      }
