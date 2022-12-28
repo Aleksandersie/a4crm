@@ -45,13 +45,13 @@ export default class MaterialStore {
       //   desc: "В разработке",
       //   img: "https://a4-yug.ru/wp-content/uploads/2020/10/flaery.jpg",
       // },
-      // {
-      //   id: 4,
-      //   name: "Плоттерная резка",
-      //   path: INT_PRINT,
-      //   desc: "В разработке",
-      //   img: "https://a4-yug.ru/wp-content/uploads/2020/10/plotternaya_rezka4.jpg",
-      // },
+      {
+        id: 4,
+        name: "Плоттерная резка",
+        path: INT_PRINT,
+        desc: "В разработке",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/plotternaya_rezka4.jpg",
+      },
       // {
       //   id: 5,
       //   name: "Стенды и таблички",

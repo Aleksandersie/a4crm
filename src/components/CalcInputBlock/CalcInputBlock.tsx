@@ -162,11 +162,15 @@ const CalcInputBlock: React.FC = observer(() => {
           if (materialList.selectedCategory.name === "Печать и резка с ламинацией") {
                price.setCurrentPrice(price.currentPriceList.vinylPCLam); 
           }
+          if (materialList.selectedCategory.name === "Плоттерная резка" && materialList.selectedIntPrintMaterial.name==="Плёнка белая") {
+               console.log("cut white")
+               price.setCurrentPrice(price.currentPriceList.vinylPCLam); 
+          }
           if (materialList.selectedCategory.name === "Интерьерная печать" && materialList.selectedMaterial.name==="Баннер 440 гр") {
                price.setCurrentPrice(price.currentPriceList.banner);
                console.log(`banner ${price.currentPriceList.banner}`);
           }
-     }, [materialList.selectedCategory, width, height, count, price.currentPriceList,materialList.selectedMaterial]);
+     }, [materialList.selectedCategory, width, height, count, price.currentPriceList,materialList.selectedMaterial,materialList.selectedIntPrintMaterial]);
 
      return (
           <div className=" ">
