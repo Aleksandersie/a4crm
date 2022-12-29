@@ -34,6 +34,10 @@ const TypeDropdown = observer(() => {
       console.log("термопленка");
       materialList.setSelectedMaterialType(materialList.thermoVinyl);
     }
+    if (material.name === "Без материала") {
+      console.log("Без материала");
+       materialList.setSelectedMaterialType(materialList.cuttingWithOutMaterial);
+    }
 
 
     console.log( materialList.selectedIntPrintMaterial );

@@ -232,8 +232,13 @@ export default class MaterialStore {
       name: "Термоплёнка под резку",
       id: 1,
     },
-
-]
+  ]
+  this._cuttingWithOutMaterial = [    
+    {
+      name: "Без материала",
+      id: 1,
+    },
+  ]
     //////////////////////////////////////////////
     this._materialForPrintCut = [
       {
@@ -248,6 +253,7 @@ export default class MaterialStore {
         id:3,
         name:"Цветная плёнка"
       },
+   
     ]
     this._materialForIntPrint = [
       {
@@ -279,6 +285,10 @@ export default class MaterialStore {
       {
         id:3,
         name:"Термоплёнка"
+      },
+      {
+        id:4,
+        name:"Без материала"
       },
     ]
     this._materialForPrintAndPrintCutWithLam = [
@@ -421,6 +431,12 @@ export default class MaterialStore {
   }
   get thermoVinyl(){
     return this._thermoVinyl
+  }
+  setCuttingWithOutMaterial(material){
+    this._cuttingWithOutMaterial = material
+  }
+  get cuttingWithOutMaterial(){
+    return this._cuttingWithOutMaterial
   }
 
 }
