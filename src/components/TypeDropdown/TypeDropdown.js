@@ -21,9 +21,18 @@ const TypeDropdown = observer(() => {
       console.log("Выбрана бумага");
       materialList.setSelectedMaterialType(materialList.intPrintPhotoPaper);
     }
+    /////////////////////// plotter cutting///////////////////////////////
     if (material.name === "Плёнка белая") {
       console.log("Пленка под резку");
       materialList.setSelectedMaterialType(materialList.whiteVinylForCutting);
+    }
+    if (material.name === "Плёнка цветная") {
+      console.log("Пленка под colored");
+      materialList.setSelectedMaterialType(materialList.coloredVinylForCutting);
+    }
+    if (material.name === "Термоплёнка") {
+      console.log("термопленка");
+      materialList.setSelectedMaterialType(materialList.thermoVinyl);
     }
 
 

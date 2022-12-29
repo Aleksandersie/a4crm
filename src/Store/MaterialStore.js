@@ -227,6 +227,13 @@ export default class MaterialStore {
         id: 2,
       },
   ]
+  this._thermoVinyl = [    
+    {
+      name: "Термоплёнка под резку",
+      id: 1,
+    },
+
+]
     //////////////////////////////////////////////
     this._materialForPrintCut = [
       {
@@ -396,11 +403,24 @@ export default class MaterialStore {
   get materialForPrintAndPrintCutWithLam(){
     return this._materialForPrintAndPrintCutWithLam
   }
+  ///////////////////////////////cutting
   setWhiteVinylForCutting(material){
     this._whiteVinylForCutting = material
   }
   get whiteVinylForCutting(){
     return this._whiteVinylForCutting
+  }
+  setColoredVinylForCutting(material){
+    this._coloredVinylForCutting = material
+  }
+  get coloredVinylForCutting(){
+    return this._coloredVinylForCutting
+  }
+  setThermoVinyl(material){
+    this._thermoVinyl = material
+  }
+  get thermoVinyl(){
+    return this._thermoVinyl
   }
 
 }
