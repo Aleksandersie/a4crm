@@ -164,7 +164,7 @@ const CalcInputBlock: React.FC = observer(() => {
           }
           if (materialList.selectedCategory.name === "Плоттерная резка" && materialList.selectedIntPrintMaterial.name==="Плёнка белая") {
                console.log("cut white")
-               price.setCurrentPrice(price.currentPriceList.vinylPCLam); 
+               price.setCurrentPrice(price.currentPriceList.whiteVinylCut); 
           }
           if (materialList.selectedCategory.name === "Интерьерная печать" && materialList.selectedMaterial.name==="Баннер 440 гр") {
                price.setCurrentPrice(price.currentPriceList.banner);

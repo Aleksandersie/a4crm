@@ -202,6 +202,31 @@ export default class MaterialStore {
         imgLink: "https://a4-yug.ru/wp-content/uploads/2020/10/banner1.jpg",
       },
     ]
+  /////////материлы для плоттерной резки//////////
+    this._whiteVinylForCutting = [    
+        {
+          name: "Белая глянцевая пленка",
+          brand: "OraJet 3640G",
+          id: 1,
+        },
+        {
+          name: "Белая матовая пленка",
+          brand: "OraJet 3640M",
+          id: 2,
+        },
+    ]
+    this._coloredVinylForCutting = [    
+      {
+        name: "Цветная глянцевая пленка",
+        brand: "Oracal 640",
+        id: 1,
+      },
+      {
+        name: "Цветная матовая пленка",
+        brand: "Oracal 640",
+        id: 2,
+      },
+  ]
     //////////////////////////////////////////////
     this._materialForPrintCut = [
       {
@@ -371,4 +396,11 @@ export default class MaterialStore {
   get materialForPrintAndPrintCutWithLam(){
     return this._materialForPrintAndPrintCutWithLam
   }
+  setWhiteVinylForCutting(material){
+    this._whiteVinylForCutting = material
+  }
+  get whiteVinylForCutting(){
+    return this._whiteVinylForCutting
+  }
+
 }

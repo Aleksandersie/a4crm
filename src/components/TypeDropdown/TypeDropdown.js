@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 const TypeDropdown = observer(() => {
   const { materialList } = useContext(Context);
   
-  
+  //выбор категории материала
   function selectType(material) {
     materialList.setSelectedIntPrintMaterial(material); //подсветка кнопки и заголовок селектора
     if (material.name === "Плёнка") {
@@ -21,6 +21,11 @@ const TypeDropdown = observer(() => {
       console.log("Выбрана бумага");
       materialList.setSelectedMaterialType(materialList.intPrintPhotoPaper);
     }
+    if (material.name === "Плёнка белая") {
+      console.log("Пленка под резку");
+      materialList.setSelectedMaterialType(materialList.whiteVinylForCutting);
+    }
+
 
     console.log( materialList.selectedIntPrintMaterial );
   }
