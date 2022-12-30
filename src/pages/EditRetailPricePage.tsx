@@ -199,6 +199,18 @@ const EditRetailPricePage = observer(() => {
                                    </th>
                               </tr>
                               <tr>
+                                   <th>Резка термоплёнки</th>
+                                   <th>{price.currentPriceList.colorVinylCut}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                  placeholder={price.currentPriceList.colorVinylCut}
+                                                  ref={colorVinylCutRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
                                    <th>Резка без материала</th>
                                    <th>{price.currentPriceList.cutOnly}</th>
                                    <th>
