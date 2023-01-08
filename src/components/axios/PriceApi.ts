@@ -21,7 +21,8 @@ export const updateRetailPriceList = async function (
      ////////////////////CUT//////////////////////////////
      whiteVinylCut:string,
      colorVinylCut:string,
-     cutOnly:string
+     cutOnly:string,
+     thermalVinyl:string
 
 ) {
      const { data } = await host.put("api/price/updateRetailPrice", {
@@ -36,7 +37,8 @@ export const updateRetailPriceList = async function (
           ////////////////////CUT//////////////////////////////
           whiteVinylCut,
           colorVinylCut,
-          cutOnly
+          cutOnly,
+          thermalVinyl
      });
      return data;
 };
@@ -53,7 +55,8 @@ export const updateWholesalePriceList = async function (
      ////////////////////CUT//////////////////////////////
      whiteVinylCut:string,
      colorVinylCut:string,
-     cutOnly:string
+     cutOnly:string,
+     thermalVinyl:string
      
 ) {
      const { data } = await host.put("api/price/updateWholesalePrice", {
@@ -68,7 +71,8 @@ export const updateWholesalePriceList = async function (
           ////////////////////CUT//////////////////////////////
           whiteVinylCut,
           colorVinylCut,
-          cutOnly
+          cutOnly,
+          thermalVinyl
      });
      return data;
 };
