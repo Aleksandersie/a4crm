@@ -26,6 +26,7 @@ const EditWholesalePricePage = observer(() => {
         const whiteVinylCutRef = React.useRef<HTMLInputElement>(null);
         const colorVinylCutRef = React.useRef<HTMLInputElement>(null);
         const cutOnlyRef = React.useRef<HTMLInputElement>(null);
+        const thermalVinylRef = React.useRef<HTMLInputElement>(null)
 
      useEffect(() => {
           getWholesalePrice().then((data) => price.setCurrentPriceList(data));
@@ -34,18 +35,19 @@ const EditWholesalePricePage = observer(() => {
     
      function updatePrice() {
           updateWholesalePriceList(
-               price.currentPriceList.priceCategory,
-               ////////////////////PRINT////////////////////////////
-               vinylRef.current.value || price.currentPriceList.vinyl,
-               bannerRef.current.value || price.currentPriceList.banner,
-               photoPaperRef.current.value|| price.currentPriceList.photoPapper,
-               ////////////////////PRINT&CUT////////////////////////
-               vinylPCRef.current.value || price.currentPriceList.vinylPCRef,
-               vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam,
-               ////////////////////CUT//////////////////////////////
-               whiteVinylCutRef.current.value|| price.currentPriceList.whiteVinylCut,
-               colorVinylCutRef.current.value|| price.currentPriceList.colorVinylCut,
-               cutOnlyRef.current.value|| price.currentPriceList.cutOnlyRef
+              price.currentPriceList.priceCategory,
+              ////////////////////PRINT////////////////////////////
+              vinylRef.current.value || price.currentPriceList.vinyl,
+              bannerRef.current.value || price.currentPriceList.banner,
+              photoPaperRef.current.value|| price.currentPriceList.photoPapper,
+              ////////////////////PRINT&CUT////////////////////////
+              vinylPCRef.current.value || price.currentPriceList.vinylPCRef,
+              vinylPCLamRef.current.value || price.currentPriceList.vinylPCLam,
+              ////////////////////CUT//////////////////////////////
+              whiteVinylCutRef.current.value|| price.currentPriceList.whiteVinylCut,
+              colorVinylCutRef.current.value|| price.currentPriceList.colorVinylCut,
+              cutOnlyRef.current.value|| price.currentPriceList.cutOnlyRef,
+              thermalVinylRef.current.value||price.currentPriceList.thermalVinylRef
           );
           navigate(MAIN_ROUTE)
      }
@@ -207,6 +209,18 @@ const EditWholesalePricePage = observer(() => {
                                              <Form.Control
                                                   placeholder={price.currentPriceList.cutOnly}
                                                   ref={cutOnlyRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Резка термоплёнки</th>
+                                   <th>{price.currentPriceList.thermalVinyl}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                 placeholder={price.currentPriceList.thermalVinyl}
+                                                 ref={thermalVinylRef}
                                              />
                                         </div>
                                    </th>

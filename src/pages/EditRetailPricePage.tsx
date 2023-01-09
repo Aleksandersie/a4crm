@@ -23,6 +23,7 @@ const EditRetailPricePage = observer(() => {
      const whiteVinylCutRef = React.useRef<HTMLInputElement>(null);
      const colorVinylCutRef = React.useRef<HTMLInputElement>(null);
      const cutOnlyRef = React.useRef<HTMLInputElement>(null);
+     const thermalVinylRef = React.useRef<HTMLInputElement>(null)
      
      useEffect(() => {
           getRetailPrice().then((data) => price.setCurrentPriceList(data));
@@ -41,8 +42,8 @@ const EditRetailPricePage = observer(() => {
                ////////////////////CUT//////////////////////////////
                whiteVinylCutRef.current.value|| price.currentPriceList.whiteVinylCut,
                colorVinylCutRef.current.value|| price.currentPriceList.colorVinylCut,
-               cutOnlyRef.current.value|| price.currentPriceList.cutOnlyRef
-
+               cutOnlyRef.current.value|| price.currentPriceList.cutOnlyRef,
+               thermalVinylRef.current.value||price.currentPriceList.thermalVinylRef
           );
 
           console.log(vinylPCLamRef.current.value);
@@ -218,6 +219,18 @@ const EditRetailPricePage = observer(() => {
                                              <Form.Control
                                                   placeholder={price.currentPriceList.cutOnly}
                                                   ref={cutOnlyRef}
+                                             />
+                                        </div>
+                                   </th>
+                              </tr>
+                              <tr>
+                                   <th>Резка термоплёнки</th>
+                                   <th>{price.currentPriceList.thermalVinyl}</th>
+                                   <th>
+                                        <div>
+                                             <Form.Control
+                                                 placeholder={price.currentPriceList.thermalVinyl}
+                                                 ref={thermalVinylRef}
                                              />
                                         </div>
                                    </th>

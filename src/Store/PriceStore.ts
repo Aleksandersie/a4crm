@@ -13,6 +13,7 @@ export interface IPrice {
      whiteVinylCut:number,
      colorVinylCut:number,
      cutOnlyRef: number,
+     thermalVinyl:number
     
 }
 
