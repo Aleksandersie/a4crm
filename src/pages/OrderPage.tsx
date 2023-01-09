@@ -26,7 +26,7 @@ const OrderPage = observer(() => {
 
 
     useEffect(() => {
-        if(user.user.role===(adminConst||managerConst||workerConst)){
+        if(user.user.role===adminConst||managerConst||workerConst){
             getAllOrders(order.orderPage, order.orderLimit).then((data): IIncomingOrder[] =>
             order.setOrderInProgress(data));
         console.log({ order });
@@ -36,7 +36,8 @@ const OrderPage = observer(() => {
         }
 
     }, []);
-
+    
+    
     return (
         <div className={"mt-5 mb-5"}>
             <Container>
@@ -53,7 +54,7 @@ const OrderPage = observer(() => {
                         Обновить вручную
                     </Button>
                     
-                    {user.user.role===(adminConst||managerConst||workerConst)?
+                    {user.user.role===adminConst||managerConst||workerConst?
                      <div
                      className={
                          "d-flex flex-row align-items-center justify-content-around mt-5 mb-4"
