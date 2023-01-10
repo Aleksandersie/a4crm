@@ -14,6 +14,7 @@ import { getAllOrders } from "../components/axios/OrderApi";
 import { getAllCustomers } from "../components/axios/UserApi";
 import { getDebtors } from "../components/axios/financeApi";
 import TemporaryPage from "../components/TemporaryPage/TemporaryPage";
+import MainPageCategorySelector from "../components/MainPageCategorySelector/MainPageCategorySelector";
 
 const MainPage = () => {
      const { price, order, user, financeStore } = useContext(Context);
@@ -42,6 +43,7 @@ const MainPage = () => {
      return (
           <Container>
                <TemporaryPage />
+               <MainPageCategorySelector/>
                {/*<CategoryBlock />*/}
                {/*<Row>*/}
                {/*    <Col className="col-3 mt-4">*/}

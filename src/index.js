@@ -10,6 +10,7 @@ import AdditionalStore from "./Store/AdditionalSrevices";
 import ToDoStore from "./Store/ToDo";
 import FinanceStore from "./Store/FinanceStore";
 import style from './app.css'
+import DigitalPrintStore from "./Store/DigitalPrintStore";
 
 export const Context = createContext(null);
 
@@ -25,6 +26,7 @@ root.render(
             AddService: new AdditionalStore(),
             toDoStore: new ToDoStore(),
             financeStore: new FinanceStore(),
+            digitalStore: new DigitalPrintStore()
         }}
     >
         <React.StrictMode>

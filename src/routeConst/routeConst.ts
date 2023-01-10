@@ -4,6 +4,7 @@ export const ADMIN_PANEL: string = "/adminPanel";
 export const INT_PRINT: string = "/intPrint";
 export const INT_PRINT_CALC: string = "/intPrintCalc";
 export const INT_PRINT_CUT: string = "/printCut";
+export const DIGITAL_PRINT_CALC: string = "/digitalPrintCalc";
 
 export const TODO_ROUTE: string = "/tasks";
 

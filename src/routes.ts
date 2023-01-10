@@ -11,6 +11,7 @@ import {
     USER_INFO_PAGE,
     EDIT_RETAIL_PRICE_PAGE,
     EDIT_WHOLESALE_PRICE_PAGE,
+    DIGITAL_PRINT_CALC,
 } from "./routeConst/routeConst";
 
 import MainPage from "./pages/MainPage";
@@ -25,6 +26,7 @@ import FinancePage from "./pages/FinancePage";
 import UserInfoPage from "./pages/UserInfoPage";
 import EditRetailPricePage from "./pages/EditRetailPricePage";
 import EditWholesalePricePage from "./pages/EditWholesalePricePage";
+import DigitalPrintingPage from "./pages/calcs/DigitalPrintingPage";
 
 export const routes = [
     {
@@ -74,5 +76,9 @@ export const routes = [
     {
         path: EDIT_WHOLESALE_PRICE_PAGE,
         Component: EditWholesalePricePage,
+    },
+    {
+        path:DIGITAL_PRINT_CALC,
+        Component: DigitalPrintingPage,
     },
 ];
