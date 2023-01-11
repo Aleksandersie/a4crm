@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
-import { Button, Card, Container, Modal } from "react-bootstrap";
+import { Button, Card, Container, Form, Modal } from "react-bootstrap";
 import { Context } from "../..";
 import DigitalPrintCategoryDropdown from "../../components/DigitalPageComponents/DigitalPrintCategoryDropdown/DigitalPrintCategoryDropdown";
 import SearchCustomers from "../../components/SearchCustomers/SearchCustomers";
 import { adminConst, managerConst } from "../../Const";
 import PaperSizeDropdown from "../../components/DigitalPageComponents/PaperSizeDropdown/PaperSizeDropdown";
 import PaperThicknessDropdown from "../../components/DigitalPageComponents/PaperThicknessDropdown/PaperThicknessDropdown";
-
+import "./digitalPrintingPageStyle.scss"
 const DigitalPrintingPage = () => {
      const { materialList, user } = useContext(Context);
      const [showFind, setShowFind] = useState(false);
@@ -50,6 +50,12 @@ const DigitalPrintingPage = () => {
                                    <div>
                                         <div className="mb-2">Бумага:</div>
                                         <PaperThicknessDropdown />
+                                   </div>
+                              </div>
+                              <div>
+                              <div className="pcsInput mt-2">
+                                        <div className="mb-2">Тираж:</div>
+                                        <Form.Control style={{width:100}} type="number"/>
                                    </div>
                               </div>
                          </Card.Subtitle>
