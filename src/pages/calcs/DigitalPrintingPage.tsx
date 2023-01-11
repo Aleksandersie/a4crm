@@ -7,10 +7,21 @@ import { adminConst, managerConst } from "../../Const";
 import PaperSizeDropdown from "../../components/DigitalPageComponents/PaperSizeDropdown/PaperSizeDropdown";
 import PaperThicknessDropdown from "../../components/DigitalPageComponents/PaperThicknessDropdown/PaperThicknessDropdown";
 import "./digitalPrintingPageStyle.scss"
+import React from "react";
+import { createDigitalPrintItem } from "../../calcLogic/digitalPrintCalc";
 const DigitalPrintingPage = () => {
-     const { materialList, user } = useContext(Context);
+     const { materialList, user, digitalStore } = useContext(Context);
      const [showFind, setShowFind] = useState(false);
-
+     const numberOfCopyRef = React.useRef<HTMLInputElement>(null)
+    
+    function addOrder(){
+        createDigitalPrintItem(
+            digitalStore.selectedDigitalPrintCategory.desc,
+            digitalStore.selectedPaperSizeForSheetFeed.size,
+            digitalStore.selectedPaperThickness.thickness,
+            numberOfCopyRef.current.value
+            )
+    }
      return (
           <Container>
                <Card className="mt-5" style={{ textAlign: "center" }}>
@@ -55,9 +66,10 @@ const DigitalPrintingPage = () => {
                               <div>
                               <div className="pcsInput mt-2">
                                         <div className="mb-2">Тираж:</div>
-                                        <Form.Control style={{width:100}} type="number"/>
+                                        <Form.Control style={{width:100}} type="number" ref={numberOfCopyRef}/>
                                    </div>
                               </div>
+                              <Button className="mt-2" onClick={addOrder}>Жмяк</Button>
                          </Card.Subtitle>
                     </Card.Body>
                </Card>
