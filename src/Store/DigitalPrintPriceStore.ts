@@ -1,24 +1,22 @@
 import { makeAutoObservable } from "mobx"
 
-enum digitalPrintPricesEnum{
-    sheetFeedVinyl = "sheetFeedVinyl"
 
-}
-interface IDigitalPrintPriceList{
+export interface IDigitalPrintPriceList{
     sheetFeedVinyl:number
     sheetFeedPrint:number
 
 }
 
+
 export default class DigitalPrintPriceStore {
     private _digitalPrintPriceList:IDigitalPrintPriceList;
-    private _currentDigitalPrintPrice = {};
+    private _currentDigitalPrintPrice:number;
     constructor(){
         this._digitalPrintPriceList = {
             sheetFeedVinyl: 200,
             sheetFeedPrint:50
         }
-        this._currentDigitalPrintPrice = {}
+        this._currentDigitalPrintPrice = null
 
         makeAutoObservable(this)
     }

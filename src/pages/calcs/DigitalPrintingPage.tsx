@@ -11,6 +11,9 @@ import React from "react";
 import { createDigitalPrintItem } from "../../calcLogic/digitalPrintCalc";
 import { digitalCategoryEnum } from "../../Store/DigitalPrintStore";
 import { observer } from "mobx-react-lite";
+import { Checkbox, FormControlLabel } from "@mui/material";
+
+
 const DigitalPrintingPage = observer( () => {
      const { materialList, user, digitalStore,digitalPrintPrice } = useContext(Context);
      const [showFind, setShowFind] = useState(false);
@@ -18,19 +21,28 @@ const DigitalPrintingPage = observer( () => {
 
      useEffect(()=>{
           if (digitalStore.selectedDigitalPrintCategory.desc===digitalCategoryEnum.sheetFeedVinyl){
-               digitalPrintPrice.setCurrentDigitalPrintPrice(digitalPrintPrice.digitalPrintPriceList.sheetFeedVinyl)
+               digitalPrintPrice.setCurrentDigitalPrintPrice(Number(digitalPrintPrice.digitalPrintPriceList.sheetFeedVinyl))
                console.log('vinyl')
                console.log(digitalPrintPrice.currentDigitalPrintPrice)
           }
-          
+          if (digitalStore.selectedDigitalPrintCategory.desc===digitalCategoryEnum.sheetFeed){
+               digitalPrintPrice.setCurrentDigitalPrintPrice(digitalPrintPrice.digitalPrintPriceList.sheetFeedPrint)
+               console.log('sheet')
+               console.log(digitalPrintPrice.currentDigitalPrintPrice)
+          }
      },[digitalStore.selectedDigitalPrintCategory])
     
+    const testBool = true
+    const [twoSided,setTwoSided] = useState(true)
+
     function addOrder(){
         createDigitalPrintItem(
             digitalStore.selectedDigitalPrintCategory.desc,
             digitalStore.selectedPaperSizeForSheetFeed.size,
             digitalStore.selectedPaperThickness.thickness,
-            numberOfCopyRef.current.value
+            numberOfCopyRef.current.value,
+            digitalPrintPrice.currentDigitalPrintPrice,
+            twoSided
             )
     }
      return (
@@ -78,9 +90,17 @@ const DigitalPrintingPage = observer( () => {
                               <div className="pcsInput mt-2">
                                         <div className="mb-2">Тираж:</div>
                                         <Form.Control style={{width:100}} type="number" ref={numberOfCopyRef}/>
+                                        <FormControlLabel
+                                             control={<Checkbox />}
+                                             checked={twoSided}
+                                             label="Да"
+                                             value={twoSided}
+                                             onChange={()=>setTwoSided(!twoSided)}
+                                        />
                                    </div>
                               </div>
                               <Button className="mt-2" onClick={addOrder}>Жмяк</Button>
+          
                          </Card.Subtitle>
                     </Card.Body>
                </Card>

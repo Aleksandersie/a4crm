@@ -1,4 +1,5 @@
 
+import { IDigitalPrintPriceList } from "../Store/DigitalPrintPriceStore";
 import { digitalCategoryEnum, paperSizeForSheetFeedEnum, paperThicknessEnum } from "../Store/DigitalPrintStore";
 
 
@@ -9,7 +10,8 @@ interface IDigitalPrintItem{
     paperSize:paperSizeForSheetFeedEnum;
     thickness:paperThicknessEnum;
     numberOfCopies:number|string;
-    
+    currentPrice:number   
+    twoSided:boolean
 }
 
 class DigitalPrintOrderItem implements IDigitalPrintItem{
@@ -17,16 +19,22 @@ class DigitalPrintOrderItem implements IDigitalPrintItem{
     paperSize:paperSizeForSheetFeedEnum;
     thickness:paperThicknessEnum;
     numberOfCopies:number|string;
+    currentPrice:number
+    twoSided:boolean
     constructor(
         category:digitalCategoryEnum,
         paperSize:paperSizeForSheetFeedEnum,
         thickness:paperThicknessEnum,
-        numberOfCopies:number|string
+        numberOfCopies:number|string,
+        currentPrice:number,
+        twoSided:boolean
         ){
       this.category = category
       this.paperSize = paperSize
       this.thickness = thickness
       this.numberOfCopies = numberOfCopies
+      this.currentPrice = currentPrice
+      this.twoSided = twoSided
     }
 }
 
@@ -36,11 +44,13 @@ interface ICreateDigitalPrintItem{
         paperSize:paperSizeForSheetFeedEnum,
         thickness:paperThicknessEnum,
         numberOfCopies:number|string,
-    ):any
+        currentPrice:number,
+        twoSided:boolean
+    ):void
 }
 
-export const createDigitalPrintItem:ICreateDigitalPrintItem = function(category,paperSize,thickness,numberOfCopies){
- const item = new DigitalPrintOrderItem(category,paperSize,thickness,numberOfCopies)
+export const createDigitalPrintItem:ICreateDigitalPrintItem = function(category,paperSize,thickness,numberOfCopies,currentPrice,twoSided){
+ const item = new DigitalPrintOrderItem(category,paperSize,thickness,numberOfCopies,currentPrice,twoSided)
  orderArray.push(item)
  console.log(orderArray)
 }
