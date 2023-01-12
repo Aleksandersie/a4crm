@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import { Button, Card, Container, Form, Modal } from "react-bootstrap";
 import { Context } from "../..";
 import DigitalPrintCategoryDropdown from "../../components/DigitalPageComponents/DigitalPrintCategoryDropdown/DigitalPrintCategoryDropdown";
@@ -9,10 +9,21 @@ import PaperThicknessDropdown from "../../components/DigitalPageComponents/Paper
 import "./digitalPrintingPageStyle.scss"
 import React from "react";
 import { createDigitalPrintItem } from "../../calcLogic/digitalPrintCalc";
-const DigitalPrintingPage = () => {
-     const { materialList, user, digitalStore } = useContext(Context);
+import { digitalCategoryEnum } from "../../Store/DigitalPrintStore";
+import { observer } from "mobx-react-lite";
+const DigitalPrintingPage = observer( () => {
+     const { materialList, user, digitalStore,digitalPrintPrice } = useContext(Context);
      const [showFind, setShowFind] = useState(false);
      const numberOfCopyRef = React.useRef<HTMLInputElement>(null)
+
+     useEffect(()=>{
+          if (digitalStore.selectedDigitalPrintCategory.desc===digitalCategoryEnum.sheetFeedVinyl){
+               digitalPrintPrice.setCurrentDigitalPrintPrice(digitalPrintPrice.digitalPrintPriceList.sheetFeedVinyl)
+               console.log('vinyl')
+               console.log(digitalPrintPrice.currentDigitalPrintPrice)
+          }
+          
+     },[digitalStore.selectedDigitalPrintCategory])
     
     function addOrder(){
         createDigitalPrintItem(
@@ -75,6 +86,6 @@ const DigitalPrintingPage = () => {
                </Card>
           </Container>
      );
-};
+});
 
 export default DigitalPrintingPage;

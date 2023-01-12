@@ -11,6 +11,7 @@ import ToDoStore from "./Store/ToDo";
 import FinanceStore from "./Store/FinanceStore";
 import "./app.scss";
 import DigitalPrintStore from "./Store/DigitalPrintStore";
+import DigitalPrintPriceStore from "./Store/DigitalPrintPriceStore";
 
 interface IContext {
      user: any;
@@ -22,6 +23,7 @@ interface IContext {
      toDoStore: any;
      financeStore: any;
      digitalStore: DigitalPrintStore;
+     digitalPrintPrice: DigitalPrintPriceStore;
 }
 
 export const Context = React.createContext<IContext>(null);
@@ -39,6 +41,7 @@ root.render(
                toDoStore: new ToDoStore(),
                financeStore: new FinanceStore(),
                digitalStore: new DigitalPrintStore(),
+               digitalPrintPrice: new DigitalPrintPriceStore()
           }}
      >
           <React.StrictMode>
