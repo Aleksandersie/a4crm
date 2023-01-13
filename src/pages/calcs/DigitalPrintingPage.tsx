@@ -12,6 +12,8 @@ import { createDigitalPrintItem } from "../../calcLogic/digitalPrintCalc";
 import { digitalCategoryEnum } from "../../Store/DigitalPrintStore";
 import { observer } from "mobx-react-lite";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import PreflightTable from "../../components/DigitalPageComponents/PreflightTable/PreflightTable";
+import useDigitalPreflightPrice from "../../components/DigitalPageComponents/useDigitalPreflightPrice";
 
 
 const DigitalPrintingPage = observer( () => {
@@ -32,7 +34,6 @@ const DigitalPrintingPage = observer( () => {
           }
      },[digitalStore.selectedDigitalPrintCategory])
     
-    const testBool = true
     const [twoSided,setTwoSided] = useState(true)
 
     function addOrder(){
@@ -45,6 +46,14 @@ const DigitalPrintingPage = observer( () => {
             twoSided
             )
     }
+
+    useEffect(()=>{
+         const{summ}=useDigitalPreflightPrice(numberOfCopyRef.current.value,digitalPrintPrice.currentDigitalPrintPrice)
+          console.log(`summ is ${summ}`);
+          
+    },[digitalStore.selectedDigitalPrintCategory])
+
+
      return (
           <Container>
                <Card className="mt-5" style={{ textAlign: "center" }}>
@@ -100,7 +109,7 @@ const DigitalPrintingPage = observer( () => {
                                    </div>
                               </div>
                               <Button className="mt-2" onClick={addOrder}>Жмяк</Button>
-          
+                         <PreflightTable/>
                          </Card.Subtitle>
                     </Card.Body>
                </Card>
