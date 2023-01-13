@@ -3,13 +3,16 @@ import { useContext, useEffect } from "react"
 import { Table } from "react-bootstrap"
 import { Context } from "../../.."
 
+interface IPreflightTable{
+    summ:number
+}
 
 
-const PreflightTable:React.FC = observer( () => {
+const PreflightTable:React.FC<IPreflightTable> = observer( ({summ}) => {
 
     const {digitalStore} = useContext(Context)
 
-    
+   
 
     return(
         <Table striped bordered hover size="sm" className="mt-4">
@@ -27,7 +30,7 @@ const PreflightTable:React.FC = observer( () => {
                          </thead>
                          <tbody>
                               <tr>
-                                   <td></td>
+                                   <td>{summ}</td>
                                    <td></td>
                               </tr>
                          </tbody>

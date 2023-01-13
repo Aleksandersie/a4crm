@@ -19,7 +19,9 @@ import useDigitalPreflightPrice from "../../components/DigitalPageComponents/use
 const DigitalPrintingPage = observer( () => {
      const { materialList, user, digitalStore,digitalPrintPrice } = useContext(Context);
      const [showFind, setShowFind] = useState(false);
-     const numberOfCopyRef = React.useRef<HTMLInputElement>(null)
+     const [numberOfCopy,setNumberOfCopy]=useState(null)
+     const [summ,setSumm] = useState(null)
+    // const numberOfCopyRef = React.useRef<HTMLInputElement>(null)
 
      useEffect(()=>{
           if (digitalStore.selectedDigitalPrintCategory.desc===digitalCategoryEnum.sheetFeedVinyl){
@@ -41,17 +43,18 @@ const DigitalPrintingPage = observer( () => {
             digitalStore.selectedDigitalPrintCategory.desc,
             digitalStore.selectedPaperSizeForSheetFeed.size,
             digitalStore.selectedPaperThickness.thickness,
-            numberOfCopyRef.current.value,
+            numberOfCopy,
             digitalPrintPrice.currentDigitalPrintPrice,
             twoSided
             )
     }
 
     useEffect(()=>{
-         const{summ}=useDigitalPreflightPrice(numberOfCopyRef.current.value,digitalPrintPrice.currentDigitalPrintPrice)
+         const{summ}=useDigitalPreflightPrice(numberOfCopy,digitalPrintPrice.currentDigitalPrintPrice)
           console.log(`summ is ${summ}`);
+          setSumm(summ)
           
-    },[digitalStore.selectedDigitalPrintCategory])
+    },[digitalStore.selectedDigitalPrintCategory,numberOfCopy])
 
 
      return (
@@ -98,7 +101,11 @@ const DigitalPrintingPage = observer( () => {
                               <div>
                               <div className="pcsInput mt-2">
                                         <div className="mb-2">Тираж:</div>
-                                        <Form.Control style={{width:100}} type="number" ref={numberOfCopyRef}/>
+                                        <Form.Control style={{width:100}} 
+                                        type="number"
+                                        value={numberOfCopy}
+                                        onChange={(e)=>setNumberOfCopy(e.target.value)}
+                                         />
                                         <FormControlLabel
                                              control={<Checkbox />}
                                              checked={twoSided}
@@ -109,7 +116,7 @@ const DigitalPrintingPage = observer( () => {
                                    </div>
                               </div>
                               <Button className="mt-2" onClick={addOrder}>Жмяк</Button>
-                         <PreflightTable/>
+                         <PreflightTable summ={summ}/>
                          </Card.Subtitle>
                     </Card.Body>
                </Card>
