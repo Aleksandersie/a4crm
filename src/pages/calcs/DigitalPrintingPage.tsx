@@ -93,7 +93,7 @@ const DigitalPrintingPage = observer( () => {
                                         <FormControlLabel
                                              control={<Checkbox />}
                                              checked={twoSided}
-                                             label="Да"
+                                             label="Печать с двух сторон"
                                              value={twoSided}
                                              onChange={()=>setTwoSided(!twoSided)}
                                         />
