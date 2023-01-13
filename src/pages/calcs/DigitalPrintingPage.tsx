@@ -21,6 +21,7 @@ const DigitalPrintingPage = observer( () => {
      const [showFind, setShowFind] = useState(false);
      const [numberOfCopy,setNumberOfCopy]=useState(null)
      const [totalPrintSumState,setTotalPrintSumState] = useState(null)
+     const [onePcsCostState, setOnePcsCostState] = useState(null)
     // const numberOfCopyRef = React.useRef<HTMLInputElement>(null)
 
      useEffect(()=>{
@@ -50,9 +51,9 @@ const DigitalPrintingPage = observer( () => {
     }
 
     useEffect(()=>{
-         const{totalPrintSum}=useDigitalPreflightPrice(numberOfCopy,digitalPrintPrice.currentDigitalPrintPrice)
-          console.log(`sum is ${totalPrintSum}`);
-          setTotalPrintSumState(totalPrintSum)
+         const{totalPrintSum,onePcsCost}=useDigitalPreflightPrice(numberOfCopy,digitalPrintPrice.currentDigitalPrintPrice)
+         setTotalPrintSumState(totalPrintSum)
+         setOnePcsCostState(onePcsCost)
           
     },[digitalStore.selectedDigitalPrintCategory,numberOfCopy])
 
@@ -116,7 +117,10 @@ const DigitalPrintingPage = observer( () => {
                                    </div>
                               </div>
                               <Button className="mt-2" onClick={addOrder}>Жмяк</Button>
-                         <PreflightTable totalPrintSumState={totalPrintSumState}/>
+                         <PreflightTable 
+                         totalPrintSumState={totalPrintSumState}
+                         onePcsCost={onePcsCostState} 
+                         />
                          </Card.Subtitle>
                     </Card.Body>
                </Card>

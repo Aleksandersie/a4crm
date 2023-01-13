@@ -4,11 +4,12 @@ import { Table } from "react-bootstrap"
 import { Context } from "../../.."
 
 interface IPreflightTable{
-    totalPrintSumState:number
+    totalPrintSumState:number,
+    onePcsCost:number
 }
 
 
-const PreflightTable:React.FC<IPreflightTable> = observer( ({totalPrintSumState}) => {
+const PreflightTable:React.FC<IPreflightTable> = observer( ({totalPrintSumState,onePcsCost}) => {
 
     const {digitalStore} = useContext(Context)
 
@@ -31,7 +32,7 @@ const PreflightTable:React.FC<IPreflightTable> = observer( ({totalPrintSumState}
                          <tbody>
                               <tr>
                                    <td>{totalPrintSumState}</td>
-                                   <td></td>
+                                   <td>{onePcsCost}</td>
                               </tr>
                          </tbody>
                        
