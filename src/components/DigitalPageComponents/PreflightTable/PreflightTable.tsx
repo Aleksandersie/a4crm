@@ -1,14 +1,14 @@
 import { observer } from "mobx-react-lite"
-import { useContext, useEffect } from "react"
+import { useContext} from "react"
 import { Table } from "react-bootstrap"
 import { Context } from "../../.."
 
 interface IPreflightTable{
-    summ:number
+    totalPrintSumState:number
 }
 
 
-const PreflightTable:React.FC<IPreflightTable> = observer( ({summ}) => {
+const PreflightTable:React.FC<IPreflightTable> = observer( ({totalPrintSumState}) => {
 
     const {digitalStore} = useContext(Context)
 
@@ -30,7 +30,7 @@ const PreflightTable:React.FC<IPreflightTable> = observer( ({summ}) => {
                          </thead>
                          <tbody>
                               <tr>
-                                   <td>{summ}</td>
+                                   <td>{totalPrintSumState}</td>
                                    <td></td>
                               </tr>
                          </tbody>

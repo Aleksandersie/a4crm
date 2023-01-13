@@ -1,10 +1,10 @@
 
 
-const useDigitalPreflightPrice = (value,price)=>{
+const useDigitalPreflightPrice = (numberOfCopy,price)=>{
 
-    const summ = value*price
-    console.log(summ)
-    return {summ}
+    const totalPrintSum = numberOfCopy*price
+    console.log(totalPrintSum)
+    return {totalPrintSum}
 } 
 
 export default useDigitalPreflightPrice
