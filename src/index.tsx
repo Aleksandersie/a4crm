@@ -16,6 +16,7 @@ import DigitalPrintPriceStore from "./Store/DigitalPrintPriceStore";
 interface IContext {
      user: any;
      order: any;
+    // price: PriceStore;
      price: any;
      materialList: any;
      checkStore: any;

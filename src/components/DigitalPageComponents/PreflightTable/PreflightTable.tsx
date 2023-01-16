@@ -31,8 +31,8 @@ const PreflightTable:React.FC<IPreflightTable> = observer( ({totalPrintSumState,
                          </thead>
                          <tbody>
                               <tr>
-                                   <td>{totalPrintSumState}</td>
                                    <td>{onePcsCost}</td>
+                                   <td>{totalPrintSumState}</td>
                               </tr>
                          </tbody>
                        

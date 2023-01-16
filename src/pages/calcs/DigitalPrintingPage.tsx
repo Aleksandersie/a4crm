@@ -14,6 +14,7 @@ import { observer } from "mobx-react-lite";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import PreflightTable from "../../components/DigitalPageComponents/PreflightTable/PreflightTable";
 import useDigitalPreflightPrice from "../../components/DigitalPageComponents/useDigitalPreflightPrice";
+import useDigitalPrintPriceSelector from "../../components/DigitalPageComponents/useDigitalPrintPriceSelector";
 
 
 const DigitalPrintingPage = observer( () => {
@@ -49,12 +50,14 @@ const DigitalPrintingPage = observer( () => {
             twoSided
             )
     }
+    useEffect(()=>{
+          useDigitalPrintPriceSelector(digitalStore.selectedDigitalPrintCategory.desc)
+    },[digitalStore.selectedDigitalPrintCategory])
 
     useEffect(()=>{
          const{totalPrintSum,onePcsCost}=useDigitalPreflightPrice(numberOfCopy,digitalPrintPrice.currentDigitalPrintPrice)
          setTotalPrintSumState(totalPrintSum)
-         setOnePcsCostState(onePcsCost)
-          
+         setOnePcsCostState(onePcsCost)   
     },[digitalStore.selectedDigitalPrintCategory,numberOfCopy])
 
 
