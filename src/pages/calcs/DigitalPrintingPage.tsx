@@ -18,21 +18,23 @@ import useDigitalPrintPriceSelector from "../../components/DigitalPageComponents
 
 
 const DigitalPrintingPage = observer( () => {
-     const { materialList, user, digitalStore,digitalPrintPrice } = useContext(Context);
+     const { materialList, user, digitalStore,digitalPrintPrice,price } = useContext(Context);
      const [showFind, setShowFind] = useState(false);
      const [numberOfCopy,setNumberOfCopy]=useState(null)
      const [totalPrintSumState,setTotalPrintSumState] = useState(null)
      const [onePcsCostState, setOnePcsCostState] = useState(null)
     // const numberOfCopyRef = React.useRef<HTMLInputElement>(null)
 
+
+////////////////////DITAL PRINT PRICE HANDLER/////////////////    
      useEffect(()=>{
           if (digitalStore.selectedDigitalPrintCategory.desc===digitalCategoryEnum.sheetFeedVinyl){
-               digitalPrintPrice.setCurrentDigitalPrintPrice(Number(digitalPrintPrice.digitalPrintPriceList.sheetFeedVinyl))
-               console.log('vinyl')
-               console.log(digitalPrintPrice.currentDigitalPrintPrice)
+               price.setCurrentPrice(Number(digitalPrintPrice.digitalPrintPriceList.sheetFeedVinyl))
+               console.log('vinylNew')
+               console.log(price.currentPrice)
           }
           if (digitalStore.selectedDigitalPrintCategory.desc===digitalCategoryEnum.sheetFeed){
-               digitalPrintPrice.setCurrentDigitalPrintPrice(digitalPrintPrice.digitalPrintPriceList.sheetFeedPrint)
+               price.setCurrentPrice(digitalPrintPrice.digitalPrintPriceList.sheetFeedPrint)
                console.log('sheet')
                console.log(digitalPrintPrice.currentDigitalPrintPrice)
           }
@@ -50,12 +52,11 @@ const DigitalPrintingPage = observer( () => {
             twoSided
             )
     }
-    useEffect(()=>{
-          useDigitalPrintPriceSelector(digitalStore.selectedDigitalPrintCategory.desc)
-    },[digitalStore.selectedDigitalPrintCategory])
+
+
 
     useEffect(()=>{
-         const{totalPrintSum,onePcsCost}=useDigitalPreflightPrice(numberOfCopy,digitalPrintPrice.currentDigitalPrintPrice)
+         const{totalPrintSum,onePcsCost}=useDigitalPreflightPrice(numberOfCopy,price.currentPrice)
          setTotalPrintSumState(totalPrintSum)
          setOnePcsCostState(onePcsCost)   
     },[digitalStore.selectedDigitalPrintCategory,numberOfCopy])
