@@ -48,7 +48,7 @@ const DigitalPrintingPage = observer( () => {
             digitalStore.selectedPaperSizeForSheetFeed.size,
             digitalStore.selectedPaperThickness.thickness,
             numberOfCopy,
-            digitalPrintPrice.currentDigitalPrintPrice,
+            price.currentPrice,
             twoSided
             )
     }
@@ -56,7 +56,7 @@ const DigitalPrintingPage = observer( () => {
 
 
     useEffect(()=>{
-         const{totalPrintSum,onePcsCost}=useDigitalPreflightPrice(numberOfCopy,price.currentPrice)
+         const{totalPrintSum,onePcsCost}=useDigitalPreflightPrice(numberOfCopy,price.currentPrice,digitalStore.currentPaperSize.size)
          setTotalPrintSumState(totalPrintSum)
          setOnePcsCostState(onePcsCost)   
     },[digitalStore.selectedDigitalPrintCategory,numberOfCopy])

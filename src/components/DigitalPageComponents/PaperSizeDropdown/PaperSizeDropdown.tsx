@@ -12,14 +12,14 @@ const PaperSizeDropdown = observer(() => {
                     id="dropdown-basic"
                     style={{ color: "black" }}
                >
-                    {digitalStore.selectedPaperSizeForSheetFeed.size || "Выберите формат"}
+                    {digitalStore.currentPaperSize.size || "Выберите формат"}
                </Dropdown.Toggle>
 
                <Dropdown.Menu>
                     {digitalStore.paperSizeForSheetFeed.map((i) => (
                          <Dropdown.Item
                               key={i.id}
-                              onClick={() => digitalStore.setSelectedPaperSizeForSheetFeed(i)}
+                              onClick={() => digitalStore.setCurrentPaperSize(i)}
                          >
                               {i.size}
                          </Dropdown.Item>

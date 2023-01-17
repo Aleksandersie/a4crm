@@ -38,6 +38,8 @@ export default class DigitalPrintStore {
      private _digitalPrintCategory: IDigitalPrintCategory[];
      private _selectedDigitalPrintCategory: IDigitalPrintCategory;
      /////////////////////////////////////
+     private _currentPaperSize:any
+     ////////////////////////////////////////
      private _paperSizeForSheetFeed: IPaperSizeForSheetFeed[];
      private _selectedPaperSizeForSheetFeed: IPaperSizeForSheetFeed;
      ///////////////////////////////////////
@@ -80,6 +82,8 @@ export default class DigitalPrintStore {
                },
           ];
           this._selectedPaperSizeForSheetFeed = <IPaperSizeForSheetFeed>{};
+          ////////////////////////////////////////
+          this._currentPaperSize = {}
           //////////////////////////////////
           this._paperThickness = [
                {
@@ -132,6 +136,12 @@ export default class DigitalPrintStore {
      }
      get selectedPaperSizeForSheetFeed() {
           return this._selectedPaperSizeForSheetFeed;
+     }
+     setCurrentPaperSize(paper){
+          this._currentPaperSize = paper
+     }
+     get currentPaperSize(){
+          return this._currentPaperSize
      }
      /////////////////////////////////////////////
      setPaperThickness(paper) {
