@@ -23,6 +23,7 @@ const DigitalPrintingPage = observer( () => {
      const [numberOfCopy,setNumberOfCopy]=useState(null)
      const [totalPrintSumState,setTotalPrintSumState] = useState(null)
      const [onePcsCostState, setOnePcsCostState] = useState(null)
+     const [twoSided,setTwoSided] = useState(false)
     // const numberOfCopyRef = React.useRef<HTMLInputElement>(null)
 
 
@@ -40,14 +41,14 @@ const DigitalPrintingPage = observer( () => {
           }
      },[digitalStore.selectedDigitalPrintCategory])
     
-    const [twoSided,setTwoSided] = useState(true)
+    
 
     function addOrder(){
         createDigitalPrintItem(
             digitalStore.selectedDigitalPrintCategory.desc,
-            digitalStore.selectedPaperSizeForSheetFeed.size,
+            digitalStore.currentPaperSize.size,
             digitalStore.selectedPaperThickness.thickness,
-            numberOfCopy,
+            Number(numberOfCopy),
             price.currentPrice,
             twoSided
             )
@@ -56,10 +57,21 @@ const DigitalPrintingPage = observer( () => {
 
 
     useEffect(()=>{
-         const{totalPrintSum,onePcsCost}=useDigitalPreflightPrice(numberOfCopy,price.currentPrice,digitalStore.currentPaperSize.size)
+         const{totalPrintSum,onePcsCost}=useDigitalPreflightPrice(
+          numberOfCopy,
+          Number(price.currentPrice),
+          digitalStore.currentPaperSize.size,
+          twoSided
+          )
+          
+
          setTotalPrintSumState(totalPrintSum)
          setOnePcsCostState(onePcsCost)   
-    },[digitalStore.selectedDigitalPrintCategory,numberOfCopy])
+    },[digitalStore.selectedDigitalPrintCategory,
+     numberOfCopy,
+     digitalStore.currentPaperSize,
+     twoSided
+    ])
 
 
      return (

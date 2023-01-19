@@ -20,7 +20,7 @@ const PreflightTable:React.FC<IPreflightTable> = observer( ({totalPrintSumState,
                          <thead>
                               <tr>
                                    <th colSpan={4}>
-                                        Формат изделия: {digitalStore.selectedPaperSizeForSheetFeed.size}
+                                        Формат изделия: {digitalStore.currentPaperSize.size}
                                         <br /> Материал: {digitalStore.selectedPaperThickness.thickness}
                                    </th>
                               </tr>
