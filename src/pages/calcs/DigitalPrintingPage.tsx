@@ -68,9 +68,9 @@ const DigitalPrintingPage = observer( () => {
          setTotalPrintSumState(totalPrintSum)
          setOnePcsCostState(onePcsCost)   
     },[digitalStore.selectedDigitalPrintCategory,
-     numberOfCopy,
-     digitalStore.currentPaperSize,
-     twoSided
+       numberOfCopy,
+       digitalStore.currentPaperSize,
+       twoSided
     ])
 
 

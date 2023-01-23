@@ -4,6 +4,7 @@ import { paperSizeForSheetFeedEnum } from "../../Store/DigitalPrintStore";
 
 const useDigitalPreflightPrice = (numberOfCopy,price,paperSize,twoSided)=>{
     //const razor = 100
+    
     const twoSideMultiplier = 2
     let sheetCost = price
     if(paperSize===paperSizeForSheetFeedEnum.a4){
