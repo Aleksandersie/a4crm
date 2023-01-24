@@ -19,7 +19,7 @@ export const takeToWorkStatus: string = "Принят в работу";
 export const inProgressStatus: string = "Выполняется";
 export const completeStatus: string = "Готов";
 /////////////DIGITAL PRINT CALC//////////////////
-export enum digipalPrintDiscountSteps{
+export enum digitalPrintDiscountSteps{
     copies_1 = 1,
     copies_2 = 2,
     copies_3 = 3

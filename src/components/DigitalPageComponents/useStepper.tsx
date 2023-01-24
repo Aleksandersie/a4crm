@@ -1,35 +1,31 @@
+import { digitalPrintDiscountSteps } from "../../Const";
 
 
+const useStepper = (numberOfCopy,price)=>{
 
-const useStepper = (numberOfCopy:number)=>{
-    //const razor = 100
-    console.log('number is ' + numberOfCopy);
-    
-
-   
-  
-    
-    const priceHandler = function(numberOfCopy){
+    let discountPrice = null
+    const discountHandler =(numberOfCopy)=>{
         switch (numberOfCopy) {
-            case 1:
-              return 1111
-              break;
-            case 2:
-                return 2222
-              break;
-            case 3:
-              alert( 'Перебор' );
-              break;
+            case digitalPrintDiscountSteps.copies_1:
+                return discountPrice = price
+                break;
+            case digitalPrintDiscountSteps.copies_2:
+                return discountPrice = 2222
+                break;
+            case 5:
+                //alert( 'Перебор' );
+                break;
             default:
-              console.log( "Нет таких значений" );
-          }
+                console.log('не обработано');
+        }
     }
-    console.log(priceHandler(numberOfCopy));
+
+    discountHandler(numberOfCopy)
     
 
    
     
-    return {priceHandler}
+    return {discountPrice}
 } 
 
 export default useStepper

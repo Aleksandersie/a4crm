@@ -20,7 +20,7 @@ import useDigitalPrintPriceSelector from "../../components/DigitalPageComponents
 const DigitalPrintingPage = observer( () => {
      const { materialList, user, digitalStore,digitalPrintPrice,price } = useContext(Context);
      const [showFind, setShowFind] = useState(false);
-     const [numberOfCopy,setNumberOfCopy]=useState(null)
+     const [numberOfCopy,setNumberOfCopy]=useState<number>(null)
      const [totalPrintSumState,setTotalPrintSumState] = useState(null)
      const [onePcsCostState, setOnePcsCostState] = useState(null)
      const [twoSided,setTwoSided] = useState(false)
@@ -53,7 +53,16 @@ const DigitalPrintingPage = observer( () => {
             twoSided
             )
     }
-
+    // useEffect(()=>{
+    //     console.log(numberOfCopy);
+    //     if(numberOfCopy===1){
+    //         console.log('copy');
+    //     }
+    //     if(numberOfCopy===2){
+    //         console.log('copy2');
+    //     }
+    //
+    // },[numberOfCopy])
 
 
     useEffect(()=>{
@@ -63,10 +72,9 @@ const DigitalPrintingPage = observer( () => {
           digitalStore.currentPaperSize.size,
           twoSided
           )
-          
-
          setTotalPrintSumState(totalPrintSum)
-         setOnePcsCostState(onePcsCost)   
+         setOnePcsCostState(onePcsCost)
+
     },[digitalStore.selectedDigitalPrintCategory,
        numberOfCopy,
        digitalStore.currentPaperSize,
@@ -121,7 +129,7 @@ const DigitalPrintingPage = observer( () => {
                                         <Form.Control style={{width:100}} 
                                         type="number"
                                         value={numberOfCopy}
-                                        onChange={(e)=>setNumberOfCopy(e.target.value)}
+                                        onChange={(e)=>setNumberOfCopy(Number(e.target.value))}
                                          />
                                         <FormControlLabel
                                              control={<Checkbox />}
