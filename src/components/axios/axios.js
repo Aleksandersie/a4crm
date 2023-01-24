@@ -6,7 +6,7 @@ const adr = "http://localhost:3002/";
 const intAdr = "http://a4test.na4u.ru/";
 
 const host = axios.create({
-    baseURL: intAdr ,
+    baseURL: adr ,
 });
 
 function axiosAuthInterceptor(config) {

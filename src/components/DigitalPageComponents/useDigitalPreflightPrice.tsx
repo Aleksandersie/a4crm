@@ -6,18 +6,24 @@ const useDigitalPreflightPrice = (numberOfCopy,price,paperSize,twoSided)=>{
     //const razor = 100
 
     const twoSideMultiplier = 2
-    let sheetCost = price
-;
+    //let sheetCost = price;
+    console.log('price'+price);
     const{discountPrice} = useStepper(numberOfCopy,price)
+    let sheetCost = price;
+    const currenDiscountPrice = discountPrice
     console.log(discountPrice);
+
+    if(paperSize===paperSizeForSheetFeedEnum.a3){
+        sheetCost = currenDiscountPrice
+    }
     if(paperSize===paperSizeForSheetFeedEnum.a4){
-        sheetCost = price / 2
+        sheetCost = currenDiscountPrice / 2
     }
     if(paperSize===paperSizeForSheetFeedEnum.a5){
-        sheetCost = price / 4
+        sheetCost = currenDiscountPrice / 4
     }
     if(paperSize===paperSizeForSheetFeedEnum.a6){
-        sheetCost = price / 8
+        sheetCost = currenDiscountPrice / 8
     }
     const totalPrintSum =  twoSided? 
     ((numberOfCopy*sheetCost)*twoSideMultiplier):(numberOfCopy*sheetCost)

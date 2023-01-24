@@ -10,7 +10,7 @@ const useStepper = (numberOfCopy,price)=>{
                 return discountPrice = price
                 break;
             case digitalPrintDiscountSteps.copies_2:
-                return discountPrice = 2222
+                return discountPrice = 95
                 break;
             case 5:
                 //alert( 'Перебор' );

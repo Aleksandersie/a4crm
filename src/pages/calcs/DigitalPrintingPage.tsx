@@ -27,17 +27,13 @@ const DigitalPrintingPage = observer( () => {
     // const numberOfCopyRef = React.useRef<HTMLInputElement>(null)
 
 
-////////////////////DITAL PRINT PRICE HANDLER/////////////////    
+////////////////////DIGITAL PRINT PRICE HANDLER/////////////////
      useEffect(()=>{
           if (digitalStore.selectedDigitalPrintCategory.desc===digitalCategoryEnum.sheetFeedVinyl){
-               price.setCurrentPrice(Number(digitalPrintPrice.digitalPrintPriceList.sheetFeedVinyl))
-               console.log('vinylNew')
-               console.log(price.currentPrice)
+               price.setCurrentPrice(Number(price.currentPriceList.sheetFeedVinyl))
           }
           if (digitalStore.selectedDigitalPrintCategory.desc===digitalCategoryEnum.sheetFeed){
-               price.setCurrentPrice(digitalPrintPrice.digitalPrintPriceList.sheetFeedPrint)
-               console.log('sheet')
-               console.log(digitalPrintPrice.currentDigitalPrintPrice)
+               price.setCurrentPrice(price.currentPriceList.sheetFeedPrint)
           }
      },[digitalStore.selectedDigitalPrintCategory])
     
