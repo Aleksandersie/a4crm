@@ -20,7 +20,7 @@ const useStepper = (numberOfCopy,price)=>{
             }
             if(numberOfCopy>digitalPrintDiscountSteps.copies_4 && numberOfCopy<=digitalPrintDiscountSteps.copies_6){
                 discountPrice = price - (price*digitalPrintDiscountValue.stage_2)/100
-                const priceLength = 100
+                const priceLength = 500
                 const start = 100
                 const end = 40
                 const arr = []
