@@ -1,27 +1,27 @@
-import { digitalPrintDiscountSteps } from "../../Const";
+import { digitalPrintDiscountSteps, digitalPrintDiscountValue } from "../../Const";
 
 
 const useStepper = (numberOfCopy,price)=>{
-    let discount:number = null
-
-
+    //let discount:number = null
+    let discountPrice = price
     const discountHandler =(numberOfCopy)=>{
-        switch (numberOfCopy) {
-            case digitalPrintDiscountSteps.copies_1:
+
+            if(numberOfCopy===1){
                 return discountPrice = price
-                break;
-            case digitalPrintDiscountSteps.copies_2:
-                return discountPrice  = 5
-                break;
-            case 5:
-                //alert( 'Перебор' );
-                break;
-            default:
-                console.log('не обработано');
-        }
+            }
+            if(numberOfCopy=>digitalPrintDiscountSteps.copies_2 && numberOfCopy<=digitalPrintDiscountSteps.copies_4){
+                discountPrice  = price - (price*digitalPrintDiscountValue.stage_1)/100
+            }
+            if(numberOfCopy>digitalPrintDiscountSteps.copies_4){
+
+                discountPrice = 10000
+            }
+
+
+
     }
 
-    let discountPrice = null
+
 
     discountHandler(numberOfCopy)
     

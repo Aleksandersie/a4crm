@@ -7,11 +7,13 @@ const useDigitalPreflightPrice = (numberOfCopy,price,paperSize,twoSided)=>{
 
     const twoSideMultiplier = 2
     //let sheetCost = price;
-    console.log('price'+price);
+
     const{discountPrice} = useStepper(numberOfCopy,price)
+    console.log('incoming price:',price);
+    console.log('discountPrice:', discountPrice);
     let sheetCost = price;
     const currenDiscountPrice = discountPrice
-    console.log(discountPrice);
+
 
     if(paperSize===paperSizeForSheetFeedEnum.a3){
         sheetCost = currenDiscountPrice
