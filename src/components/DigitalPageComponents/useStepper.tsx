@@ -12,9 +12,9 @@ const useStepper = (numberOfCopy,price)=>{
             if(numberOfCopy=>digitalPrintDiscountSteps.copies_2 && numberOfCopy<=digitalPrintDiscountSteps.copies_4){
                 discountPrice  = price - (price*digitalPrintDiscountValue.stage_1)/100
             }
-            if(numberOfCopy>digitalPrintDiscountSteps.copies_4){
+            if(numberOfCopy>digitalPrintDiscountSteps.copies_4&&numberOfCopy<=digitalPrintDiscountSteps.copies_6){
 
-                discountPrice = 10000
+                discountPrice = price - (price*digitalPrintDiscountValue.stage_2)/100
             }
 
 

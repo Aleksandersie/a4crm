@@ -24,7 +24,9 @@ export enum digitalPrintDiscountSteps{
     copies_2 = 2,
     copies_3 = 3,
     copies_4 = 4,
-    copies_5 = 5
+    copies_5 = 5,
+    copies_6 = 6
+
 }
 export enum digitalPrintDiscountValue{
     stage_1 = 5,
