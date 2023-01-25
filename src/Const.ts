@@ -22,7 +22,9 @@ export const completeStatus: string = "Готов";
 export enum digitalPrintDiscountSteps{
     copies_1 = 1,
     copies_2 = 2,
-    copies_3 = 3
+    copies_3 = 3,
+    copies_4 = 4,
+    copies_5 = 5
 }
 export enum digitalPrintDiscountValue{
     stage_1 = 5,
