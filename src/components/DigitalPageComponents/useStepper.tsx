@@ -23,6 +23,9 @@ const useStepper = (numberOfCopy,price)=>{
         firstPriceArray.push(result)
     }
     console.log(firstPriceArray);
+    //////////////////////////////////////////////
+    const secondPriceRangeDiff = firstPriceArray[firstPriceArray.length-1] - 10
+    console.log(secondPriceRangeDiff);
 
     // arr.push(start)
     // const diff = start - end
