@@ -28,7 +28,7 @@ const useDigitalPreflightPrice = (numberOfCopy,price,paperSize,twoSided)=>{
         sheetCost = currenDiscountPrice / 8
     }
     const totalPrintSum =  twoSided? 
-    ((numberOfCopy*sheetCost)*twoSideMultiplier):(numberOfCopy*sheetCost)
+    (((numberOfCopy*sheetCost)*twoSideMultiplier).toFixed(2)):((numberOfCopy*sheetCost).toFixed(2))
 
  
     

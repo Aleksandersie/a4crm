@@ -6,25 +6,23 @@ const useStepper = (numberOfCopy,price)=>{
     let discountPrice = price
     /////////////////////////
 
-    const arr = []
-
-    const priceLength = 250
     const startPrice = 100
-    const endPrice = 40
+    const endPrice = 30
 
-    const firstPriceRangeEnd = startPrice * 0.65
+
+    const firstPriceRangeEnd = startPrice * 0.55
     const firstPriceArray = []
     const firstPriceRangeDiff = startPrice - firstPriceRangeEnd
     const firstPriceRangeLength = 9
     const firstDiscountValue = firstPriceRangeDiff / firstPriceRangeLength
     firstPriceArray.push(startPrice)
+
     for (let i = 0; i<firstPriceRangeLength;i++){
         let result = firstPriceArray[firstPriceArray.length-1] - firstDiscountValue
         firstPriceArray.push(Number(result.toFixed()))
     }
-    console.log("firstArr",firstPriceArray);
     //////////////////////////////////////////////
-    const secondStartPrice = firstPriceArray[firstPriceArray.length-1]
+    const secondStartPrice = firstPriceArray[firstPriceArray.length-1]-0.5
     const secondPriceEnd = firstPriceArray[firstPriceArray.length-1] - 10
     const secondPriceRangeDiff = secondStartPrice - secondPriceEnd
     const secondPriceArray = []
@@ -35,48 +33,41 @@ const useStepper = (numberOfCopy,price)=>{
         let result = secondPriceArray[secondPriceArray.length-1] - secondDiscountValue
         secondPriceArray.push(Number(result.toFixed(2)))
     }
-    console.log("secondArr",secondPriceArray);
 
-    // arr.push(start)
-    // const diff = start - end
-    // const discount = diff/priceLength
-    // for (  let i = 0;i<priceLength; i++ ){
-    //     let res = arr[arr.length-1]- discount
-    //     arr.push(res)
-    // }
-    // console.log(arr);
+    //////////////////////////////////////////////
+    const thirdStartPrice = secondPriceArray[secondPriceArray.length-1]
+    const thirdPriceEnd = secondPriceArray[secondPriceArray.length-1] - 10
+    const thirdPriceRangeDiff = thirdStartPrice - thirdPriceEnd
+    const thirdPriceArray = []
+    const thirdPriceRangeLength = 99
+    const thirdDiscountValue = thirdPriceRangeDiff/thirdPriceRangeLength
+    thirdPriceArray.push(thirdStartPrice)
+    for (let i = 0; i<thirdPriceRangeLength;i++){
+        let result = thirdPriceArray[thirdPriceArray.length-1] - thirdDiscountValue
+        thirdPriceArray.push(Number(result.toFixed(2)))
+    }
+    /////////////////////////////////////////////
+    const mainPriceArray = [...firstPriceArray,...secondPriceArray,...thirdPriceArray]
+    console.log('price is',mainPriceArray[numberOfCopy-1]);
 
     const discountHandler =(numberOfCopy)=> {
 
-        if (numberOfCopy <= digitalPrintDiscountSteps.copies_10 ) {
-            discountPrice = firstPriceArray[numberOfCopy-1]
+
+            discountPrice = mainPriceArray[numberOfCopy-1]
+        if(numberOfCopy>150) {
+            discountPrice = mainPriceArray[mainPriceArray.length-1]
         }
-        // if (numberOfCopy => digitalPrintDiscountSteps.copies_2 && numberOfCopy <= digitalPrintDiscountSteps.copies_4) {
-        //     discountPrice = price - (price * digitalPrintDiscountValue.stage_1) / 100
+
+        // if (numberOfCopy <= digitalPrintDiscountSteps.copies_10  ) {
+        //     discountPrice = firstPriceArray[numberOfCopy-1]
         // }
-        // if (numberOfCopy > digitalPrintDiscountSteps.copies_4 && numberOfCopy <= digitalPrintDiscountSteps.copies_6) {
-        //     discountPrice = price - (price * digitalPrintDiscountValue.stage_2) / 100
-        //
+        // if (numberOfCopy >  digitalPrintDiscountSteps.copies_10 && numberOfCopy <= 50) {
+        //     discountPrice = secondPriceArray[numberOfCopy-1]
         // }
-        // if (numberOfCopy > digitalPrintDiscountSteps.copies_6) {
-        //     // discountPrice = price - (price * digitalPrintDiscountValue.stage_2) / 100
-        //     discountPrice = arr[numberOfCopy]
+        // if (numberOfCopy > 50 && numberOfCopy <= 150) {
+        //    discountPrice = thirdPriceArray[numberOfCopy-1]
         // }
 
-        // if (numberOfCopy === 1) {
-        //     return discountPrice = price
-        // }
-        // if (numberOfCopy => digitalPrintDiscountSteps.copies_2 && numberOfCopy <= digitalPrintDiscountSteps.copies_4) {
-        //     discountPrice = price - (price * digitalPrintDiscountValue.stage_1) / 100
-        // }
-        // if (numberOfCopy > digitalPrintDiscountSteps.copies_4 && numberOfCopy <= digitalPrintDiscountSteps.copies_6) {
-        //     discountPrice = price - (price * digitalPrintDiscountValue.stage_2) / 100
-        //
-        // }
-        // if (numberOfCopy > digitalPrintDiscountSteps.copies_6) {
-        //    // discountPrice = price - (price * digitalPrintDiscountValue.stage_2) / 100
-        //     discountPrice = arr[numberOfCopy]
-        // }
 
     }
 
