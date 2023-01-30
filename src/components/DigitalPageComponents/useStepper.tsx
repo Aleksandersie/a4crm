@@ -47,28 +47,26 @@ const useStepper = (numberOfCopy,price)=>{
         thirdPriceArray.push(Number(result.toFixed(2)))
     }
     /////////////////////////////////////////////
-    const mainPriceArray = [...firstPriceArray,...secondPriceArray,...thirdPriceArray]
+    const fourthStartPrice = thirdPriceArray[thirdPriceArray.length-1]
+    const fourthPriceEnd = thirdPriceArray[thirdPriceArray.length-1] - 5
+    const fourthPriceRangeDiff = fourthStartPrice - fourthPriceEnd
+    const fourthPriceArray = []
+    const fourthPriceRangeLength = 89
+    const fourthDiscountValue = fourthPriceRangeDiff/fourthPriceRangeLength
+    fourthPriceArray.push(fourthStartPrice)
+    for (let i = 0; i<fourthPriceRangeLength;i++){
+        let result = fourthPriceArray[fourthPriceArray.length-1] - fourthDiscountValue
+        fourthPriceArray.push(Number(result.toFixed(2)))
+    }
+    ////////////////////////////////////////////
+    const mainPriceArray = [...firstPriceArray,...secondPriceArray,...thirdPriceArray,...fourthPriceArray]
     console.log('price is',mainPriceArray[numberOfCopy-1]);
 
     const discountHandler =(numberOfCopy)=> {
-
-
-            discountPrice = mainPriceArray[numberOfCopy-1]
-        if(numberOfCopy>150) {
+        discountPrice = mainPriceArray[numberOfCopy-1]
+        if(numberOfCopy>mainPriceArray.length) {
             discountPrice = mainPriceArray[mainPriceArray.length-1]
         }
-
-        // if (numberOfCopy <= digitalPrintDiscountSteps.copies_10  ) {
-        //     discountPrice = firstPriceArray[numberOfCopy-1]
-        // }
-        // if (numberOfCopy >  digitalPrintDiscountSteps.copies_10 && numberOfCopy <= 50) {
-        //     discountPrice = secondPriceArray[numberOfCopy-1]
-        // }
-        // if (numberOfCopy > 50 && numberOfCopy <= 150) {
-        //    discountPrice = thirdPriceArray[numberOfCopy-1]
-        // }
-
-
     }
 
     discountHandler(numberOfCopy)
