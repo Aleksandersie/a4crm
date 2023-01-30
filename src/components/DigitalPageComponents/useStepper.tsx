@@ -16,16 +16,26 @@ const useStepper = (numberOfCopy,price)=>{
     const firstPriceArray = []
     const firstPriceRangeDiff = startPrice - firstPriceRangeEnd
     const firstPriceRangeLength = 9
-    const firstDiscountValue = Number((firstPriceRangeDiff / firstPriceRangeLength).toFixed())
+    const firstDiscountValue = firstPriceRangeDiff / firstPriceRangeLength
     firstPriceArray.push(startPrice)
     for (let i = 0; i<firstPriceRangeLength;i++){
         let result = firstPriceArray[firstPriceArray.length-1] - firstDiscountValue
-        firstPriceArray.push(result)
+        firstPriceArray.push(Number(result.toFixed()))
     }
-    console.log(firstPriceArray);
+    console.log("firstArr",firstPriceArray);
     //////////////////////////////////////////////
-    const secondPriceRangeDiff = firstPriceArray[firstPriceArray.length-1] - 10
-    console.log(secondPriceRangeDiff);
+    const secondStartPrice = firstPriceArray[firstPriceArray.length-1]
+    const secondPriceEnd = firstPriceArray[firstPriceArray.length-1] - 10
+    const secondPriceRangeDiff = secondStartPrice - secondPriceEnd
+    const secondPriceArray = []
+    const secondPriceRangeLength = 49
+    const secondDiscountValue = secondPriceRangeDiff/secondPriceRangeLength
+    secondPriceArray.push(secondStartPrice)
+    for (let i = 0; i<secondPriceRangeLength;i++){
+        let result = secondPriceArray[secondPriceArray.length-1] - secondDiscountValue
+        secondPriceArray.push(Number(result.toFixed(2)))
+    }
+    console.log("secondArr",secondPriceArray);
 
     // arr.push(start)
     // const diff = start - end
@@ -38,7 +48,7 @@ const useStepper = (numberOfCopy,price)=>{
 
     const discountHandler =(numberOfCopy)=> {
 
-        if (numberOfCopy <= firstPriceRangeLength ) {
+        if (numberOfCopy <= digitalPrintDiscountSteps.copies_10 ) {
             discountPrice = firstPriceArray[numberOfCopy-1]
         }
         // if (numberOfCopy => digitalPrintDiscountSteps.copies_2 && numberOfCopy <= digitalPrintDiscountSteps.copies_4) {
