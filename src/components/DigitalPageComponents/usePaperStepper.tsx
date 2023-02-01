@@ -5,8 +5,17 @@ const UsePaperStepper = (thickness, price) => {
      let paperCost = null;
      const paperLength = Object.keys(paperThicknessEnum).length;
      const costStep = price / paperLength;
-     console.log("th", thickness, "price", price);
-     console.log("step", costStep);
+
+     if(thickness===paperThicknessEnum.gr130){
+          paperCost = costStep
+     }
+     if (thickness===paperThicknessEnum.gr150){
+          paperCost = costStep * 2
+     }
+     if (thickness===paperThicknessEnum.gr170){
+          paperCost = costStep * 3
+     }
+     console.log('step',paperCost);
      return { paperCost };
 };
 
