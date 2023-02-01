@@ -70,10 +70,7 @@ const useStepper = (numberOfCopy,price)=>{
     }
 
     discountHandler(numberOfCopy)
-    
 
-   
-    
     return {discountPrice}
 } 
 
