@@ -30,7 +30,9 @@ const useDigitalPreflightPrice = (numberOfCopy, price, paperSize, twoSided, thic
           ? (numberOfCopy * sheetCost * twoSideMultiplier).toFixed(2)
           : (numberOfCopy * sheetCost).toFixed(2);
 
-     const onePcsCost = 1 * sheetCost;
+     const onePcsCost = (1 * sheetCost)+paperCost;
+
+     console.log("paper",paperCost);
 
      return { totalPrintSum, onePcsCost };
 };
